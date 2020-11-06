@@ -1,14 +1,12 @@
 package Monopoly;
 
-import com.oracle.webservices.internal.api.message.PropertySet.Property;
-
 public class Group {
 	private Property[] properties;
 	private int priceToBuild;
 	private int currentAmount;
 	
 	public Group(int size) {
-		propertise = new Property[size];
+		properties = new Property[size];
 	}
 	
 	public void AddProperty(Property property) 
