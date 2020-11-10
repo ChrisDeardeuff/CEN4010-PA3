@@ -1,6 +1,7 @@
 package ui;
 
 import java.io.FileNotFoundException;
+import java.util.function.Consumer;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -29,8 +30,11 @@ public class MainWindow extends Application{
     	main.setAlignment(Pos.CENTER);
     	this.main = main;
     	
+    	// ChangePane method
+    	Consumer<Pane> method = p -> this.ChangePane(p);
+    	
     	// Get and Set StartupPane
-    	ChangePane(GetStartupPane());
+    	ChangePane(Startup.GetStartupPane(method));
     	
     	// Create scene
     	Scene scene = new Scene(main, 800, 600);
@@ -40,41 +44,6 @@ public class MainWindow extends Application{
         this.stage = stage;
         
         ChangeScene(scene);
-    }
-    
-    private Pane GetStartupPane() throws FileNotFoundException
-    {
-    	BorderPane pane = new BorderPane();
-    	pane.setCenter(new ImageViewSimple("\\Assets\\MonopolyLogo.png"));
-    	
-    	Button twoPlayers = new Button("2 Players");
-    	twoPlayers.setOnAction(new EventHandler<ActionEvent>() {
-    	    @Override public void handle(ActionEvent e) {
-    	    	ChangePane(Game.GetPane(2));
-    	    }
-    	});
-    	
-    	Button threePlayers = new Button("3 Players");
-    	threePlayers.setOnAction(new EventHandler<ActionEvent>() {
-    	    @Override public void handle(ActionEvent e) {
-    	    	ChangePane(Game.GetPane(3));
-    	    }
-    	});
-    	
-    	Button fourPlayers = new Button("4 Players");
-    	fourPlayers.setOnAction(new EventHandler<ActionEvent>() {
-    	    @Override public void handle(ActionEvent e) {
-    	    	ChangePane(Game.GetPane(3));
-    	    }
-    	});
-    	
-    	HBox buttonPane = new HBox();
-    	buttonPane.getChildren().addAll(twoPlayers, threePlayers, fourPlayers);
-    	pane.setBottom(buttonPane);
-    	buttonPane.setAlignment(Pos.BOTTOM_CENTER);
-    	
-    	return pane;
-    	
     }
     
     private void ChangePane(Pane newPane)
