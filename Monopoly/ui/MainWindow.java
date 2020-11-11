@@ -16,43 +16,59 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class MainWindow extends Application{
-	private Stage stage;
-	private Pane main;
-	
+    private Stage stage;
+    private Pane main;
+    private Pane currentScene;
+
     public static void main(String[] args) {
         launch(args);
     }
-    
+
     @Override
     public void start(Stage stage) throws Exception {
-    	// Create pane
-    	VBox  main = new VBox();
-    	main.setAlignment(Pos.CENTER);
-    	this.main = main;
-    	
-    	// ChangePane method
-    	Consumer<Pane> method = p -> this.ChangePane(p);
-    	
-    	// Get and Set StartupPane
-    	ChangePane(Startup.GetStartupPane(method));
-    	
-    	// Create scene
-    	Scene scene = new Scene(main, 800, 600);
-    	
+        // size change listener
+        stage.heightProperty().addListener(e ->{
+            SizeChanged();
+        });
+
+        stage.widthProperty().addListener(e ->{
+            SizeChanged();
+        });
+
+        // Create pane
+        VBox  main = new VBox();
+        main.setAlignment(Pos.CENTER);
+        this.main = main;
+        main.autosize();
+
+        // ChangePane method
+        Consumer<Pane> method = p -> this.ChangePane(p);
+
+        // Get and Set StartupPane
+        ChangePane(Startup.GetStartupPane(method));
+
+        // Create scene
+        Scene scene = new Scene(main, 800, 600);
+
         // Set the stage title
         stage.setTitle("Monopoly");
         this.stage = stage;
-        
+
         ChangeScene(scene);
+        SizeChanged();
     }
-    
+
     private void ChangePane(Pane newPane)
     {
-    	main.getChildren().clear();
-    	main.getChildren().add(newPane);
+        main.getChildren().clear();
+        main.getChildren().add(newPane);
+        currentScene = newPane;
+        newPane.setPrefSize(main.getHeight(), main.getWidth());
+        newPane.setMinSize(100, 100);
+        newPane.autosize();
 
     }
-    
+
     private void ChangeScene(Scene scene)
     {
         //Set Scene
@@ -62,5 +78,12 @@ public class MainWindow extends Application{
 
         stage.getScene().getRoot().requestFocus();
     }
-    
+
+    private void SizeChanged()
+    {
+        main.setPrefSize(stage.getHeight(), stage.getWidth());
+        currentScene.setPrefSize(stage.getHeight(), stage.getWidth());
+        currentScene.autosize();
+    }
+
 }
