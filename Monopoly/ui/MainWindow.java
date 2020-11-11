@@ -85,5 +85,4 @@ public class MainWindow extends Application{
         currentScene.setPrefSize(stage.getHeight(), stage.getWidth());
         currentScene.autosize();
     }
-
 }
