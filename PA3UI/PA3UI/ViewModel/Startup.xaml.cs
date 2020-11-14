@@ -33,7 +33,7 @@ namespace PA3UI.ui
 
         private void StartGame(int players) 
         {
-            changeUserControl(new MonopolyGame(2, (int)sliderTimer.Value,changeUserControl));
+            changeUserControl(new MonopolyGame(players, (int)sliderTimer.Value,changeUserControl));
         }
 
         private void sliderTimer_ValueChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<double> e)
