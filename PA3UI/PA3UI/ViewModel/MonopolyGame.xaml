@@ -6,9 +6,9 @@
              xmlns:local="clr-namespace:PA3UI.ui"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <Grid ShowGridLines="true">
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="0.3*"/>
             <RowDefinition Height="3*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
@@ -18,6 +18,42 @@
             <ColumnDefinition Width="3*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
+        <local:Board Grid.Row="1" Grid.Column="1"/>
+        <!-->
+            Money and Round Display
+            <!-->
+            <Grid ShowGridLines="True">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Label HorizontalAlignment="Center" FontSize="15">${placeholder}</Label>
+                <Label Grid.Column="1" HorizontalAlignment="Center">Round: {placeholder}</Label>
+            </Grid>
+            
+            <!-->
+            Player Display
+            <!-->
+            
+                <Grid Grid.Column="1" ShowGridLines="True">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                        <Label Grid.Column="1" HorizontalAlignment="Center">Player: {placeholder}</Label>
+                </Grid>
     </Grid>
     
     
