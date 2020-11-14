@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30503.244
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PA3UI", "PA3UI\PA3UI.csproj", "{14B42C46-C41B-4648-ABE5-46519325905C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PA3BackEnd", "PA3BackEnd\PA3BackEnd.csproj", "{A1385413-7C37-4083-A449-B5005D2870BC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{14B42C46-C41B-4648-ABE5-46519325905C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14B42C46-C41B-4648-ABE5-46519325905C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14B42C46-C41B-4648-ABE5-46519325905C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14B42C46-C41B-4648-ABE5-46519325905C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1385413-7C37-4083-A449-B5005D2870BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1385413-7C37-4083-A449-B5005D2870BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1385413-7C37-4083-A449-B5005D2870BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1385413-7C37-4083-A449-B5005D2870BC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3D4A2BF2-6B34-4854-B985-D1A1B13FFF2E}
+	EndGlobalSection
+EndGlobal
