@@ -45,6 +45,9 @@
           <e p="dice_six.png" t="Include" />
           <e p="dice_three.png" t="Include" />
           <e p="dice_two.png" t="Include" />
+          <e p="Fonts" t="Include">
+            <e p="COLLEGIA.ttf" t="Include" />
+          </e>
           <e p="monopoly-board21.jpg" t="Include" />
           <e p="MonopolyLogo.png" t="Include" />
         </e>

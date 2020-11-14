@@ -5,10 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PA3UI.ui"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="600" d:DesignWidth="1800">
     <Grid ShowGridLines="true">
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.3*"/>
+            <RowDefinition Height="0.15*"/>
             <RowDefinition Height="3*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
@@ -20,40 +20,12 @@
         </Grid.ColumnDefinitions>
         <local:Board Grid.Row="1" Grid.Column="1"/>
         <!-->
-            Money and Round Display
-            <!-->
-            <Grid ShowGridLines="True">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                </Grid.RowDefinitions>
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-                <Label HorizontalAlignment="Center" FontSize="15">${placeholder}</Label>
-                <Label Grid.Column="1" HorizontalAlignment="Center">Round: {placeholder}</Label>
-            </Grid>
-            
-            <!-->
-            Player Display
-            <!-->
-            
-                <Grid Grid.Column="1" ShowGridLines="True">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
-                    </Grid.RowDefinitions>
-
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
-                    
-                        <Label Grid.Column="1" HorizontalAlignment="Center">Player: {placeholder}</Label>
-                </Grid>
+            Money, Round, Player, Timer Display
+        <!-->
+        <Label HorizontalAlignment="Left" FontSize="15">${placeholder}</Label>
+        <Label Grid.Column="0" HorizontalAlignment="Right" FontSize="15">Round: {placeholder}</Label>
+        <Label Grid.Column="1" HorizontalAlignment="Center" FontSize="15">Player: {placeholder}</Label>
+        
     </Grid>
     
     
