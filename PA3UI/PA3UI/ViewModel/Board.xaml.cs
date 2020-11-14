@@ -11,12 +11,14 @@ namespace PA3UI.ui
         public Board()
         {
             InitializeComponent();
+
+            //this += Board_SizeChanged;
         }
 
-        private void UserControl_SizeChanged(object sender, System.Windows.SizeChangedEventArgs e)
+        private void Board_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            rowDefinition1.Height = new GridLength(imageBackround.Height);
-            columDefinition1.Width = new GridLength(imageBackround.Width);
+            rowDefinition1.Height = new GridLength(e.NewSize.Height);
+            columDefinition1.Width = new GridLength(e.NewSize.Width);
         }
     }
 }
