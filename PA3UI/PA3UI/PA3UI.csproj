@@ -10,4 +10,9 @@
     <ProjectReference Include="..\PA3BackEnd\PA3BackEnd.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="control\" />
+    <Folder Include="ui\" />
+  </ItemGroup>
+
 </Project>

@@ -46,7 +46,7 @@ namespace PA3BackEnd.src.Monopoly
 
 		}
 
-		public boolean CanPlayerBuildOnProperty(int index)
+		public bool CanPlayerBuildOnProperty(int index)
 		{
 			return false;
 		}
