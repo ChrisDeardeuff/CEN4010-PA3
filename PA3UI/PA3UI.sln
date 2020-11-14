@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.30503.244
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PA3UI", "PA3UI\PA3UI.csproj", "{F8B7BCB6-4424-480D-854C-039E337DDC90}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PA3BackEnd", "PA3BackEnd\PA3BackEnd.csproj", "{D26DE95E-1264-488B-89B3-9B245CD82A62}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PA3BackEnd", "PA3BackEnd\PA3BackEnd.csproj", "{D26DE95E-1264-488B-89B3-9B245CD82A62}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PA3Tests", "PA3Tests\PA3Tests.csproj", "{BB2364F9-2DF4-453D-BD38-E208B2EA47DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{D26DE95E-1264-488B-89B3-9B245CD82A62}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D26DE95E-1264-488B-89B3-9B245CD82A62}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D26DE95E-1264-488B-89B3-9B245CD82A62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB2364F9-2DF4-453D-BD38-E208B2EA47DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB2364F9-2DF4-453D-BD38-E208B2EA47DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB2364F9-2DF4-453D-BD38-E208B2EA47DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB2364F9-2DF4-453D-BD38-E208B2EA47DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
