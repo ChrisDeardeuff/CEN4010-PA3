@@ -6,4 +6,8 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PA3BackEnd\PA3BackEnd.csproj" />
+  </ItemGroup>
+
 </Project>
