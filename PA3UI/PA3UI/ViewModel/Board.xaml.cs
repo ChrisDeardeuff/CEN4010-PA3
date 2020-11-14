@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace PA3UI.ui
 {
@@ -10,6 +11,12 @@ namespace PA3UI.ui
         public Board()
         {
             InitializeComponent();
+        }
+
+        private void UserControl_SizeChanged(object sender, System.Windows.SizeChangedEventArgs e)
+        {
+            rowDefinition1.Height = new GridLength(imageBackround.Height);
+            columDefinition1.Width = new GridLength(imageBackround.Width);
         }
     }
 }
