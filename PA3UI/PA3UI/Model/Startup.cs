@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Windows.Controls;
 
 namespace PA3UI.ui
 {
-    public partial class Startup
+    public partial class Startup : UserControl
     {
 
     }

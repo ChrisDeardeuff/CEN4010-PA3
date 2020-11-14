@@ -1,18 +1,5 @@
 ﻿using PA3UI.ui;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace PA3UI
 {
@@ -24,7 +11,12 @@ namespace PA3UI
         public MainWindow()
         {
             InitializeComponent();
-            this.Content = new Startup();
+            ChangeUserControl(new Startup(ChangeUserControl));
+        }
+        private void ChangeUserControl(System.Windows.Controls.UserControl newPage)
+        {
+            mainGrid.Children.Clear();
+            mainGrid.Children.Add(newPage);
         }
     }
 }
