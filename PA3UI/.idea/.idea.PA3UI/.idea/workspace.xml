@@ -26,7 +26,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2d6f8fab-0150-40cc-b591-bdd44fa14279" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/PA3UI/MainWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/PA3UI/MainWindow.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.PA3UI/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PA3UI/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.PA3UI/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PA3UI/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PA3UI/ViewModel/MonopolyGame.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/PA3UI/ViewModel/MonopolyGame.xaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,16 +45,21 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/PA3UI/MainWindow.xaml" />
+        <option value="$PROJECT_DIR$/PA3UI/ViewModel/Startup.xaml" />
+        <option value="$PROJECT_DIR$/PA3UI/ViewModel/MonopolyGame.xaml" />
       </list>
     </option>
   </component>
   <component name="ProjectId" id="1kGmHn6gIgsrXIYgHfkaAx60VMp" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.34993446" />
     <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.30013105" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
@@ -112,6 +119,7 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -119,22 +127,30 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="254" y="85" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1600.860/-1600.0.1600.860@0.0.1600.860" timestamp="1605337382848" />
-    <state width="1557" height="158" key="GridCell.Tab.0.bottom" timestamp="1605337661270">
-      <screen x="0" y="0" width="1600" height="860" />
+    <state width="857" height="555" key="GridCell.Tab.0.bottom" timestamp="1605386515640">
+      <screen x="0" y="0" width="900" height="1560" />
     </state>
     <state width="1557" height="158" key="GridCell.Tab.0.bottom/0.0.1600.860/-1600.0.1600.860@0.0.1600.860" timestamp="1605337661270" />
-    <state width="1557" height="158" key="GridCell.Tab.0.center" timestamp="1605337661270">
-      <screen x="0" y="0" width="1600" height="860" />
+    <state width="857" height="442" key="GridCell.Tab.0.bottom/0.0.900.1560/-1600.0.1600.860@-1600.0.1600.860" timestamp="1605385428686" />
+    <state width="857" height="555" key="GridCell.Tab.0.bottom/0.0.900.1560/-1600.0.1600.860@0.0.900.1560" timestamp="1605386515640" />
+    <state width="857" height="555" key="GridCell.Tab.0.center" timestamp="1605386515640">
+      <screen x="0" y="0" width="900" height="1560" />
     </state>
     <state width="1557" height="158" key="GridCell.Tab.0.center/0.0.1600.860/-1600.0.1600.860@0.0.1600.860" timestamp="1605337661270" />
-    <state width="1557" height="158" key="GridCell.Tab.0.left" timestamp="1605337661270">
-      <screen x="0" y="0" width="1600" height="860" />
+    <state width="857" height="442" key="GridCell.Tab.0.center/0.0.900.1560/-1600.0.1600.860@-1600.0.1600.860" timestamp="1605385428686" />
+    <state width="857" height="555" key="GridCell.Tab.0.center/0.0.900.1560/-1600.0.1600.860@0.0.900.1560" timestamp="1605386515640" />
+    <state width="857" height="555" key="GridCell.Tab.0.left" timestamp="1605386515640">
+      <screen x="0" y="0" width="900" height="1560" />
     </state>
     <state width="1557" height="158" key="GridCell.Tab.0.left/0.0.1600.860/-1600.0.1600.860@0.0.1600.860" timestamp="1605337661270" />
-    <state width="1557" height="158" key="GridCell.Tab.0.right" timestamp="1605337661270">
-      <screen x="0" y="0" width="1600" height="860" />
+    <state width="857" height="442" key="GridCell.Tab.0.left/0.0.900.1560/-1600.0.1600.860@-1600.0.1600.860" timestamp="1605385428685" />
+    <state width="857" height="555" key="GridCell.Tab.0.left/0.0.900.1560/-1600.0.1600.860@0.0.900.1560" timestamp="1605386515640" />
+    <state width="857" height="555" key="GridCell.Tab.0.right" timestamp="1605386515640">
+      <screen x="0" y="0" width="900" height="1560" />
     </state>
     <state width="1557" height="158" key="GridCell.Tab.0.right/0.0.1600.860/-1600.0.1600.860@0.0.1600.860" timestamp="1605337661270" />
+    <state width="857" height="442" key="GridCell.Tab.0.right/0.0.900.1560/-1600.0.1600.860@-1600.0.1600.860" timestamp="1605385428686" />
+    <state width="857" height="555" key="GridCell.Tab.0.right/0.0.900.1560/-1600.0.1600.860@0.0.900.1560" timestamp="1605386515640" />
     <state width="1557" height="303" key="GridCell.Tab.1.bottom" timestamp="1605337661072">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
@@ -203,9 +219,10 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="231" y="41" width="916" height="708" key="SettingsEditor/0.0.1600.860/-1600.0.1600.860@0.0.1600.860" timestamp="1605337367531" />
-    <state x="460" y="544" width="672" height="677" key="search.everywhere.popup" timestamp="1605337454730">
-      <screen x="0" y="0" width="1600" height="860" />
+    <state x="228" y="987" width="672" height="1229" key="search.everywhere.popup" timestamp="1605386365633">
+      <screen x="0" y="0" width="900" height="1560" />
     </state>
     <state x="460" y="544" width="672" height="677" key="search.everywhere.popup/0.0.1600.860/-1600.0.1600.860@0.0.1600.860" timestamp="1605337454730" />
+    <state x="228" y="987" width="672" height="1229" key="search.everywhere.popup/0.0.900.1560/-1600.0.1600.860@0.0.900.1560" timestamp="1605386365633" />
   </component>
 </project>
