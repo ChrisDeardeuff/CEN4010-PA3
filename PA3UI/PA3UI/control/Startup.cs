@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PA3UI.control
 {
-    class Startup
+    public partial class Startup
     {
     }
 }
