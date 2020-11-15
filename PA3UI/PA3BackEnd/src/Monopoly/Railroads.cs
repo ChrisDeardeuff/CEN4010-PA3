@@ -2,9 +2,7 @@ namespace PA3BackEnd.src.Monopoly
 {
     public class Railroads: Property
     {
-        int rent;
-
-        public Railroads(int location, Group group, int price) : base(location, group, price) {
+        public Railroads(int location, Group group, int price, string name) : base(location, group, price, name) {
             
         }
         
@@ -13,11 +11,8 @@ namespace PA3BackEnd.src.Monopoly
         }
         
         public override int GetRent() {
-            return rent;
-        }
-        
-        public override Actions GetAction() {
-            return 0;
+            int amount = this.group.GetAmountPlayerOwns(owner);
+            return amount * 50;
         }
     }
 }

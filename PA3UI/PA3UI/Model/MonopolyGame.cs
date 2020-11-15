@@ -179,8 +179,17 @@ namespace PA3UI.ui
             {
                 return;
             }
+            int rent = 0;
 
-            int rent = property.GetRent();
+            if (property is Utility)
+            {
+                rent = roles[roles.Count - 1][0] + roles[roles.Count - 1][1];
+                rent = ((Utility)property).GetRent(rent);
+            }
+            else 
+            {
+                rent = property.GetRent();
+            }
 
             ShowDialogBoxOK($"You need To pay ${rent} rent to player {property.owner + 1} ({GetUserTokenName(property.owner)})", (object sender, RoutedEventArgs args) =>
             {

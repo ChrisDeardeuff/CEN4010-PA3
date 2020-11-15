@@ -1,10 +1,11 @@
+using System;
+using System.Diagnostics;
+
 namespace PA3BackEnd.src.Monopoly
 {
     public class Utility: Property
     {
-        int rent = 1;
-
-        public Utility(int location, Group group, int price):base(location, group, price){
+        public Utility(int location, Group group, int price, string name):base(location, group, price, name){
         }
         
         public override bool CanBeMortaged() {
@@ -12,11 +13,13 @@ namespace PA3BackEnd.src.Monopoly
         }
         
         public override int GetRent() {
-            return rent;
-        }
-        
-        public override Actions GetAction() {
+            Debug.Fail("GetRent(int role) should be called instead of this");
             return 0;
+        }
+
+        public int GetRent(int role)
+        {
+            return role * 12;
         }
     }
 }

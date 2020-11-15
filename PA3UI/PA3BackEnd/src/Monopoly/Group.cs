@@ -29,5 +29,18 @@ namespace PA3BackEnd.src.Monopoly
 			}
 			return true;
 		}
+
+		public int GetAmountPlayerOwns(int playerid)
+		{
+			int amount = 0;
+			foreach (var prop in properties)
+			{
+				if (prop.owner == playerid)
+				{
+					amount++;
+				}
+			}
+			return amount;
+		}
 	}
 }

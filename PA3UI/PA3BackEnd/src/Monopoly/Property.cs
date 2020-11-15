@@ -2,17 +2,19 @@
 {
     public abstract class Property : Field
     {
-        Group group;
+        public Group group { private set; get; }
         public int owner { private set; get; }
         public int price { private set; get; }
         public bool isMortaged { private set; get; }
+        public string name { private set; get; }
 
 
 
-        public Property(int location, Group group, int price) : base(location)
+        public Property(int location, Group group, int price, string name) : base(location)
         {
             this.group = group;
             this.price = price;
+            this.name = name;
             isMortaged = false;
             owner = -1;
         }

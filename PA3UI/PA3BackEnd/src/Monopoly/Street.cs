@@ -8,7 +8,7 @@ namespace PA3BackEnd.src.Monopoly
         private bool status;
         private int[] rent;
 
-        public Street(int location, Group group, int price, int[] rent):base(location, group, price) {
+        public Street(int location, Group group, int price, int[] rent, string name):base(location, group, price, name) {
             this.rent = rent;
         }
         int HousesAvailable(){
