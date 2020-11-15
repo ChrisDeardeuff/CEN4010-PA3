@@ -10,6 +10,43 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="3*"/>
-        </Grid.ColumnDefinitions>      
+        </Grid.ColumnDefinitions>
+
+        <Grid Name="MainGrid" ShowGridLines="True" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+        </Grid>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Rectangle Name="House1" Visibility="Hidden" Grid.Column="1" Grid.Row="1" Fill="Green"/>
+            <Rectangle Name="House2" Visibility="Hidden" Grid.Column="1" Grid.Row="3" Fill="Green"/>
+            <Rectangle Name="House3" Visibility="Hidden" Grid.Column="1" Grid.Row="5" Fill="Green"/>
+            <Rectangle Name="House4" Visibility="Hidden" Grid.Column="1" Grid.Row="7" Fill="Green"/>
+            <Rectangle Name="Hotel" Visibility="Hidden" Grid.Column="1" Grid.Row="3" Grid.RowSpan="3" Fill="Red"/>
+        </Grid>
     </Grid>
 </local:Tile>

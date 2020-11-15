@@ -5,21 +5,28 @@ namespace PA3UI.ui
     /// <summary>
     /// Interaction logic for CornerTiles.xaml
     /// </summary>
-    public partial class CornerTiles : Tile
+    public partial class CornerTile : Tile
     {
-        public CornerTiles()
+        public CornerTile(int y, int x)
         {
             InitializeComponent();
+            SetValue(Grid.RowProperty, x);
+            SetValue(Grid.ColumnProperty, y);
         }
 
-        public override void AddPlayerToken(UserControl playerToken)
+        public override void AddPlayerToken(UserControl playerToken, int id)
         {
-            throw new System.NotImplementedException();
+            this.AddPlayerTokenToGrid(playerToken, MainGrid, id);
         }
 
         public override void RemovePlayerToken(UserControl playerToken)
         {
-            throw new System.NotImplementedException();
+            MainGrid.Children.Remove(playerToken);
+        }
+
+        public override void SetDevelopmentOfProperty(int level)
+        {
+            throw new System.NotSupportedException();
         }
     }
 }

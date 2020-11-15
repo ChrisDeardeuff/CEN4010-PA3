@@ -20,21 +20,26 @@ namespace PA3UI.ui
     /// </summary>
     public partial class PropertyRight : Tile
     {
-        public PropertyRight()
+        public PropertyRight(int y, int x)
         {
             InitializeComponent();
+            SetValue(Grid.RowProperty, x);
+            SetValue(Grid.ColumnProperty, y);
         }
 
-        public override void AddPlayerToken(UserControl playerToken)
+        public override void AddPlayerToken(UserControl playerToken, int id)
         {
-            throw new NotImplementedException();
+            this.AddPlayerTokenToGrid(playerToken, MainGrid, id);
         }
 
         public override void RemovePlayerToken(UserControl playerToken)
         {
-            throw new NotImplementedException();
+            MainGrid.Children.Remove(playerToken);
         }
 
-
+        public override void SetDevelopmentOfProperty(int level)
+        {
+            SetDevelopmentOfProperty(level, House1, House2, House3, House4, Hotel);
+        }
     }
 }
