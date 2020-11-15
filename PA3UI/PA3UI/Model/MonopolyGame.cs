@@ -18,7 +18,6 @@ namespace PA3UI.ui
         private int Round;
         private Player[] players;
         private Fields fields;
-        private bool playerDidRole;
         private List<int[]> roles;
         private Random rnd;
 
@@ -36,6 +35,7 @@ namespace PA3UI.ui
 
         private void InitilizeData(int amountOfPlayers)
         {
+            roles = new List<int[]>();
             Round = 0;
             currentsPlayerTurn = -1;
 
@@ -53,7 +53,8 @@ namespace PA3UI.ui
 
         private void NextPlayersTurn() 
         {
-            playerDidRole = false;
+            //check if in prison
+            DiceButton.IsEnabled = true;
             currentsPlayerTurn++;
             currentsPlayerTurn %= players.Length;
 
@@ -67,7 +68,30 @@ namespace PA3UI.ui
             ShowDialogBoxOK($"Player {currentsPlayerTurn+1} it is your turn now !", null);
         }
 
+        private void DiceRole(int x, int y)
+        {
+            roles.Add(new int[] { x, y });
+            if (roles.Count == 3 && x == y)
+            {
+                GoToPrison();
+            }
+            else if (x != y)
+            {
+                DiceButton.IsEnabled = false;
+            }
 
+            int oldPosition = players[currentsPlayerTurn].getPosition();
+            players[currentsPlayerTurn].movePlayerForward(x + y);
+            board.SetPositionOfPlayer(oldPosition, players[currentsPlayerTurn].getPosition(), currentsPlayerTurn);
+
+            //action of field landed on
+        }
+
+        private void GoToPrison() 
+        {
+            players[currentsPlayerTurn].goToJail();
+            //got to message
+        }
 
 
     }

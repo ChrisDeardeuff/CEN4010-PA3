@@ -147,6 +147,11 @@ namespace PA3UI.ui
                 }
                 else 
                 {
+                    int x = RandomRole();
+                    int y = RandomRole();
+                    DiceOne.Source = new BitmapImage(new Uri(IntRoleToTexture(x), UriKind.RelativeOrAbsolute));
+                    DiceTwo.Source = new BitmapImage(new Uri(IntRoleToTexture(y), UriKind.RelativeOrAbsolute));
+                    DiceRole(x, y);
                     timer.Stop();
                     mainGrid.Children.Remove(cover);
                     cover.Opacity = 0.5;

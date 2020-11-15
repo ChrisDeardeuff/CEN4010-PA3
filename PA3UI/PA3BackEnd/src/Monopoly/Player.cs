@@ -16,8 +16,9 @@ namespace PA3BackEnd.src.Monopoly
 
         }
 
-        public void movePlayerTo(int position){
-            //TODO
+        public void movePlayerForward(int position){
+            this.position += position;
+            this.position %= 40;
         }
 
         public void goToJail(){
