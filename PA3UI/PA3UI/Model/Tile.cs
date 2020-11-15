@@ -20,6 +20,7 @@ namespace PA3UI.ui
         public abstract void SetDevelopmentOfProperty(int level);
         public void AddPlayerTokenToGrid(UserControl playerToken, Grid grid, int id)
         {
+            id++;
             int x = 0;
             int y = 0;
 

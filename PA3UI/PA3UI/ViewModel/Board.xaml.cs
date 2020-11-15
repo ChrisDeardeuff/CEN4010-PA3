@@ -43,8 +43,9 @@ namespace PA3UI.ui
 
             for (int i = 0; i < numberOfPlayers; i++)
             {
-                tiles[0].AddPlayerToken(userTokens[i], i+1);
+                tiles[0].AddPlayerToken(userTokens[i], i);
             }
+            SetPositionOfPlayer(0, 18, 3);
         }
 
         private void Board_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -60,8 +61,8 @@ namespace PA3UI.ui
 
         public void SetPositionOfPlayer(int oldLocation, int newLocation, int id) 
         {
-            tiles[oldLocation].RemovePlayerToken(null);
-            tiles[newLocation].AddPlayerToken(null, id);
+            tiles[oldLocation].RemovePlayerToken(userTokens[id]);
+            tiles[newLocation].AddPlayerToken(userTokens[id], id);
         }
     }
 }

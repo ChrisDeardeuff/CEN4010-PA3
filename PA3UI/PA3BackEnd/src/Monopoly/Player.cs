@@ -9,7 +9,7 @@ namespace PA3BackEnd.src.Monopoly
 
         public Player(){
 
-            this.propertiesOwned = new Property[27];
+            this.propertiesOwned = new Property[28];
             this.balance = 1500;
             this.inPrison = false;
             this.position = 0;

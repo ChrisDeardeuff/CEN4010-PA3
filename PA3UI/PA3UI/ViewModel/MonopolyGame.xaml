@@ -25,8 +25,8 @@
         <Label HorizontalAlignment="Left" FontSize="15" FontWeight="Bold" Foreground="White">${placeholder}</Label>
         <Label Grid.Column="0" HorizontalAlignment="Right" FontSize="15" FontWeight="Bold" Foreground="White">Round: {placeholder}</Label>
         <Label Grid.Column="1" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold" Foreground="White">Player: {placeholder}</Label>
-        <Label Grid.Column="2" HorizontalAlignment="Left" FontSize="15" FontWeight="Bold" Foreground="White">Time Left: </Label>
-        <Button Grid.Column="2" HorizontalAlignment="Right" FontSize="15" FontWeight="Bold" Foreground="White" Background="#D92427">Resign</Button>
+        <TextBlock  Name="textBlockTimer"  Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15" FontWeight="Bold" Foreground="White">Time Left:</TextBlock>
+        <Button Grid.Column="2" HorizontalAlignment="Right" FontSize="15" FontWeight="Bold" Foreground="White" Background="#D92427" Click="Button_Resign_Click">Resign</Button>
         
         <!-->
         Trade, Buy Prop, Develop button

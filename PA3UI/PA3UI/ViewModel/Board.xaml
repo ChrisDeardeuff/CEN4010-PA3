@@ -51,7 +51,6 @@
                     <RowDefinition Height="1.6*"/>
                 </Grid.RowDefinitions>
             </Grid>
-
         </Grid>
     </Grid>
 </UserControl>
