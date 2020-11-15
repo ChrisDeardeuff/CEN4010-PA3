@@ -6,9 +6,10 @@
              xmlns:local="clr-namespace:PA3UI.ui"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="1800">
-    <Grid ShowGridLines="true">
+    <Grid ShowGridLines="false">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.15*"/>
+            <RowDefinition Height="5"/>
             <RowDefinition Height="3*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
@@ -18,14 +19,16 @@
             <ColumnDefinition Width="3*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <local:Board Grid.Row="1" Grid.Column="1"/>
+        <local:Board Grid.Row="2" Grid.Column="1"/>
         <!-->
             Money, Round, Player, Timer Display
         <!-->
-        <Label HorizontalAlignment="Left" FontSize="15">${placeholder}</Label>
-        <Label Grid.Column="0" HorizontalAlignment="Right" FontSize="15">Round: {placeholder}</Label>
-        <Label Grid.Column="1" HorizontalAlignment="Center" FontSize="15">Player: {placeholder}</Label>
-        
+        <Border Grid.ColumnSpan="3" BorderThickness="2" BorderBrush="#D92427" Background="#D92427"></Border>
+        <Label HorizontalAlignment="Left" FontSize="15" FontWeight="Bold" Foreground="White">${placeholder}</Label>
+        <Label Grid.Column="0" HorizontalAlignment="Right" FontSize="15" FontWeight="Bold" Foreground="White">Round: {placeholder}</Label>
+        <Label Grid.Column="1" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold" Foreground="White">Player: {placeholder}</Label>
+        <Label Grid.Column="2" HorizontalAlignment="Left" FontSize="15" FontWeight="Bold" Foreground="White">Time Left: </Label>
+        <Button Grid.Column="2" HorizontalAlignment="Right" FontSize="15" FontWeight="Bold" Foreground="White" Background="#D92427">Exit</Button>
     </Grid>
     
     

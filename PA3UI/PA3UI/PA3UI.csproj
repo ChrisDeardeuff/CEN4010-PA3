@@ -159,6 +159,7 @@
     <Content Include="Assets\Board.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\Car.png" />
     <Content Include="Assets\dice_five.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -177,6 +178,9 @@
     <Content Include="Assets\dice_two.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\Shoe.png" />
+    <Content Include="Assets\Thimble.png" />
+    <Content Include="Assets\TopHat.png" />
     <Resource Include="Assets\Fonts\COLLEGIA.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
