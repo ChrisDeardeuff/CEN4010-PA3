@@ -9,9 +9,7 @@ namespace PA3UI.ui
     public partial class Dialog : UserControl
     {
         public bool yes { private set; get; }
-        public int amount { private set; get; }
-        private int min;
-        private int max;
+        public int amount { get { return (int)moneySlider.Value; } }
 
 
         private RoutedEventHandler routedEvent;
@@ -25,9 +23,9 @@ namespace PA3UI.ui
         {
             InitializeComponent();
             TextBlockMessage.Text = msg;
-            amount = min;
-            this.min = min;
-            this.max = max;
+            moneySlider.Minimum = min;
+            moneySlider.Maximum = max;
+            moneySlider.ValueChanged += MoneySlider_ValueChanged;
         }
 
         private void OnButtonClick(object sender, RoutedEventArgs e)
@@ -67,28 +65,26 @@ namespace PA3UI.ui
             return dialog;
         }
 
-        private void OnButtonClickPlus(object sender, RoutedEventArgs e)
-        {
-            yes = true;
-            amount += 10;
-        }
-
-        private void OnButtonClickMinus(object sender, RoutedEventArgs e)
-        {
-            yes = false;
-            amount -= 10;
-        }
-
         public static Dialog ShowBidingDialog(string msg, int min, int max, RoutedEventHandler onClick)
         {
             var dialog = new Dialog(msg, min, max);
-            dialog.okButton.Click += dialog.OnButtonClickPlus;
-            dialog.okButton.Content = "+";
+            dialog.okButton.Click += dialog.OnButtonClickYes;
+            dialog.okButton.Content = "Yes";
             dialog.routedEvent = onClick;
-            dialog.noButton.Click += dialog.OnButtonClickMinus;
-            dialog.noButton.Content = "-";
+            dialog.noButton.Click += dialog.OnButtonClickNo;
+            dialog.moneySlider.Visibility = Visibility.Visible;
             return dialog;
 
+        }
+
+        private void MoneySlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            SetTextOfTextBlockAmount($"${(int)e.NewValue}");
+        }
+
+        private void SetTextOfTextBlockAmount(string text) 
+        {
+            textBlockAmount.Text = text;
         }
     }
 }

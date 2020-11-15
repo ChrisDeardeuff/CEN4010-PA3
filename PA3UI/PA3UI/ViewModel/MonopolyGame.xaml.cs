@@ -140,8 +140,9 @@ namespace PA3UI.ui
             mainGrid.Children.Remove((UIElement)sender);
             if (routedEventHandler != null)
             {
-                routedEventHandler.Invoke(sender, args);
+                var tempEvent = routedEventHandler;
                 routedEventHandler = null;
+                tempEvent.Invoke(sender, args);
             }
         }
 

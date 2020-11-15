@@ -55,7 +55,7 @@ namespace PA3UI.ui
 
         private void NextPlayersTurn()
         {
-            
+
             HideEndTurnButton();
             roles.Clear();
             DiceButton.IsEnabled = true;
@@ -94,7 +94,7 @@ namespace PA3UI.ui
                     });
                 }
                 else
-                { 
+                {
 
                     if (currentPlayer.inPrisonCounter != 3)
                     {
@@ -112,7 +112,7 @@ namespace PA3UI.ui
                             }
                         });
                     }
-                    else 
+                    else
                     {
                         ShowDialogBoxOK($"You now have to pay the fine of $50", (object sender, RoutedEventArgs args) =>
                         {
@@ -168,6 +168,7 @@ namespace PA3UI.ui
             ShowDialogBoxOK($"You have to pay ${amount} in taxes", (object sender, RoutedEventArgs args) =>
             {
                 players[currentsPlayerTurn].subtractBalance(amount);
+                LoadPlayerDataTopBar();
             });
         }
 
@@ -181,7 +182,7 @@ namespace PA3UI.ui
 
             int rent = property.GetRent();
 
-            ShowDialogBoxOK($"You need To pay ${rent} rent to player {property.owner} ({GetUserTokenName(property.owner)})", (object sender, RoutedEventArgs args) =>
+            ShowDialogBoxOK($"You need To pay ${rent} rent to player {property.owner + 1} ({GetUserTokenName(property.owner)})", (object sender, RoutedEventArgs args) =>
             {
                 players[currentsPlayerTurn].subtractBalance(rent);
                 players[property.owner].addBalance(rent);
@@ -195,7 +196,7 @@ namespace PA3UI.ui
 
             if (!currentPlayer.HasEnoughMoney(property.price))
             {
-                BidForProperty(property);
+                BidForProperty(property, 0, -1, -1);
             }
 
             ShowDialogBoxYesNo($"You have landed on a property that can be bought\n\nWould you like to buy it for ${property.price}?", (object sender, RoutedEventArgs args) =>
@@ -209,30 +210,51 @@ namespace PA3UI.ui
                 }
                 else
                 {
-                    BidForProperty(property);
+                    BidForProperty(property, 0, -1, -1);
                 }
             });
         }
 
-        private void BidForProperty(Property property)
+        private void BidForProperty(Property property, int highestBid, int highestBider, int playerid)
         {
-            int HighestBid = 0;
-            int playerHighestBid = -1;
-            for (int i = 0; i < players.Length; i++)
+            playerid++;
+
+            if (playerid < players.Length)
             {
-                if (i == currentsPlayerTurn)
+
+                if (playerid == currentsPlayerTurn || !currentPlayer.HasEnoughMoney(property.price))
                 {
-                    continue;
+                    BidForProperty(property, highestBid, highestBider, playerid);
+                    return;
                 }
 
-                if (!currentPlayer.HasEnoughMoney(property.price))
+                ShowDialogBoxBidding($"Player {playerid + 1} ({GetUserTokenName(playerid)}) you can bid for a Property!\n Please Enter your bid!", property.price, players[playerid].balance, (object sender, RoutedEventArgs args) =>
                 {
-                    continue;
-                }
-
+                    var dialog = (Dialog)sender;
+                    if (dialog.yes)
+                    {
+                        if (dialog.amount > highestBid)
+                        {
+                            highestBid = dialog.amount;
+                            highestBider = playerid;
+                        }
+                    }
+                    BidForProperty(property, highestBid, highestBider, playerid);
+                });
+                return;
             }
 
-
+            if (highestBider == -1)
+            {
+                ShowDialogBoxOK("Nobody bid for the property !", null);
+            }
+            else 
+            {
+                players[highestBider].subtractBalance(highestBid);
+                players[highestBider].addProperty(property);
+                property.BoughtByPlayer(highestBider);
+                ShowDialogBoxOK($"Player {highestBider +1} ({GetUserTokenName(highestBider)}) won the biding with a bid of ${highestBid}!", null);
+            }
         }
 
         private void GoToPrison()
