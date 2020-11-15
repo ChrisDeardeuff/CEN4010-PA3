@@ -26,14 +26,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2d6f8fab-0150-40cc-b591-bdd44fa14279" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/PA3UI/Assets/Car.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PA3UI/Assets/Shoe.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PA3UI/Assets/Thimble.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PA3UI/Assets/TopHat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PA3BackEnd/src/Monopoly/Player.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PA3BackEnd/src/Monopoly/Railroads.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PA3BackEnd/src/Monopoly/Street.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PA3BackEnd/src/Monopoly/Utility.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.PA3UI/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PA3UI/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.PA3UI/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PA3UI/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PA3UI/PA3UI.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/PA3UI/PA3UI.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PA3UI/ViewModel/MonopolyGame.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/PA3UI/ViewModel/MonopolyGame.xaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,6 +52,10 @@
         <option value="$PROJECT_DIR$/PA3UI/ViewModel/Startup.xaml" />
         <option value="$PROJECT_DIR$/PA3UI/ViewModel/Startup.xaml.cs" />
         <option value="$PROJECT_DIR$/PA3UI/ViewModel/MonopolyGame.xaml" />
+        <option value="$PROJECT_DIR$/PA3BackEnd/src/Monopoly/Player.cs" />
+        <option value="$PROJECT_DIR$/PA3BackEnd/src/Monopoly/Railroads.cs" />
+        <option value="$PROJECT_DIR$/PA3BackEnd/src/Monopoly/Street.cs" />
+        <option value="$PROJECT_DIR$/PA3BackEnd/src/Monopoly/Utility.cs" />
       </list>
     </option>
   </component>
@@ -105,6 +107,7 @@
       <updated>1605335218529</updated>
       <workItem from="1605335225601" duration="1162000" />
       <workItem from="1605336418283" duration="1244000" />
+      <workItem from="1605405769654" duration="2522000" />
     </task>
     <servers />
   </component>
@@ -230,6 +233,10 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state width="1557" height="303" key="GridCell.Tab.4.right/0.0.1600.860/-1600.0.1600.860@0.0.1600.860" timestamp="1605337647779" />
+    <state x="78" y="160" key="Rider.ProjectTemplateDialog.Size" timestamp="1605406950123">
+      <screen x="0" y="23" width="1440" height="797" />
+    </state>
+    <state x="78" y="160" key="Rider.ProjectTemplateDialog.Size/0.23.1440.797@0.23.1440.797" timestamp="1605406950123" />
     <state x="206" y="490" key="RollbackChangesDialog" timestamp="1605393267473">
       <screen x="0" y="0" width="900" height="1560" />
     </state>
