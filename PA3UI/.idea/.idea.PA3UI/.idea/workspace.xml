@@ -26,12 +26,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2d6f8fab-0150-40cc-b591-bdd44fa14279" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/PA3UI/Assets/HDBoard.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PA3UI/Assets/house.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.PA3UI/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PA3UI/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.PA3UI/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PA3UI/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PA3UI/PA3UI.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/PA3UI/PA3UI.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PA3UI/ViewModel/MonopolyGame.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/PA3UI/ViewModel/MonopolyGame.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PA3UI/ViewModel/Startup.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PA3UI/ViewModel/Startup.xaml.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
