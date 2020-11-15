@@ -29,6 +29,10 @@ namespace PA3BackEnd.src.Monopoly
         }
         
         public override int GetRent() {
+            if (isMortaged)
+            {
+                return 0;
+            }
             return rent[developments];
         }
     }

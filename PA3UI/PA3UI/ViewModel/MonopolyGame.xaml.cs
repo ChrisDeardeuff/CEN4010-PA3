@@ -175,11 +175,6 @@ namespace PA3UI.ui
             timer.Start();
         }
 
-        private void Timer_Tick(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
         private void RoleDices() 
         {
             DiceOne.Source = new BitmapImage(new Uri(IntRoleToTexture(RandomRole()), UriKind.RelativeOrAbsolute));

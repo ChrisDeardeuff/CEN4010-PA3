@@ -36,45 +36,45 @@ namespace PA3BackEnd.src.Monopoly
 			// Initialize fields
 
 			// street
-			fields[1] = new Street(1, groups[0], 60);
-			fields[3] = new Street(3, groups[0], 60);
+			fields[1] = new Street(1, groups[0], 60, new int[] {2, 10, 30, 90, 160, 250 }, "Mediterranean Ave");
+			fields[3] = new Street(3, groups[0], 60, new int[] { 4, 20, 60, 180, 320, 450 }, "Baltic Ave");
 
-			fields[6] = new Street(6, groups[1], 100);
-			fields[8] = new Street(8, groups[1], 100);
-			fields[9] = new Street(9, groups[1], 120);
+			fields[6] = new Street(6, groups[1], 100, new int[] { 4, 20, 60, 180, 320, 450 }, "Baltic Ave");
+			fields[8] = new Street(8, groups[1], 100, new int[] { 4, 20, 60, 180, 320, 450 }, "Baltic Ave");
+			fields[9] = new Street(9, groups[1], 120, new int[] { 4, 20, 60, 180, 320, 450 }, "Baltic Ave");
 
-			fields[11] = new Street(11, groups[2], 140);
-			fields[13] = new Street(13, groups[2], 140);
-			fields[14] = new Street(14, groups[2], 160);
+			fields[11] = new Street(11, groups[2], 140, new int[] { 4, 20, 60, 180, 320, 450 }, "Baltic Ave");
+			fields[13] = new Street(13, groups[2], 140, new int[] { 4, 20, 60, 180, 320, 450 }, "Baltic Ave");
+			fields[14] = new Street(14, groups[2], 160, new int[] { 4, 20, 60, 180, 320, 450 }, "Baltic Ave");
 
-			fields[16] = new Street(16, groups[3], 180);
-			fields[18] = new Street(18, groups[3], 180);
-			fields[19] = new Street(19, groups[3], 200);
+			fields[16] = new Street(16, groups[3], 180, new int[] { 4, 20, 60, 180, 320, 450 }, "Baltic Ave");
+			fields[18] = new Street(18, groups[3], 180, new int[] { 4, 20, 60, 180, 320, 450 }, "Baltic Ave");
+			fields[19] = new Street(19, groups[3], 200, new int[] { 4, 20, 60, 180, 320, 450 }, "Baltic Ave");
 
-			fields[21] = new Street(21, groups[4], 220);
-			fields[23] = new Street(23, groups[4], 220);
-			fields[24] = new Street(24, groups[4], 240);
+			fields[21] = new Street(21, groups[4], 220, new int[] { 4, 20, 60, 180, 320, 450 }, "Baltic Ave");
+			fields[23] = new Street(23, groups[4], 220, new int[] { 4, 20, 60, 180, 320, 450 }, "Baltic Ave");
+			fields[24] = new Street(24, groups[4], 240, new int[] { 4, 20, 60, 180, 320, 450 }, "Baltic Ave");
 
-			fields[26] = new Street(26, groups[5], 260);
-			fields[27] = new Street(27, groups[5], 260);
-			fields[29] = new Street(29, groups[5], 280);
+			fields[26] = new Street(26, groups[5], 260, new int[] { 4, 20, 60, 180, 320, 450 }, "Baltic Ave");
+			fields[27] = new Street(27, groups[5], 260, new int[] { 4, 20, 60, 180, 320, 450 }, "Baltic Ave");
+			fields[29] = new Street(29, groups[5], 280, new int[] { 4, 20, 60, 180, 320, 450 }, "Baltic Ave");
 
-			fields[31] = new Street(31, groups[6], 300);
-			fields[32] = new Street(32, groups[6], 300);
-			fields[34] = new Street(34, groups[6], 320);
+			fields[31] = new Street(31, groups[6], 300, new int[] { 4, 20, 60, 180, 320, 450 }, "Baltic Ave");
+			fields[32] = new Street(32, groups[6], 300, new int[] { 4, 20, 60, 180, 320, 450 }, "Baltic Ave");
+			fields[34] = new Street(34, groups[6], 320, new int[] { 4, 20, 60, 180, 320, 450 }, "Baltic Ave");
 
-			fields[37] = new Street(37, groups[7], 350);
-			fields[39] = new Street(39, groups[7], 400);
+			fields[37] = new Street(37, groups[7], 350, new int[] { 4, 20, 60, 180, 320, 450 }, "Baltic Ave");
+			fields[39] = new Street(39, groups[7], 400, new int[] { 4, 20, 60, 180, 320, 450 }, "Baltic Ave");
 
-			// railroads
-			fields[12] = new Street(12, groups[8], 150);
-			fields[28] = new Street(28, groups[8], 150);
+			// railRoads
+			fields[5]  = new Railroads(32, groups[8], 200, "Baltic Ave");
+			fields[15] = new Railroads(34, groups[8], 200, "Baltic Ave");
+			fields[25] = new Railroads(32, groups[8], 200, "Baltic Ave");
+			fields[35] = new Railroads(34, groups[8], 200, "Baltic Ave");
 
 			// utility
-			fields[5] = new Street(32, groups[9], 200);
-			fields[15] = new Street(34, groups[9], 200);
-			fields[25] = new Street(32, groups[9], 200);
-			fields[35] = new Street(34, groups[9], 200);
+			fields[12] = new Utility(12, groups[9], 150, "Baltic Ave");
+			fields[28] = new Utility(28, groups[9], 150, "Baltic Ave");
 
 			// corners
 			fields[0] = new Tile(0, Actions.go);

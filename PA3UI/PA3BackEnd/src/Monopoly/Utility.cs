@@ -9,7 +9,7 @@ namespace PA3BackEnd.src.Monopoly
         }
         
         public override bool CanBeMortaged() {
-            return false;
+            return !isMortaged;
         }
         
         public override int GetRent() {
@@ -19,7 +19,20 @@ namespace PA3BackEnd.src.Monopoly
 
         public int GetRent(int role)
         {
-            return role * 12;
+            if (isMortaged)
+            {
+                return 0;
+            }
+
+            int amount = this.group.GetAmountPlayerOwns(owner);
+            if (amount == 1)
+            {
+                return role * 4;
+            }
+            else 
+            {
+                return role * 10;
+            }
         }
     }
 }

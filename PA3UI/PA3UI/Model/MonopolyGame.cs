@@ -136,12 +136,12 @@ namespace PA3UI.ui
                 ShowEndTurnButton();
             }
 
-            int oldPosition = players[currentsPlayerTurn].position;
-            players[currentsPlayerTurn].movePlayerForward(x + y);
-            board.SetPositionOfPlayer(oldPosition, players[currentsPlayerTurn].position, currentsPlayerTurn);
+            int oldPosition = currentPlayer.position;
+            currentPlayer.movePlayerForward(x + y);
+            board.SetPositionOfPlayer(oldPosition, currentPlayer.position, currentsPlayerTurn);
             LoadPlayerDataTopBar();
 
-            switch (fields.GetFieldAt(players[currentsPlayerTurn].position).GetAction())
+            switch (fields.GetFieldAt(currentPlayer.position).GetAction())
             {
                 case Actions.canBuy:
                     CanBuy();
@@ -167,14 +167,14 @@ namespace PA3UI.ui
         {
             ShowDialogBoxOK($"You have to pay ${amount} in taxes", (object sender, RoutedEventArgs args) =>
             {
-                players[currentsPlayerTurn].subtractBalance(amount);
+                currentPlayer.subtractBalance(amount);
                 LoadPlayerDataTopBar();
             });
         }
 
         private void PayRent()
         {
-            var property = (Property)fields.GetFieldAt(players[currentsPlayerTurn].position);
+            var property = (Property)fields.GetFieldAt(currentPlayer.position);
             if (property.owner == currentsPlayerTurn)
             {
                 return;
@@ -191,9 +191,9 @@ namespace PA3UI.ui
                 rent = property.GetRent();
             }
 
-            ShowDialogBoxOK($"You need To pay ${rent} rent to player {property.owner + 1} ({GetUserTokenName(property.owner)})", (object sender, RoutedEventArgs args) =>
+            ShowDialogBoxOK($"You need To pay ${rent} rent to player {property.owner + 1} ({GetUserTokenName(property.owner)})\n on {property.name}", (object sender, RoutedEventArgs args) =>
             {
-                players[currentsPlayerTurn].subtractBalance(rent);
+                currentPlayer.subtractBalance(rent);
                 players[property.owner].addBalance(rent);
                 LoadPlayerDataTopBar();
             });
@@ -201,7 +201,7 @@ namespace PA3UI.ui
 
         private void CanBuy()
         {
-            var property = (Property)fields.GetFieldAt(players[currentsPlayerTurn].position);
+            var property = (Property)fields.GetFieldAt(currentPlayer.position);
 
             if (!currentPlayer.HasEnoughMoney(property.price))
             {
@@ -212,8 +212,8 @@ namespace PA3UI.ui
             {
                 if (((Dialog)sender).yes)
                 {
-                    players[currentsPlayerTurn].subtractBalance(property.BoughtByPlayer(currentsPlayerTurn));
-                    players[currentsPlayerTurn].addProperty(property);
+                    currentPlayer.subtractBalance(property.BoughtByPlayer(currentsPlayerTurn));
+                    currentPlayer.addProperty(property);
                     LoadPlayerDataTopBar();
                     //and property list
                 }
@@ -268,9 +268,9 @@ namespace PA3UI.ui
 
         private void GoToPrison()
         {
-            int oldPosition = players[currentsPlayerTurn].position;
-            players[currentsPlayerTurn].goToJail();
-            board.SetPositionOfPlayer(oldPosition, players[currentsPlayerTurn].position, currentsPlayerTurn);
+            int oldPosition = currentPlayer.position;
+            currentPlayer.goToJail();
+            board.SetPositionOfPlayer(oldPosition, currentPlayer.position, currentsPlayerTurn);
             ShowDialogBoxOK("You are now in prison, and you turn is over!", (object sender, RoutedEventArgs args) => { NextPlayersTurn(); });
         }
 

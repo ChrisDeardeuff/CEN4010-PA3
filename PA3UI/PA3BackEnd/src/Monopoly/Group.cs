@@ -4,12 +4,17 @@ namespace PA3BackEnd.src.Monopoly
 	public class Group
 	{
 		private Property[] properties;
-		private int priceToBuild;
+		public int priceToBuild { get; private set; }
 		private int currentAmount;
 
 		public Group(int size)
 		{
 			properties = new Property[size];
+		}
+
+		public Group(int size, int priceToBuild) : this(size)
+		{
+			this.priceToBuild = priceToBuild;
 		}
 
 		public void AddProperty(Property property)

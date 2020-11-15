@@ -1,3 +1,5 @@
+using System;
+
 namespace PA3BackEnd.src.Monopoly
 {
     public class Railroads: Property
@@ -7,12 +9,16 @@ namespace PA3BackEnd.src.Monopoly
         }
         
         public override bool CanBeMortaged() {
-            return false;
+            return !isMortaged;
         }
         
         public override int GetRent() {
+            if (isMortaged)
+            {
+                return 0;
+            }
             int amount = this.group.GetAmountPlayerOwns(owner);
-            return amount * 50;
+            return ((int)Math.Pow(2, amount-1))*25;
         }
     }
 }
