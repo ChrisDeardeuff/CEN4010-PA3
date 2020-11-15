@@ -182,7 +182,7 @@ namespace PA3UI.ui
 
             int rent = property.GetRent();
 
-            ShowDialogBoxOK($"You need To pay ${rent} rent to Player {property.owner}({GetUserTokenName(property.owner)})", (object sender, RoutedEventArgs args) =>
+            ShowDialogBoxOK($"You need To pay ${rent} rent to Player {property.owner+1}({GetUserTokenName(property.owner)})", (object sender, RoutedEventArgs args) =>
             {
                 players[currentsPlayerTurn].subtractBalance(rent);
                 players[property.owner].addBalance(rent);
@@ -228,7 +228,7 @@ namespace PA3UI.ui
                     return;
                 }
 
-                ShowDialogBoxBidding($"Player {playerid} ({GetUserTokenName(playerid)}) you can bid for a Property!\n Please Enter your bid!", property.price, players[playerid].balance, (object sender, RoutedEventArgs args) =>
+                ShowDialogBoxBidding($"Player {playerid + 1} ({GetUserTokenName(playerid)}) you can bid for a Property!\n Please Enter your bid!", property.price, players[playerid].balance, (object sender, RoutedEventArgs args) =>
                 {
                     var dialog = (Dialog)sender;
                     if (dialog.yes)
@@ -253,7 +253,7 @@ namespace PA3UI.ui
                 players[highestBider].subtractBalance(highestBid);
                 players[highestBider].addProperty(property);
                 property.BoughtByPlayer(highestBider);
-                ShowDialogBoxOK($"Player {highestBider} ({GetUserTokenName(highestBider)}) won the biding with a bid of ${highestBid}!", null);
+                ShowDialogBoxOK($"Player {highestBider +1} ({GetUserTokenName(highestBider)}) won the biding with a bid of ${highestBid}!", null);
             }
         }
 
