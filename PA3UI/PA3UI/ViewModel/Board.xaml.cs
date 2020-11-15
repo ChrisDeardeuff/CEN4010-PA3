@@ -16,23 +16,23 @@ namespace PA3UI.ui
             InitializeComponent();
 
             userTokens = new UserToken[4];
-            userTokens[0] = new UserToken("/Assets/Shoe.png");
-            userTokens[1] = new UserToken("/Assets/Thimble.png");
-            userTokens[2] = new UserToken("/Assets/Car.png");
-            userTokens[3] = new UserToken("/Assets/TopHat.png");
+            userTokens[0] = new UserToken("/Assets/Tokens/Shoe.png");
+            userTokens[1] = new UserToken("/Assets/Tokens/Thimble.png");
+            userTokens[2] = new UserToken("/Assets/Tokens/Car.png");
+            userTokens[3] = new UserToken("/Assets/Tokens/TopHat.png");
 
             tiles = new Tile[40];
-            tiles[0] = new CornerTile(0, 0);
-            tiles[10] = new CornerTile(10, 0);
-            tiles[20] = new CornerTile(10, 10);
-            tiles[30] = new CornerTile(0, 10);
+            tiles[0] = new CornerTile(10, 10);
+            tiles[10] = new CornerTile(0, 10);
+            tiles[20] = new CornerTile(0, 0);
+            tiles[30] = new CornerTile(10, 0);
 
             for (int i = 1; i < 10; i++) 
             {
-                tiles[i] = new PropertyTop(i, 0);
-                tiles[i+10] = new PropertyRight(10, i);
-                tiles[i+20] = new PropertyBottom(10-i, 10);
-                tiles[i+30] = new PropertyLeft(0,10-i);
+                tiles[i] = new PropertyBottom(10 -i, 10);
+                tiles[i+10] = new PropertyLeft(0, 10-i);
+                tiles[i+20] = new PropertyTop(i, 0);
+                tiles[i+30] = new PropertyRight(10,i);
 
             }
 
@@ -43,7 +43,7 @@ namespace PA3UI.ui
 
             for (int i = 0; i < numberOfPlayers; i++)
             {
-                tiles[0].AddPlayerToken(userTokens[i], i);
+                tiles[0].AddPlayerToken(userTokens[i], i+1);
             }
         }
 

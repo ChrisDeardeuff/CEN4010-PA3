@@ -34,8 +34,9 @@ namespace PA3UI.ui
             }
 
 
-            SetValue(Grid.RowProperty, x);
-            SetValue(Grid.ColumnProperty, y);
+            playerToken.SetValue(Grid.RowProperty, x);
+            playerToken.SetValue(Grid.ColumnProperty, y);
+            grid.Children.Add(playerToken);
         }
 
         public void SetDevelopmentOfProperty(int level, Rectangle House1, Rectangle House2, Rectangle House3, Rectangle House4, Rectangle Hotel)

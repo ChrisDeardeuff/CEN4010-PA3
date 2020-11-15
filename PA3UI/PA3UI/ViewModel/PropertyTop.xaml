@@ -6,13 +6,13 @@
              xmlns:local="clr-namespace:PA3UI.ui"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid ShowGridLines="True">
+    <Grid ShowGridLines="False">
         <Grid.RowDefinitions>
             <RowDefinition Height="3*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
-        <Grid Name="MainGrid" ShowGridLines="True">
+        <Grid Name="MainGrid" ShowGridLines="False">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
