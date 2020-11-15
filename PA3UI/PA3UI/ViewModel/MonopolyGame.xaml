@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PA3UI.ui"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              d:DesignHeight="1000" d:DesignWidth="1000">
     <Grid Name="mainGrid" ShowGridLines="true">
         <Grid.RowDefinitions>
@@ -18,6 +18,7 @@
             <ColumnDefinition Width="3*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
+        
         <!-->
             Money, Round, Player, Timer Display
         <!-->
@@ -42,16 +43,13 @@
                 
             </Grid.RowDefinitions>
             
-            <Button Grid.Row="1">Develop Property</Button>
-            <Button Grid.Row="2">Trade</Button>
-            <Button Grid.Row="3">Buy Property</Button>
-            
+            <Button Grid.Row="1" FontSize="15" FontWeight="Bold" Foreground="White" Background="#D92427">Develop Property</Button>
+            <Button Grid.Row="2" FontSize="15" FontWeight="Bold" Foreground="White" Background="#D92427">Trade</Button>
+            <Button Grid.Row="3" FontSize="15" FontWeight="Bold" Foreground="White" Background="#D92427">Buy Property</Button>
             
         </Grid>
         
-        
-        
-        
+        <local:CardHolder Grid.Column="2" Grid.Row="2"></local:CardHolder>
     </Grid>
     
     

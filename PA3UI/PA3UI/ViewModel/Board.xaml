@@ -21,8 +21,9 @@
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
 
-
+            
             <Grid Name="mainGrid" Grid.Row="1" Grid.Column="1">
+                <Border Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="11" Grid.RowSpan="11" BorderThickness="2" BorderBrush="#D92427"></Border>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1.6*"/>
                     <ColumnDefinition Width="1*"/>

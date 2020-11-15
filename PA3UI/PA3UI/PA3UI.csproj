@@ -67,8 +67,14 @@
     <Compile Include="ViewModel\CardHolder.xaml.cs">
       <DependentUpon>CardHolder.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\CardVeiwer.xaml.cs">
+      <DependentUpon>CardVeiwer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\CornerTiles.xaml.cs">
       <DependentUpon>CornerTiles.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\Deed.xaml.cs">
+      <DependentUpon>Deed.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\MonopolyGame.xaml.cs">
       <DependentUpon>MonopolyGame.xaml</DependentUpon>
@@ -108,10 +114,12 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ViewModel\CardHolder.xaml" />
+    <Page Include="ViewModel\CardVeiwer.xaml" />
     <Page Include="ViewModel\CornerTiles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ViewModel\Deed.xaml" />
     <Page Include="ViewModel\MonopolyGame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
