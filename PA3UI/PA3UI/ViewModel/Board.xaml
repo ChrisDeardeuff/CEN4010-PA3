@@ -50,8 +50,16 @@
                     <RowDefinition Height="1*"/>
                     <RowDefinition Height="1.6*"/>
                 </Grid.RowDefinitions>
+                <local:PropertyLeft Grid.Row="1" Grid.Column="0"/>
+                <local:PropertyLeft Grid.Row="2" Grid.Column="0"/>
+                <local:PropertyLeft Grid.Row="3" Grid.Column="0"/>
+                <local:PropertyLeft Grid.Row="4" Grid.Column="0"/>
+                <local:PropertyLeft Grid.Row="5" Grid.Column="0"/>
+                <local:PropertyLeft Grid.Row="6" Grid.Column="0"/>
+                <local:PropertyLeft Grid.Row="7" Grid.Column="0"/>
+                <local:PropertyLeft Grid.Row="8" Grid.Column="0"/>
+                <local:PropertyLeft Grid.Row="9" Grid.Column="0"/>
             </Grid>
-
 
         </Grid>
     </Grid>

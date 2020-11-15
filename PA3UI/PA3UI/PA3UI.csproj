@@ -56,12 +56,26 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Board.cs" />
+    <Compile Include="Model\Property.cs" />
     <Compile Include="Model\Startup.cs" />
     <Compile Include="ViewModel\Board.xaml.cs">
       <DependentUpon>Board.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\MonopolyGame.xaml.cs">
       <DependentUpon>MonopolyGame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\PropertyBottom.xaml.cs">
+      <DependentUpon>PropertyBottom.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\PropertyTop.xaml.cs">
+      <DependentUpon>PropertyTop.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\PropertyRight.xaml.cs">
+      <DependentUpon>PropertyRight.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\PropertyLeft.xaml.cs">
+      <DependentUpon>PropertyLeft.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\Startup.xaml.cs">
       <DependentUpon>Startup.xaml</DependentUpon>
@@ -83,6 +97,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ViewModel\MonopolyGame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewModel\PropertyBottom.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ViewModel\PropertyTop.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ViewModel\PropertyRight.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ViewModel\PropertyLeft.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
