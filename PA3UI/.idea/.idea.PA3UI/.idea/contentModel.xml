@@ -49,6 +49,7 @@
           <e p="Fonts" t="Include">
             <e p="COLLEGIA.ttf" t="Include" />
           </e>
+          <e p="HDBoard.jpg" t="Include" />
           <e p="monopoly-board21.jpg" t="Include" />
           <e p="MonopolyLogo.png" t="Include" />
           <e p="Shoe.png" t="Include" />
@@ -59,16 +60,25 @@
         <e p="MainWindow.xaml" t="Include" />
         <e p="MainWindow.xaml.cs" t="Include" />
         <e p="Model" t="Include">
+          <e p="Board.cs" t="Include" />
+          <e p="Property.cs" t="Include" />
           <e p="Startup.cs" t="Include" />
+          <e p="Tile.cs" t="Include" />
         </e>
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="App.g.cs" t="Include" />
+            <e p="GeneratedInternalTypeHelper.g.cs" t="Include" />
             <e p="MainWindow.g.cs" t="Include" />
             <e p="PA3UI_Content.g.cs" t="Include" />
             <e p="ViewModel" t="Include">
               <e p="Board.g.cs" t="Include" />
+              <e p="CornerTiles.g.cs" t="Include" />
               <e p="MonopolyGame.g.cs" t="Include" />
+              <e p="PropertyBottom.g.cs" t="Include" />
+              <e p="PropertyLeft.g.cs" t="Include" />
+              <e p="PropertyRight.g.cs" t="Include" />
+              <e p="PropertyTop.g.cs" t="Include" />
               <e p="Startup.g.cs" t="Include" />
             </e>
           </e>
@@ -84,8 +94,18 @@
         <e p="ViewModel" t="Include">
           <e p="Board.xaml" t="Include" />
           <e p="Board.xaml.cs" t="Include" />
+          <e p="CornerTiles.xaml" t="Include" />
+          <e p="CornerTiles.xaml.cs" t="Include" />
           <e p="MonopolyGame.xaml" t="Include" />
           <e p="MonopolyGame.xaml.cs" t="Include" />
+          <e p="PropertyBottom.xaml" t="Include" />
+          <e p="PropertyBottom.xaml.cs" t="Include" />
+          <e p="PropertyLeft.xaml" t="Include" />
+          <e p="PropertyLeft.xaml.cs" t="Include" />
+          <e p="PropertyRight.xaml" t="Include" />
+          <e p="PropertyRight.xaml.cs" t="Include" />
+          <e p="PropertyTop.xaml" t="Include" />
+          <e p="PropertyTop.xaml.cs" t="Include" />
           <e p="Startup.xaml" t="Include" />
           <e p="Startup.xaml.cs" t="Include" />
         </e>

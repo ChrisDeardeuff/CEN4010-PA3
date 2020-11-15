@@ -36,6 +36,7 @@ namespace PA3UI.ui
         {
             changeUserControl(new MonopolyGame(2, (int)sliderTimer.Value,changeUserControl));
             
+            MainWindow.MaximizeWindow();
 
         }
 
