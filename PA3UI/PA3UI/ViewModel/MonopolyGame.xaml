@@ -57,6 +57,7 @@
                         <ColumnDefinition Width="5*"/>
                     </Grid.ColumnDefinitions>
 
+                    <Rectangle Grid.ColumnSpan="3" Fill="#D92427"></Rectangle>
                     <Image x:Name="DiceOne" Grid.Column="0" HorizontalAlignment="Center"></Image>
                     <Image x:Name="DiceTwo" Grid.Column="2" HorizontalAlignment="Center"></Image>
                 </Grid>

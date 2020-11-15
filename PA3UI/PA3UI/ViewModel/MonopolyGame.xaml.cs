@@ -104,6 +104,16 @@ namespace PA3UI.ui
             }
         }
 
+        private void ShowDialogBoxBidding(string msg, int min, int max, RoutedEventHandler routedEvent) 
+        {
+            ShowDialogBox();
+            routedEventHandler = routedEvent;
+            var dialogBox = Dialog.ShowBidingDialog(msg, min, max, RemoveDialogBox);
+            dialogBox.SetValue(Grid.RowProperty, 2);
+            dialogBox.SetValue(Grid.ColumnProperty, 1);
+            mainGrid.Children.Add(dialogBox);
+        }
+
         private void ShowDialogBoxOK(string msg, RoutedEventHandler routedEvent) 
         {
             ShowDialogBox();

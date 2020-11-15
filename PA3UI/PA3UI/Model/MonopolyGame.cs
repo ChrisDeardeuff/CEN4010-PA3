@@ -21,6 +21,7 @@ namespace PA3UI.ui
         private Fields fields;
         private List<int[]> roles;
         private Random rnd;
+        private Player currentPlayer { get { return players[currentsPlayerTurn]; } }
 
         private void Timer_Elapsed(object sender, EventArgs e)
         {
@@ -52,9 +53,9 @@ namespace PA3UI.ui
             NextPlayersTurn();
         }
 
-        private void NextPlayersTurn() 
+        private void NextPlayersTurn()
         {
-            //check if in prison
+            
             HideEndTurnButton();
             roles.Clear();
             DiceButton.IsEnabled = true;
@@ -68,15 +69,66 @@ namespace PA3UI.ui
 
             LoadPlayerDataTopBar();
 
-            ShowDialogBoxOK($"Player {currentsPlayerTurn+1} it is your turn now !", null);
+            if (currentPlayer.inPrison)
+            {
+                ShowDialogBoxOK($"Player {currentsPlayerTurn + 1}({GetUserTokenName(currentsPlayerTurn)}) it is your turn now !\n\t but you are in Prison!", null);
+                return;
+            }
+
+            ShowDialogBoxOK($"Player {currentsPlayerTurn + 1}({GetUserTokenName(currentsPlayerTurn)}) it is your turn now !", null);
         }
 
         private void DiceRole(int x, int y)
         {
             roles.Add(new int[] { x, y });
+
+            if (currentPlayer.inPrison)
+            {
+                currentPlayer.UpdateInPrisonCounter();
+                if (x == y)
+                {
+                    ShowDialogBoxOK($"You roled Doubles and got out of Prison!\n\tHowever, this ends your turn!", (object sender, RoutedEventArgs args) =>
+                    {
+                        currentPlayer.GetOutOfJail();
+                        NextPlayersTurn();
+                    });
+                }
+                else
+                { 
+
+                    if (currentPlayer.inPrisonCounter != 3)
+                    {
+                        ShowDialogBoxYesNo($"You did not role Doubles,\n but you can pay a fine of $50 to get out of prison.\n Would you like to pay the fine?", (object sender, RoutedEventArgs args) =>
+                        {
+                            if (((Dialog)sender).yes)
+                            {
+                                currentPlayer.GetOutOfJail();
+                                currentPlayer.subtractBalance(50);
+                                NextPlayersTurn();
+                            }
+                            else
+                            {
+                                NextPlayersTurn();
+                            }
+                        });
+                    }
+                    else 
+                    {
+                        ShowDialogBoxOK($"You now have to pay the fine of $50", (object sender, RoutedEventArgs args) =>
+                        {
+                            currentPlayer.subtractBalance(50);
+                            currentPlayer.GetOutOfJail();
+                            NextPlayersTurn();
+                        });
+                    }
+                }
+                return;
+            }
+
             if (roles.Count == 3 && x == y)
             {
                 GoToPrison();
+                return;
             }
             else if (x != y)
             {
@@ -89,7 +141,6 @@ namespace PA3UI.ui
             board.SetPositionOfPlayer(oldPosition, players[currentsPlayerTurn].position, currentsPlayerTurn);
             LoadPlayerDataTopBar();
 
-            //action of field landed on
             switch (fields.GetFieldAt(players[currentsPlayerTurn].position).GetAction())
             {
                 case Actions.canBuy:
@@ -101,12 +152,26 @@ namespace PA3UI.ui
                 case Actions.goToPrison:
                     GoToPrison();
                     break;
+                case Actions.payTax100:
+                    PayTax(100);
+                    break;
+                case Actions.payTax200:
+                    PayTax(200);
+                    break;
                 default:
                     break;
             }
         }
 
-        private void PayRent() 
+        private void PayTax(int amount)
+        {
+            ShowDialogBoxOK($"You have to pay ${amount} in taxes", (object sender, RoutedEventArgs args) =>
+            {
+                players[currentsPlayerTurn].subtractBalance(amount);
+            });
+        }
+
+        private void PayRent()
         {
             var property = (Property)fields.GetFieldAt(players[currentsPlayerTurn].position);
             if (property.owner == currentsPlayerTurn)
@@ -116,17 +181,25 @@ namespace PA3UI.ui
 
             int rent = property.GetRent();
 
-            ShowDialogBoxOK($"You need To pay ${rent} rent to Player{property.owner}({GetUserTokenName(property.owner)})", (object sender, RoutedEventArgs args) => {
+            ShowDialogBoxOK($"You need To pay ${rent} rent to Player {property.owner}({GetUserTokenName(property.owner)})", (object sender, RoutedEventArgs args) =>
+            {
                 players[currentsPlayerTurn].subtractBalance(rent);
                 players[property.owner].addBalance(rent);
                 LoadPlayerDataTopBar();
             });
         }
 
-        private void CanBuy() 
+        private void CanBuy()
         {
             var property = (Property)fields.GetFieldAt(players[currentsPlayerTurn].position);
-            ShowDialogBoxYesNo($"You have landed on a Property that can be bought for ${property.price}\nWould you like to Buy it ?", (object sender, RoutedEventArgs args) => {
+
+            if (!currentPlayer.HasEnoughMoney(property.price))
+            {
+                BidForProperty(property);
+            }
+
+            ShowDialogBoxYesNo($"You have landed on a Property that can be bought\nWould you like to Buy it for ${property.price}?", (object sender, RoutedEventArgs args) =>
+            {
                 if (((Dialog)sender).yes)
                 {
                     players[currentsPlayerTurn].subtractBalance(property.BoughtByPlayer(currentsPlayerTurn));
@@ -134,14 +207,35 @@ namespace PA3UI.ui
                     LoadPlayerDataTopBar();
                     //and property list
                 }
-                else 
+                else
                 {
-                    //start biding for property
+                    BidForProperty(property);
                 }
             });
         }
 
-        private void GoToPrison() 
+        private void BidForProperty(Property property)
+        {
+            int HighestBid = 0;
+            int playerHighestBid = -1;
+            for (int i = 0; i < players.Length; i++)
+            {
+                if (i == currentsPlayerTurn)
+                {
+                    continue;
+                }
+
+                if (!currentPlayer.HasEnoughMoney(property.price))
+                {
+                    continue;
+                }
+
+            }
+
+
+        }
+
+        private void GoToPrison()
         {
             int oldPosition = players[currentsPlayerTurn].position;
             players[currentsPlayerTurn].goToJail();

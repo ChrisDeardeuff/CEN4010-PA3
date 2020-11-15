@@ -9,12 +9,15 @@ namespace PA3BackEnd.src.Monopoly
         public bool inPrison { private set; get; }
         public int position { private set; get; }
 
+        public int inPrisonCounter { private set; get; }
+
         public Player(){
 
             this.propertiesOwned = new List<Property>();
             this.balance = 1500;
             this.inPrison = false;
             this.position = 0;
+            this.inPrisonCounter = 0;
 
         }
 
@@ -30,6 +33,17 @@ namespace PA3BackEnd.src.Monopoly
         public void goToJail(){
             this.inPrison = true;
             this.position = 10;
+        }
+
+        public void UpdateInPrisonCounter()
+        {
+            inPrisonCounter++;
+        }
+
+        public void GetOutOfJail()
+        {
+            this.inPrison = false;
+            this.inPrisonCounter = 0;
         }
 
         public void addBalance(int money){
@@ -53,6 +67,15 @@ namespace PA3BackEnd.src.Monopoly
 
         public void setPosition(int position) {
             this.position = position;
+        }
+
+        public bool HasEnoughMoney(int amount)
+        {
+            if (balance >= amount)
+            {
+                return true;
+            }
+            return false;
         }
 
     }
