@@ -33,6 +33,7 @@ namespace PA3BackEnd.src.Monopoly
 			groups[9] = new Group(2);
 
 			// Initialize fields
+
 			// street
 			// utility
 			// railroads

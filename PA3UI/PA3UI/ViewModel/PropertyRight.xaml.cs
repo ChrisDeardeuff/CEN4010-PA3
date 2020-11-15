@@ -18,11 +18,23 @@ namespace PA3UI.ui
     /// <summary>
     /// Interaction logic for PropertyLeft.xaml
     /// </summary>
-    public partial class PropertyRight : UserControl
+    public partial class PropertyRight : Tile
     {
         public PropertyRight()
         {
             InitializeComponent();
         }
+
+        public override void AddPlayerToken(UserControl playerToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void RemovePlayerToken(UserControl playerToken)
+        {
+            throw new NotImplementedException();
+        }
+
+
     }
 }

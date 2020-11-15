@@ -8,11 +8,13 @@ namespace PA3UI.ui
     /// </summary>
     public partial class Board : UserControl
     {
+        private Tile[] tiles;
+
         public Board()
         {
             InitializeComponent();
 
-            //this += Board_SizeChanged;
+            tiles = new Tile[40]; 
         }
 
         private void Board_SizeChanged(object sender, SizeChangedEventArgs e)

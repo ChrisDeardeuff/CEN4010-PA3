@@ -7,7 +7,7 @@ using System.Windows.Controls;
 
 namespace PA3UI.ui
 {
-    public abstract class Property : UserControl
+    public interface Property
     {
         /// <summary>
         /// Updates the visual part of properties on the board
@@ -16,8 +16,7 @@ namespace PA3UI.ui
         /// Valid values for:
         ///     Streets: -1 to 5
         ///     RailRoad -1 to 0
-        ///     For the rest not valid
-        ///     This method has no checking if the value is valid and only updates the visual on the board</param>
-        public abstract void SetDevelopmentOfProperty(int level);
+        /// </param>
+        void SetDevelopmentOfProperty(int level);
     }
 }

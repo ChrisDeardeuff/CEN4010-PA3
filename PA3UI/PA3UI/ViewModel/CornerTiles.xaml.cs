@@ -3,11 +3,11 @@
 namespace PA3UI.ui
 {
     /// <summary>
-    /// Interaction logic for PropertyLeft.xaml
+    /// Interaction logic for CornerTiles.xaml
     /// </summary>
-    public partial class PropertyLeft : Tile
+    public partial class CornerTiles : Tile
     {
-        public PropertyLeft()
+        public CornerTiles()
         {
             InitializeComponent();
         }
