@@ -31,6 +31,6 @@
         <Button Name="okButton"  Grid.Column="4" Grid.Row="3">OK</Button>
         <Button Name="noButton"  Grid.Column="2" Grid.Row="3">No</Button>
         <Slider Visibility="Hidden" x:Name="moneySlider" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3"></Slider>
-        <TextBlock Name="textBlockAmount" Grid.Row="3" Grid.Column="3" HorizontalAlignment="Center"></TextBlock>
+        <TextBlock Name="textBlockAmount" Grid.Row="3" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15"></TextBlock>
     </Grid>
 </UserControl>

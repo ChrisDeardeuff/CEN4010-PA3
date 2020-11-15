@@ -79,7 +79,7 @@ namespace PA3UI.ui
 
         private void MoneySlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            SetTextOfTextBlockAmount($"${e.NewValue}");
+            SetTextOfTextBlockAmount($"${(int)e.NewValue}");
         }
 
         private void SetTextOfTextBlockAmount(string text) 
