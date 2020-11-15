@@ -7,20 +7,22 @@
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <ScrollViewer>
-        <Grid>
+        <Grid ShowGridLines="True">
             <Grid.RowDefinitions>
+                <RowDefinition Height="36"/>
+                <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
             
-            
-            <Image Grid.Row="0" Source="../Assets/Deeds/Boardwalk.png"></Image>
-            <Image Grid.Row="1" Source="../Assets/Deeds/ConnecticutAve.png"></Image>
-            <Image Grid.Row="2" Source="../Assets/Deeds/ReadingRailroad.png"></Image>
-            <Image Grid.Row="3" Source="../Assets/Deeds/AtlanticAve.png"></Image>
-            
+            <TextBlock TextAlignment="Center" FontSize="15" FontWeight="Bold" Foreground="White" Background="#D92427" >Owned Properties</TextBlock>
+            <local:Deed Grid.Row="1"></local:Deed>
+            <local:Deed Grid.Row="2"></local:Deed>
+            <local:Deed Grid.Row="3"></local:Deed>
+            <local:Deed Grid.Row="4"></local:Deed>
+            <local:Deed Grid.Row="5"></local:Deed>
             
         </Grid>
     </ScrollViewer>
