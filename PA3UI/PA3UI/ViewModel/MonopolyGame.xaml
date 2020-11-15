@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PA3UI.ui"
              mc:Ignorable="d"
+             SizeChanged="UserControl_SizeChanged"
              d:DesignHeight="1000" d:DesignWidth="1000">
     <Grid Name="mainGrid" ShowGridLines="true">
         <Grid.RowDefinitions>
@@ -18,14 +19,14 @@
             <ColumnDefinition Width="3*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        
+
         <!-->
             Money, Round, Player, Timer Display
         <!-->
         <Border Grid.ColumnSpan="3" BorderThickness="2" BorderBrush="#D92427" Background="#D92427"></Border>
-        <Label HorizontalAlignment="Left" FontSize="15" FontWeight="Bold" Foreground="White">${placeholder}</Label>
-        <Label Grid.Column="0" HorizontalAlignment="Right" FontSize="15" FontWeight="Bold" Foreground="White">Round: {placeholder}</Label>
-        <Label Grid.Column="1" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold" Foreground="White">Player: {placeholder}</Label>
+        <Label Name="textBlockMoney" HorizontalAlignment="Left" FontSize="15" FontWeight="Bold" Foreground="White">${placeholder}</Label>
+        <Label Name="textBlockRound"  Grid.Column="0" HorizontalAlignment="Right" FontSize="15" FontWeight="Bold" Foreground="White">Round: {placeholder}</Label>
+        <TextBlock Name="textBlockPlayersTurn" VerticalAlignment="Center" Grid.Column="1" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold" Foreground="White">Player: {placeholder}</TextBlock>
         <TextBlock  Name="textBlockTimer"  Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15" FontWeight="Bold" Foreground="White">Time Left:</TextBlock>
         <Button Grid.Column="2" HorizontalAlignment="Right" FontSize="15" FontWeight="Bold" Foreground="White" Background="#D92427" Click="Button_Resign_Click">Resign</Button>
         
@@ -40,16 +41,29 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
                 
             </Grid.RowDefinitions>
-            
+            <local:CardViewer></local:CardViewer>
             <Button Grid.Row="1" FontSize="15" FontWeight="Bold" Foreground="White" Background="#D92427">Develop Property</Button>
             <Button Grid.Row="2" FontSize="15" FontWeight="Bold" Foreground="White" Background="#D92427">Trade</Button>
             <Button Grid.Row="3" FontSize="15" FontWeight="Bold" Foreground="White" Background="#D92427">Buy Property</Button>
+            <Button Name="DiceButton" Grid.Row="4" FontSize="15" FontWeight="Bold" Foreground="White" Background="#D92427" Click="RoleDices">
+                <Grid Name="DiceButtonGrid">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Image x:Name="DiceOne" Grid.Column="0" HorizontalAlignment="Center"></Image>
+                    <Image x:Name="DiceTwo" Grid.Column="2" HorizontalAlignment="Center"></Image>
+                </Grid>
+            </Button>
             
         </Grid>
-        
-        <local:CardHolder Grid.Column="2" Grid.Row="2"></local:CardHolder>
+
+        <local:CardHolder x:Name="Ch" Grid.Column="2" Grid.Row="2"></local:CardHolder>
     </Grid>
     
     

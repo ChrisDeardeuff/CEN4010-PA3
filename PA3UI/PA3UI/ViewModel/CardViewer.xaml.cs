@@ -2,9 +2,9 @@
 
 namespace PA3UI.ui
 {
-    public partial class CardVeiwer : UserControl
+    public partial class CardViewer : UserControl
     {
-        public CardVeiwer()
+        public CardViewer()
         {
             InitializeComponent();
         }

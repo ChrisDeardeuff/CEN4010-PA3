@@ -66,14 +66,17 @@
     <Compile Include="ViewModel\CardHolder.xaml.cs">
       <DependentUpon>CardHolder.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\CardVeiwer.xaml.cs">
-      <DependentUpon>CardVeiwer.xaml</DependentUpon>
+    <Compile Include="ViewModel\CardViewer.xaml.cs">
+      <DependentUpon>CardViewer.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\CornerTiles.xaml.cs">
       <DependentUpon>CornerTiles.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\Deed.xaml.cs">
       <DependentUpon>Deed.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\DialogOK.xaml.cs">
+      <DependentUpon>DialogOK.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\MonopolyGame.xaml.cs">
       <DependentUpon>MonopolyGame.xaml</DependentUpon>
@@ -113,12 +116,16 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ViewModel\CardHolder.xaml" />
-    <Page Include="ViewModel\CardVeiwer.xaml" />
+    <Page Include="ViewModel\CardViewer.xaml" />
     <Page Include="ViewModel\CornerTiles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ViewModel\Deed.xaml" />
+    <Page Include="ViewModel\DialogOK.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ViewModel\MonopolyGame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -178,88 +185,88 @@
     <Content Include="Assets\Board.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\Deeds\AtlanticAve.png">
+    <Content Include="Assets\Deeds\26.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\Deeds\B&amp;ORailroad.png">
+    <Content Include="Assets\Deeds\25.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\Deeds\BalticAve.png">
+    <Content Include="Assets\Deeds\3.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\Deeds\Boardwalk.png">
+    <Content Include="Assets\Deeds\39.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\Deeds\ConnecticutAve.png">
+    <Content Include="Assets\Deeds\9.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\Deeds\ElectricCo.png">
+    <Content Include="Assets\Deeds\12.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\Deeds\IllinoisAve.png">
+    <Content Include="Assets\Deeds\24.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\Deeds\IndianaAve.png">
+    <Content Include="Assets\Deeds\23.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\Deeds\KentuckyAve.png">
+    <Content Include="Assets\Deeds\21.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\Deeds\MarvinGardens.png">
+    <Content Include="Assets\Deeds\29.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\Deeds\MediterraneanAve.png">
+    <Content Include="Assets\Deeds\1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\Deeds\NewYorkAve.png">
+    <Content Include="Assets\Deeds\19.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\Deeds\NorthCarolinaAve.png">
+    <Content Include="Assets\Deeds\32.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\Deeds\OrientalAve.png">
+    <Content Include="Assets\Deeds\6.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\Deeds\PacificAvenue.png">
+    <Content Include="Assets\Deeds\31.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\Deeds\ParkPlace.png">
+    <Content Include="Assets\Deeds\37.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\Deeds\PennsylvaniaAve.png">
+    <Content Include="Assets\Deeds\34.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\Deeds\PennsylvaniaRailroad.png">
+    <Content Include="Assets\Deeds\15.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\Deeds\ReadingRailroad.png">
+    <Content Include="Assets\Deeds\5.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\Deeds\ShortLine.png">
+    <Content Include="Assets\Deeds\35.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\Deeds\StatesAve.png">
+    <Content Include="Assets\Deeds\13.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\Deeds\StCharlesPlace.png">
+    <Content Include="Assets\Deeds\11.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\Deeds\StJamesPlace.png">
+    <Content Include="Assets\Deeds\16.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\Deeds\TennesseeAve.png">
+    <Content Include="Assets\Deeds\18.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\Deeds\VentnorAve.png">
+    <Content Include="Assets\Deeds\27.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\Deeds\VermontAve.png">
+    <Content Include="Assets\Deeds\8.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\Deeds\VirginiaAve.png">
+    <Content Include="Assets\Deeds\14.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\Deeds\WaterWorks.png">
+    <Content Include="Assets\Deeds\28.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\Dice\dice_five.png">

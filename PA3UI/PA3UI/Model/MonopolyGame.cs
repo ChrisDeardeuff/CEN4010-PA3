@@ -1,6 +1,7 @@
 ﻿
 using PA3BackEnd.src.Monopoly;
 using System;
+using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
@@ -17,6 +18,9 @@ namespace PA3UI.ui
         private int Round;
         private Player[] players;
         private Fields fields;
+        private bool playerDidRole;
+        private List<int[]> roles;
+        private Random rnd;
 
         private void Timer_Elapsed(object sender, EventArgs e)
         {
@@ -49,17 +53,7 @@ namespace PA3UI.ui
 
         private void NextPlayersTurn() 
         {
-            var userControl = new UserControl();
-            var rectanngle = new Rectangle();
-            //rectanngle.Opacity = 128;
-            rectanngle.Fill = Brushes.Black;
-            userControl.Content = rectanngle;
-
-            MainWindow.AddUserControl(userControl);
-            //userControl.
-
-            //lock develop trade and buy property
-
+            playerDidRole = false;
             currentsPlayerTurn++;
             currentsPlayerTurn %= players.Length;
 
@@ -68,10 +62,12 @@ namespace PA3UI.ui
                 Round++;
             }
 
-            // load Data
+            LoadPlayerData();
 
-            // bring up window that it is player x turn
+            ShowDialogBoxOK($"Player {currentsPlayerTurn+1} it is your turn now !", null);
         }
+
+
 
 
     }
