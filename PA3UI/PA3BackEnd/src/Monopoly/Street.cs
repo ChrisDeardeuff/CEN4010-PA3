@@ -29,9 +29,5 @@ namespace PA3BackEnd.src.Monopoly
         public override int GetRent() {
             return 0;
         }
-        
-        public override int GetAction() {
-            return 0;
-        }
     }
 }

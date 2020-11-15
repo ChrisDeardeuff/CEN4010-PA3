@@ -4,6 +4,17 @@ using System.Text;
 
 namespace PA3BackEnd.src.Monopoly
 {
+	public enum Actions
+	{ 
+		go,
+		none,
+		canBuy,
+		payRent,
+		payTax100,
+		payTax200,
+		goToPrison,
+	}
+
 	public abstract class Field
 	{
 		int location;
@@ -18,6 +29,6 @@ namespace PA3BackEnd.src.Monopoly
 			return location;
 		}
 
-		public abstract int GetAction();
+		public abstract Actions GetAction();
 	}
 }

@@ -22,7 +22,7 @@ namespace PA3BackEnd.src.Monopoly
 		{
 			for (int i = 0; i < properties.Length; i++)
 			{
-				if (properties[i].GetOwner() != playerid)
+				if (properties[i].owner != playerid)
 				{
 					return false;
 				}

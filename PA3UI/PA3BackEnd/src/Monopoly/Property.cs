@@ -3,60 +3,63 @@
     public abstract class Property : Field
     {
         Group group;
-	    int owner;
-	    int price;
-        bool isMortaged;
+        public int owner { private set; get; }
+        public int price { private set; get; }
+        public bool isMortaged { private set; get; }
 
 
 
-    public Property(int location, Group group, int price) : base(location)
-    {
-        this.group = group;
-        this.price = price;
-        isMortaged = false;
-        owner = -1;
-    }
-
-    public int GetPrice()
-    {
-        return price;
-    }
-
-    public int GetOwner()
-    {
-        return owner;
-    }
-
-    public Group GetGroup()
-    {
-        return group;
-    }
-
-    public int MortageProperty()
-    {
-        if (!CanBeMortaged())
+        public Property(int location, Group group, int price) : base(location)
         {
-            return 0;
+            this.group = group;
+            this.price = price;
+            isMortaged = false;
+            owner = -1;
         }
 
-        isMortaged = true;
-
-        return price;
-    }
-
-    public int UnMortageProperty()
-    {
-        if (!isMortaged)
+        public int MortageProperty()
         {
-            return 0;
+            if (!CanBeMortaged())
+            {
+                return 0;
+            }
+
+            isMortaged = true;
+
+            return price;
         }
 
-        isMortaged = false;
-        return price;
+        public int UnMortageProperty()
+        {
+            if (!isMortaged)
+            {
+                return 0;
+            }
+
+            isMortaged = false;
+            return price * -1;
+        }
+
+        public abstract bool CanBeMortaged();
+
+        public abstract int GetRent();
+
+        public int BoughtByPlayer(int playerId) 
+        {
+            owner = playerId;
+            return price;
+        }
+
+        public override Actions GetAction()
+        {
+            if (owner == -1)
+            {
+                return Actions.canBuy;
+            }
+            else 
+            {
+                return Actions.payRent;
+            }
+        }
     }
-
-    public abstract bool CanBeMortaged();
-
-    public abstract int GetRent();
-}
 }

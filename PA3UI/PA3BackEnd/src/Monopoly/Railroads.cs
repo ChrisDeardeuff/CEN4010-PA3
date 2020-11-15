@@ -4,7 +4,7 @@ namespace PA3BackEnd.src.Monopoly
     {
         int rent;
 
-        public Railroads(int location, Group group, int price):base(location, group, price) {
+        public Railroads(int location, Group group, int price) : base(location, group, price) {
             
         }
         
@@ -16,7 +16,7 @@ namespace PA3BackEnd.src.Monopoly
             return rent;
         }
         
-        public override int GetAction() {
+        public override Actions GetAction() {
             return 0;
         }
     }

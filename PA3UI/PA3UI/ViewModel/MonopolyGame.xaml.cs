@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -66,28 +67,13 @@ namespace PA3UI.ui
             }
         }
 
-        private void LoadPlayerData() 
+        private void LoadPlayerDataTopBar() 
         {
-            var playersToken = "";
-            switch (currentsPlayerTurn) 
-            {
-                case 0:
-                    playersToken = "Shoe";
-                    break;
-                case 1:
-                    playersToken = "Thimble";
-                    break;
-                case 2:
-                    playersToken = "Car";
-                    break;
-                case 3:
-                    playersToken = "TopHat";
-                    break;
-            }
+            var playersToken = GetUserTokenName(currentsPlayerTurn);
 
             textBlockPlayersTurn.Text = $"Player: {currentsPlayerTurn + 1 }({playersToken})";
             textBlockRound.Content = $"Round: {Round}";
-            textBlockMoney.Content = $"${players[currentsPlayerTurn].getBalance()}";
+            textBlockMoney.Content = $"${players[currentsPlayerTurn].balance}";
         }
 
         private void EndGame()
@@ -100,6 +86,7 @@ namespace PA3UI.ui
         {
             EndGame();
         }
+
         private void viewDeed_OnClick(object sender, RoutedEventArgs e)
         {
             
@@ -107,14 +94,31 @@ namespace PA3UI.ui
 
         private void ShowDialogBox() 
         {
-            mainGrid.Children.Add(cover);    
+            try
+            {
+                mainGrid.Children.Add(cover);
+            }
+            catch 
+            {
+                Debug.Fail("Adding the cover failed!");    
+            }
         }
 
         private void ShowDialogBoxOK(string msg, RoutedEventHandler routedEvent) 
         {
             ShowDialogBox();
             routedEventHandler = routedEvent;
-            var dialogBox = new DialogOK(msg, RemoveDialogBox);
+            var dialogBox = Dialog.ShowOKDialog(msg, RemoveDialogBox);
+            dialogBox.SetValue(Grid.RowProperty, 2);
+            dialogBox.SetValue(Grid.ColumnProperty, 1);
+            mainGrid.Children.Add(dialogBox);
+        }
+
+        private void ShowDialogBoxYesNo(string msg, RoutedEventHandler routedEvent)
+        {
+            ShowDialogBox();
+            routedEventHandler = routedEvent;
+            var dialogBox = Dialog.ShowYesNoDialog(msg, RemoveDialogBox);
             dialogBox.SetValue(Grid.RowProperty, 2);
             dialogBox.SetValue(Grid.ColumnProperty, 1);
             mainGrid.Children.Add(dialogBox);
@@ -134,7 +138,7 @@ namespace PA3UI.ui
         private void RoleDices(object sender, RoutedEventArgs e)
         {
             cover.Opacity = 0;
-            mainGrid.Children.Add(cover);
+            ShowDialogBox();
             var timer = new DispatcherTimer();
             timer.Interval = new TimeSpan(0, 0, 0, 0, 100);
             int i = 0;
@@ -147,14 +151,14 @@ namespace PA3UI.ui
                 }
                 else 
                 {
+                    mainGrid.Children.Remove(cover);
+                    cover.Opacity = 0.5;
                     int x = RandomRole();
                     int y = RandomRole();
                     DiceOne.Source = new BitmapImage(new Uri(IntRoleToTexture(x), UriKind.RelativeOrAbsolute));
                     DiceTwo.Source = new BitmapImage(new Uri(IntRoleToTexture(y), UriKind.RelativeOrAbsolute));
                     DiceRole(x, y);
                     timer.Stop();
-                    mainGrid.Children.Remove(cover);
-                    cover.Opacity = 0.5;
                 }
             };
             timer.Start();
@@ -200,6 +204,24 @@ namespace PA3UI.ui
         {
             DiceButtonGrid.Height = DiceButton.ActualHeight;
             DiceButtonGrid.Width = DiceButton.ActualWidth;
+        }
+
+        private void EndTurnButton_Click(object sender, RoutedEventArgs e)
+        {
+            HideEndTurnButton();
+            NextPlayersTurn();
+        }
+
+        private void HideEndTurnButton()
+        { 
+            EndTurnButton.IsEnabled = false;
+            EndTurnButton.Visibility = Visibility.Hidden;
+        }
+
+        private void ShowEndTurnButton()
+        {
+            EndTurnButton.IsEnabled = true;
+            EndTurnButton.Visibility = Visibility.Visible;
         }
     }
 }

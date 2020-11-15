@@ -57,7 +57,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\MonopolyGame.cs" />
-    <Compile Include="Model\Property.cs" />
     <Compile Include="Model\Startup.cs" />
     <Compile Include="Model\Tile.cs" />
     <Compile Include="ViewModel\Board.xaml.cs">
@@ -75,8 +74,8 @@
     <Compile Include="ViewModel\Deed.xaml.cs">
       <DependentUpon>Deed.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\DialogOK.xaml.cs">
-      <DependentUpon>DialogOK.xaml</DependentUpon>
+    <Compile Include="ViewModel\Dialog.xaml.cs">
+      <DependentUpon>Dialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\MonopolyGame.xaml.cs">
       <DependentUpon>MonopolyGame.xaml</DependentUpon>
@@ -122,7 +121,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ViewModel\Deed.xaml" />
-    <Page Include="ViewModel\DialogOK.xaml">
+    <Page Include="ViewModel\Dialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,15 +1,17 @@
+using System.Collections.Generic;
+
 namespace PA3BackEnd.src.Monopoly
 {
     public class Player
     {
-        Property[] propertiesOwned;
-        int balance;
-        bool inPrison;
-        int position;
+        List<Property> propertiesOwned;
+        public int balance { private set; get; }
+        public bool inPrison { private set; get; }
+        public int position { private set; get; }
 
         public Player(){
 
-            this.propertiesOwned = new Property[28];
+            this.propertiesOwned = new List<Property>();
             this.balance = 1500;
             this.inPrison = false;
             this.position = 0;
@@ -18,13 +20,16 @@ namespace PA3BackEnd.src.Monopoly
 
         public void movePlayerForward(int position){
             this.position += position;
-            this.position %= 40;
+            if (this.position >= 40)
+            {
+                this.position -= 40;
+                balance += 200;
+            }
         }
 
         public void goToJail(){
             this.inPrison = true;
             this.position = 10;
-
         }
 
         public void addBalance(int money){
@@ -36,34 +41,14 @@ namespace PA3BackEnd.src.Monopoly
         }
 
         public void removeProperty(Property property){
-            //TODO
+            propertiesOwned.Add(property);
         }
         public void addProperty(Property property){
-            //TODO
+            propertiesOwned.Add(property);
         }
 
-        public Property[] getPropertiesOwned() {
+        public List<Property> getPropertiesOwned() {
             return propertiesOwned;
-        }
-
-        public void setPropertiesOwned(Property[] propertiesOwned) {
-            this.propertiesOwned = propertiesOwned;
-        }
-
-        public int getBalance() {
-            return balance;
-        }
-
-        public void setBalance(int balance) {
-            this.balance = balance;
-        }
-
-        public bool isInPrison() {
-            return inPrison;
-        }
-
-        public int getPosition() {
-            return position;
         }
 
         public void setPosition(int position) {

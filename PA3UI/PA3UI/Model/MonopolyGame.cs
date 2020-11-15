@@ -2,6 +2,7 @@
 using PA3BackEnd.src.Monopoly;
 using System;
 using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
@@ -54,6 +55,8 @@ namespace PA3UI.ui
         private void NextPlayersTurn() 
         {
             //check if in prison
+            HideEndTurnButton();
+            roles.Clear();
             DiceButton.IsEnabled = true;
             currentsPlayerTurn++;
             currentsPlayerTurn %= players.Length;
@@ -63,7 +66,7 @@ namespace PA3UI.ui
                 Round++;
             }
 
-            LoadPlayerData();
+            LoadPlayerDataTopBar();
 
             ShowDialogBoxOK($"Player {currentsPlayerTurn+1} it is your turn now !", null);
         }
@@ -78,21 +81,88 @@ namespace PA3UI.ui
             else if (x != y)
             {
                 DiceButton.IsEnabled = false;
+                ShowEndTurnButton();
             }
 
-            int oldPosition = players[currentsPlayerTurn].getPosition();
+            int oldPosition = players[currentsPlayerTurn].position;
             players[currentsPlayerTurn].movePlayerForward(x + y);
-            board.SetPositionOfPlayer(oldPosition, players[currentsPlayerTurn].getPosition(), currentsPlayerTurn);
+            board.SetPositionOfPlayer(oldPosition, players[currentsPlayerTurn].position, currentsPlayerTurn);
+            LoadPlayerDataTopBar();
 
             //action of field landed on
+            switch (fields.GetFieldAt(players[currentsPlayerTurn].position).GetAction())
+            {
+                case Actions.canBuy:
+                    CanBuy();
+                    break;
+                case Actions.payRent:
+                    PayRent();
+                    break;
+                case Actions.goToPrison:
+                    GoToPrison();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void PayRent() 
+        {
+            var property = (Property)fields.GetFieldAt(players[currentsPlayerTurn].position);
+            if (property.owner == currentsPlayerTurn)
+            {
+                return;
+            }
+
+            int rent = property.GetRent();
+
+            ShowDialogBoxOK($"You need To pay ${rent} rent to Player{property.owner}({GetUserTokenName(property.owner)})", (object sender, RoutedEventArgs args) => {
+                players[currentsPlayerTurn].subtractBalance(rent);
+                players[property.owner].addBalance(rent);
+                LoadPlayerDataTopBar();
+            });
+        }
+
+        private void CanBuy() 
+        {
+            var property = (Property)fields.GetFieldAt(players[currentsPlayerTurn].position);
+            ShowDialogBoxYesNo($"You have landed on a Property that can be bought for ${property.price}\nWould you like to Buy it ?", (object sender, RoutedEventArgs args) => {
+                if (((Dialog)sender).yes)
+                {
+                    players[currentsPlayerTurn].subtractBalance(property.BoughtByPlayer(currentsPlayerTurn));
+                    players[currentsPlayerTurn].addProperty(property);
+                    LoadPlayerDataTopBar();
+                    //and property list
+                }
+                else 
+                {
+                    //start biding for property
+                }
+            });
         }
 
         private void GoToPrison() 
         {
+            int oldPosition = players[currentsPlayerTurn].position;
             players[currentsPlayerTurn].goToJail();
-            //got to message
+            board.SetPositionOfPlayer(oldPosition, players[currentsPlayerTurn].position, currentsPlayerTurn);
+            ShowDialogBoxOK("You are now in prison, and you turn is over!", (object sender, RoutedEventArgs args) => { NextPlayersTurn(); });
         }
 
-
+        private string GetUserTokenName(int id)
+        {
+            switch (id)
+            {
+                case 0:
+                    return "Shoe";
+                case 1:
+                    return "Thimble";
+                case 2:
+                    return "Car";
+                case 3:
+                    return "TopHat";
+            }
+            return "";
+        }
     }
 }
