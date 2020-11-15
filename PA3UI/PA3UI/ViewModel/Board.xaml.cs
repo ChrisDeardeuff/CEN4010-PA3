@@ -45,7 +45,6 @@ namespace PA3UI.ui
             {
                 tiles[0].AddPlayerToken(userTokens[i], i);
             }
-            SetPositionOfPlayer(0, 18, 3);
         }
 
         private void Board_SizeChanged(object sender, SizeChangedEventArgs e)

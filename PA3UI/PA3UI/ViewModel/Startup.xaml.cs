@@ -9,11 +9,8 @@ namespace PA3UI.ui
     /// </summary>
     public partial class Startup : UserControl
     {
-        private Action<UserControl> changeUserControl;
-
-        public Startup(Action<UserControl> changePage)
+        public Startup()
         {
-            this.changeUserControl = changePage;
             InitializeComponent();
         }
 
@@ -34,7 +31,7 @@ namespace PA3UI.ui
 
         private void StartGame(int players) 
         {
-            changeUserControl(new MonopolyGame(players, (int)sliderTimer.Value,changeUserControl));
+            MainWindow.ChangeUserControl(new MonopolyGame(players, (int)sliderTimer.Value));
             
             MainWindow.MaximizeWindow();
 

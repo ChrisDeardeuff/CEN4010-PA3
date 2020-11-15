@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
-using System.Timers;
 using System.Windows.Controls;
 using System.Windows.Threading;
 
@@ -11,12 +9,10 @@ namespace PA3UI.ui
     /// </summary>
     public partial class MonopolyGame : UserControl
     {
-        private Action<UserControl> changeUserControl;
         private Board board;
 
-        public MonopolyGame(int players, int timerTime, Action<UserControl> changePage)
+        public MonopolyGame(int players, int timerTime)
         {
-            this.changeUserControl = changePage;
             InitializeComponent();
             board = new Board(players);
             board.SetValue(Grid.ColumnProperty, 1);
@@ -31,7 +27,7 @@ namespace PA3UI.ui
             SetRemainingTime(timerTime);
             timer.Start();
 
-
+            InitilizeData(players);
         }
 
         private void SetRemainingTime(int timeLeft) 

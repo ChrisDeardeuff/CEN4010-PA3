@@ -1,5 +1,6 @@
 ﻿using PA3UI.ui;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace PA3UI
 {
@@ -9,22 +10,40 @@ namespace PA3UI
     public partial class MainWindow : Window
     {
         private static Window window;
+        private static Grid grid;
 
         public MainWindow()
         {
             InitializeComponent();
             window = this;
-            ChangeUserControl(new Startup(ChangeUserControl));
+            grid = mainGrid;
+            ChangeUserControl(new Startup());
         }
-        private void ChangeUserControl(System.Windows.Controls.UserControl newPage)
+
+        public static void ChangeUserControl(UserControl newPage)
         {
-            mainGrid.Children.Clear();
-            mainGrid.Children.Add(newPage);
+            grid.Children.Clear();
+            grid.Children.Add(newPage);
+        }
+
+        public static void AddUserControl(UserControl newPage) 
+        {
+            grid.Children.Add(newPage);
+        }
+
+        public static void RemoveUserControl(UserControl newPage)
+        {
+            grid.Children.Remove(newPage);
         }
 
         public static void MaximizeWindow()
         {
             window.WindowState = WindowState.Maximized;
+        }
+
+        public static void ShowDialogBoxYesNo()
+        { 
+            
         }
 
         public static void CloseWindow() 
