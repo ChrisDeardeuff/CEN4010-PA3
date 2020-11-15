@@ -71,7 +71,7 @@ namespace PA3UI.ui
         {
             var playersToken = GetUserTokenName(currentsPlayerTurn);
 
-            textBlockPlayersTurn.Text = $"Player: {currentsPlayerTurn + 1 }({playersToken})";
+            textBlockPlayersTurn.Text = $"Player: {currentsPlayerTurn + 1 } ({playersToken})";
             textBlockRound.Content = $"Round: {Round}";
             textBlockMoney.Content = $"${players[currentsPlayerTurn].balance}";
         }

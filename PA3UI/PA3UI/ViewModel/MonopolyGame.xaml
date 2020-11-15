@@ -42,14 +42,12 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
                 
             </Grid.RowDefinitions>
             <local:CardViewer></local:CardViewer>
             <Button Grid.Row="1" FontSize="15" FontWeight="Bold" Foreground="White" Background="#D92427">Develop Property</Button>
             <Button Grid.Row="2" FontSize="15" FontWeight="Bold" Foreground="White" Background="#D92427">Trade</Button>
-            <Button Grid.Row="3" FontSize="15" FontWeight="Bold" Foreground="White" Background="#D92427">Buy Property</Button>
-            <Button Name="DiceButton" Grid.Row="4" FontSize="15" FontWeight="Bold" Foreground="White" Background="#D92427" Click="RoleDices">
+            <Button Name="DiceButton" Grid.Row="3" FontSize="15" FontWeight="Bold" Foreground="White" Background="#D92427" Click="RoleDices">
                 <Grid Name="DiceButtonGrid">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="5*"/>
@@ -62,8 +60,8 @@
                     <Image x:Name="DiceTwo" Grid.Column="2" HorizontalAlignment="Center"></Image>
                 </Grid>
             </Button>
-            <Rectangle Grid.Row="5" Fill="#D92427"></Rectangle>
-            <Button x:Name="EndTurnButton" Grid.Row="5" FontSize="15" FontWeight="Bold" Foreground="White" Background="#D92427" Visibility="Hidden" IsEnabled="False" Click="EndTurnButton_Click">End Turn</Button>
+            <Rectangle Grid.Row="4" Fill="#D92427"></Rectangle>
+            <Button x:Name="EndTurnButton" Grid.Row="4" FontSize="15" FontWeight="Bold" Foreground="White" Background="#D92427" Visibility="Hidden" IsEnabled="False" Click="EndTurnButton_Click">End Turn</Button>
         </Grid>
 
         <local:CardHolder x:Name="Ch" Grid.Column="2" Grid.Row="2"></local:CardHolder>

@@ -71,11 +71,11 @@ namespace PA3UI.ui
 
             if (currentPlayer.inPrison)
             {
-                ShowDialogBoxOK($"Player {currentsPlayerTurn + 1}({GetUserTokenName(currentsPlayerTurn)}) it is your turn now !\n\t but you are in Prison!", null);
+                ShowDialogBoxOK($"Player {currentsPlayerTurn + 1} ({GetUserTokenName(currentsPlayerTurn)}) it is your turn now !\n\t but you are in Prison!", null);
                 return;
             }
 
-            ShowDialogBoxOK($"Player {currentsPlayerTurn + 1}({GetUserTokenName(currentsPlayerTurn)}) it is your turn now !", null);
+            ShowDialogBoxOK($"Player {currentsPlayerTurn + 1} ({GetUserTokenName(currentsPlayerTurn)}) it is your turn now !\n Roll the dice!", null);
         }
 
         private void DiceRole(int x, int y)
@@ -87,7 +87,7 @@ namespace PA3UI.ui
                 currentPlayer.UpdateInPrisonCounter();
                 if (x == y)
                 {
-                    ShowDialogBoxOK($"You roled Doubles and got out of Prison!\n\tHowever, this ends your turn!", (object sender, RoutedEventArgs args) =>
+                    ShowDialogBoxOK($"You rolled doubles and got out of Prison!\n\tHowever, this ends your turn!", (object sender, RoutedEventArgs args) =>
                     {
                         currentPlayer.GetOutOfJail();
                         NextPlayersTurn();
@@ -98,7 +98,7 @@ namespace PA3UI.ui
 
                     if (currentPlayer.inPrisonCounter != 3)
                     {
-                        ShowDialogBoxYesNo($"You did not role Doubles,\n but you can pay a fine of $50 to get out of prison.\n Would you like to pay the fine?", (object sender, RoutedEventArgs args) =>
+                        ShowDialogBoxYesNo($"You did not role doubles,\n but you can pay a fine of $50 to get out of prison.\n Would you like to pay the fine?", (object sender, RoutedEventArgs args) =>
                         {
                             if (((Dialog)sender).yes)
                             {
@@ -181,7 +181,7 @@ namespace PA3UI.ui
 
             int rent = property.GetRent();
 
-            ShowDialogBoxOK($"You need To pay ${rent} rent to Player {property.owner}({GetUserTokenName(property.owner)})", (object sender, RoutedEventArgs args) =>
+            ShowDialogBoxOK($"You need To pay ${rent} rent to player {property.owner} ({GetUserTokenName(property.owner)})", (object sender, RoutedEventArgs args) =>
             {
                 players[currentsPlayerTurn].subtractBalance(rent);
                 players[property.owner].addBalance(rent);
@@ -198,7 +198,7 @@ namespace PA3UI.ui
                 BidForProperty(property);
             }
 
-            ShowDialogBoxYesNo($"You have landed on a Property that can be bought\nWould you like to Buy it for ${property.price}?", (object sender, RoutedEventArgs args) =>
+            ShowDialogBoxYesNo($"You have landed on a property that can be bought\n\nWould you like to buy it for ${property.price}?", (object sender, RoutedEventArgs args) =>
             {
                 if (((Dialog)sender).yes)
                 {
