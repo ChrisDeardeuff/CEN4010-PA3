@@ -8,9 +8,12 @@ namespace PA3UI
     /// </summary>
     public partial class MainWindow : Window
     {
+        private static Window window;
+
         public MainWindow()
         {
             InitializeComponent();
+            window = this;
             ChangeUserControl(new Startup(ChangeUserControl));
         }
         private void ChangeUserControl(System.Windows.Controls.UserControl newPage)
@@ -18,5 +21,16 @@ namespace PA3UI
             mainGrid.Children.Clear();
             mainGrid.Children.Add(newPage);
         }
+
+        public static void MaximizeWindow()
+        {
+            window.WindowState = WindowState.Maximized;
+        }
+
+        public static void CloseWindow() 
+        {
+            window.Close();
+        }
+
     }
 }
