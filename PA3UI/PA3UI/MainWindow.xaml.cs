@@ -31,6 +31,5 @@ namespace PA3UI
         {
             window.Close();
         }
-
     }
 }

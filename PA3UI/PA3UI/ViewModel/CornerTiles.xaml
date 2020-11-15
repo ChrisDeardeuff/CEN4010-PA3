@@ -1,11 +1,19 @@
-﻿<local:Tile x:Class="PA3UI.ui.CornerTiles"
+﻿<local:Tile x:Class="PA3UI.ui.CornerTile"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PA3UI.ui"
              mc:Ignorable="d">
-    <Grid Name="MainGrid">
-            
+    <Grid Name="MainGrid" ShowGridLines="True">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
     </Grid>
 </local:Tile>
