@@ -6,8 +6,10 @@ namespace PA3BackEnd.src.Monopoly
         private int hotels;
         private int developments;
         private bool status;
+        private int[] rent;
 
-        public Street(int location, Group group, int price):base(location, group, price) {
+        public Street(int location, Group group, int price, int[] rent):base(location, group, price) {
+            this.rent = rent;
         }
         int HousesAvailable(){
             return houses;
@@ -27,7 +29,7 @@ namespace PA3BackEnd.src.Monopoly
         }
         
         public override int GetRent() {
-            return 0;
+            return rent[developments];
         }
     }
 }
