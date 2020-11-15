@@ -63,6 +63,9 @@
     <Compile Include="ViewModel\Board.xaml.cs">
       <DependentUpon>Board.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\CardHolder.xaml.cs">
+      <DependentUpon>CardHolder.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\CornerTiles.xaml.cs">
       <DependentUpon>CornerTiles.xaml</DependentUpon>
     </Compile>
@@ -103,6 +106,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ViewModel\CardHolder.xaml" />
     <Page Include="ViewModel\CornerTiles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
