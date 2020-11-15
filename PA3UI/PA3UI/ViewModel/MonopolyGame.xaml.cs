@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Timers;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
 
@@ -23,6 +24,9 @@ namespace PA3UI.ui
             board.SetValue(Grid.RowProperty, 2);
             mainGrid.Children.Add(board);
 
+            Ch.Add_EventHandler(viewDeed_OnClick);
+            
+            
             timeElapsed = 0;
             this.timerTime = timerTime;
             timer = new DispatcherTimer();
@@ -60,6 +64,10 @@ namespace PA3UI.ui
         private void Button_Resign_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             EndGame();
+        }
+        private void viewDeed_OnClick(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

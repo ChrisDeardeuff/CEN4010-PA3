@@ -42,14 +42,14 @@
                 <RowDefinition Height="1*"/>
                 
             </Grid.RowDefinitions>
-            
+            <local:CardViewer></local:CardViewer>
             <Button Grid.Row="1" FontSize="15" FontWeight="Bold" Foreground="White" Background="#D92427">Develop Property</Button>
             <Button Grid.Row="2" FontSize="15" FontWeight="Bold" Foreground="White" Background="#D92427">Trade</Button>
             <Button Grid.Row="3" FontSize="15" FontWeight="Bold" Foreground="White" Background="#D92427">Buy Property</Button>
             
         </Grid>
         
-        <local:CardHolder Grid.Column="2" Grid.Row="2"></local:CardHolder>
+        <local:CardHolder x:Name="Ch" Grid.Column="2" Grid.Row="2"></local:CardHolder>
     </Grid>
     
     
