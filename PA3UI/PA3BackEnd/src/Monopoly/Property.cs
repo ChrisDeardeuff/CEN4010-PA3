@@ -5,7 +5,8 @@
         public Group group { private set; get; }
         public int owner { private set; get; }
         public int price { private set; get; }
-        public bool isMortaged { private set; get; }
+        public int developmentValue { private set; get; }
+        public bool isMortaged { get { return developmentValue == -1; } }
         public string name { private set; get; }
 
 
@@ -15,7 +16,7 @@
             this.group = group;
             this.price = price;
             this.name = name;
-            isMortaged = false;
+            developmentValue = 0;
             owner = -1;
             group.AddProperty(this);
         }
@@ -27,7 +28,7 @@
                 return 0;
             }
 
-            isMortaged = true;
+            developmentValue = -1;
 
             return price;
         }
@@ -39,8 +40,13 @@
                 return 0;
             }
 
-            isMortaged = false;
+            developmentValue = 0;
             return price * -1;
+        }
+
+        public void DevelopProperty(int level)
+        {
+            this.developmentValue = level;
         }
 
         public abstract bool CanBeMortaged();
@@ -64,5 +70,7 @@
                 return Actions.payRent;
             }
         }
+
+        public abstract bool CanPlayerBuild(int playerId);
     }
 }

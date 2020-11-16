@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PA3BackEnd.src.Monopoly;
+using System;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
@@ -42,6 +43,10 @@ namespace PA3UI.ui
             timer.Tick += Timer_Elapsed;
             SetRemainingTime(timerTime);
             timer.Start();
+
+            cardViewer.buttonMinus.Click += Button_Click_Minus;
+            cardViewer.buttonPlus.Click += Button_Click_Plus;
+            cardViewer.TextBoxMoneyNeeded.IsReadOnly = true;
 
             rnd = new Random();
             RoleDices();
@@ -95,6 +100,7 @@ namespace PA3UI.ui
         private void SetDeedIntoCardViewer(Deed deed)
         {
             cardViewer.SetDeed(new Deed(deed.id));
+            ResetDevelopValues();
         }
 
         private void ShowDialogBox() 
@@ -241,6 +247,55 @@ namespace PA3UI.ui
             foreach (var prop in currentPlayer.getPropertiesOwned())
             {
                 Ch.Add_Deed(prop.GetLocation());
+            }
+        }
+
+        private void Button_Click_DevelopProperty(object sender, RoutedEventArgs e)
+        {
+            if (cardViewer.deed == null)
+            {
+                ShowDialogBoxOK($"You need to select one of Your Properties First!\n You can select one by pressing on one on the right side", null);
+            }
+
+            DevelopProperty();
+        }
+
+        private void SetTextBlockMoneyNeeded(string Text) 
+        {
+            cardViewer.TextBoxMoneyNeeded.Text = Text;
+        }
+
+        private void Button_Click_Plus(object sender, RoutedEventArgs e) 
+        {
+            if (cardViewer.deed == null)
+            {
+                return;
+            }
+
+            DevelopProperty(cardViewer.deed.id);
+            PlaningDevelopment();
+        }
+
+        private void Button_Click_Minus(object sender, RoutedEventArgs e)
+        {
+            if (cardViewer.deed == null)
+            {
+                return;
+            }
+
+            UnDevelopProperty(cardViewer.deed.id);
+            PlaningDevelopment();
+        }
+
+        private void LoadDevelopmentValues() 
+        {
+            for (int i = 0; i < 40; i++)
+            {
+                var tile = this.fields.GetFieldAt(i);
+                if (tile is Property)
+                {
+                    board.SetDevelopmentLevelOfTile(i, ((Property)tile).developmentValue);
+                }
             }
         }
     }

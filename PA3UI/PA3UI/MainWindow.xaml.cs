@@ -41,11 +41,6 @@ namespace PA3UI
             window.WindowState = WindowState.Maximized;
         }
 
-        public static void ShowDialogBoxYesNo()
-        { 
-            
-        }
-
         public static void CloseWindow() 
         {
             window.Close();

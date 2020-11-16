@@ -2,11 +2,32 @@ namespace PA3BackEnd.src.Monopoly
 {
     public class Street: Property
     {
-        private int houses;
-        private int hotels;
-        private int developments;
+        private static int houses;
+        private static int hotels;
         private bool status;
         private int[] rent;
+
+        static Street()
+        {
+            InitializeHousesAndHotels();
+        }
+
+        public static void InitializeHousesAndHotels()
+        {
+            houses = 32;
+            hotels = 12;
+        }
+
+        public static bool EnoughHousesAndHotelsAvailable(int houses, int hotels)
+        {
+            if (houses >= Street.houses && hotels >= Street.hotels)
+            {
+                Street.houses -= houses;
+                Street.hotels -= hotels;
+                return true;
+            }
+            return false;
+        }
 
         public Street(int location, Group group, int price, int[] rent, string name):base(location, group, price, name) {
             this.rent = rent;
@@ -18,14 +39,31 @@ namespace PA3BackEnd.src.Monopoly
             return hotels;
         }
         int DevelopmentStatus(){
-            return developments;
-        }
-        bool CanPlayerBuild(){
-            return status;
+            return developmentValue;
         }
         
         public override bool CanBeMortaged() {
-            return false;
+
+            if (isMortaged)
+            {
+                return false;
+            }
+
+            if (developmentValue != 0)
+            {
+                return false;
+            }
+
+            if (group.GetAmountPlayerOwns(owner) == 1)
+            {
+                return true;
+            }
+
+            if (group.HasAnyBuildings())
+            {
+                return false;
+            }
+            return true;
         }
         
         public override int GetRent() {
@@ -33,7 +71,22 @@ namespace PA3BackEnd.src.Monopoly
             {
                 return 0;
             }
-            return rent[developments];
+            return rent[developmentValue];
+        }
+
+        public override bool CanPlayerBuild(int playerId)
+        {
+            if (owner != playerId)
+            {
+                return false;
+            }
+
+            if (group.GetAmountPlayerOwns(playerId) != group.Count)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

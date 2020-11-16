@@ -11,7 +11,12 @@ namespace PA3BackEnd.src.Monopoly
         public override bool CanBeMortaged() {
             return !isMortaged;
         }
-        
+
+        public override bool CanPlayerBuild(int playerId)
+        {
+            return false;
+        }
+
         public override int GetRent() {
             if (isMortaged)
             {
