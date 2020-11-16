@@ -20,14 +20,14 @@ namespace PA3BackEnd.src.Monopoly
 		{
 			// Initialize groups
 			// groups for Streets
-			groups[0] = new Group(2);
-			groups[1] = new Group(3);
-			groups[2] = new Group(3);
-			groups[3] = new Group(3);
-			groups[4] = new Group(3);
-			groups[5] = new Group(3);
-			groups[6] = new Group(3);
-			groups[7] = new Group(2);
+			groups[0] = new Group(2, 50);
+			groups[1] = new Group(3, 50);
+			groups[2] = new Group(3, 100);
+			groups[3] = new Group(3, 100);
+			groups[4] = new Group(3, 150);
+			groups[5] = new Group(3, 150);
+			groups[6] = new Group(3, 200);
+			groups[7] = new Group(2, 200);
 			//railroads
 			groups[8] = new Group(4);
 			//Utility

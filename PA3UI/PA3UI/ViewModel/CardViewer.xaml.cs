@@ -4,7 +4,7 @@ namespace PA3UI.ui
 {
     public partial class CardViewer : UserControl
     {
-        private Deed deed;
+        public Deed deed { private set; get; }
         public CardViewer()
         {
             InitializeComponent();

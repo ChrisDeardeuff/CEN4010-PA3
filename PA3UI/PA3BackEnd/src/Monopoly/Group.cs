@@ -3,8 +3,9 @@ namespace PA3BackEnd.src.Monopoly
 {
 	public class Group
 	{
-		private Property[] properties;
+		public Property[] properties { get; private set; }
 		public int priceToBuild { get; private set; }
+		public int Count { get { return properties.Length; } }
 		private int currentAmount;
 
 		public Group(int size)
@@ -17,22 +18,22 @@ namespace PA3BackEnd.src.Monopoly
 			this.priceToBuild = priceToBuild;
 		}
 
+		public bool HasAnyBuildings()
+		{
+			foreach (var prop in properties)
+			{
+				if (prop.developmentValue > 0)
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+
 		public void AddProperty(Property property)
 		{
 			properties[currentAmount] = property;
 			currentAmount++;
-		}
-
-		public bool CanPlayerBuild(int playerid)
-		{
-			for (int i = 0; i < properties.Length; i++)
-			{
-				if (properties[i].owner != playerid)
-				{
-					return false;
-				}
-			}
-			return true;
 		}
 
 		public int GetAmountPlayerOwns(int playerid)
