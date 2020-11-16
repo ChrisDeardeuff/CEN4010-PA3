@@ -101,8 +101,25 @@ namespace PA3UI.ui
                 CardHolderPlayer1.Add_Deed(prop.GetLocation());
             }
 
-            MoneySlider.Minimum = -1 * players[index].balance;
-            MoneySlider.Maximum = players[playerId].balance;
+            if (players[index].balance < 0)
+            {
+                MoneySlider.Minimum = 0;
+            }
+            else 
+            {
+                MoneySlider.Minimum = -1 * players[index].balance;
+            }
+
+            if (players[playerId].balance < 0)
+            {
+                MoneySlider.Maximum = 0;
+            }
+            else 
+            {
+                MoneySlider.Maximum = players[playerId].balance;
+            }
+
+            MoneySlider.Value = 0;
         }
 
         private void PlayerOneGives(object sender, RoutedEventArgs args)
