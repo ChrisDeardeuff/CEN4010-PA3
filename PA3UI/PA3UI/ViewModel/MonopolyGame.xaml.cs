@@ -100,7 +100,7 @@ namespace PA3UI.ui
                 }
             }
             
-            MainWindow.ChangeUserControl(new EndGame($"Player {id} ({GetUserTokenName(id)}) won with a score of {highestScore}\nClick here to exit"));
+            MainWindow.ChangeUserControl(new EndGame($"Player {id+1} ({GetUserTokenName(id)}) won with a score of {highestScore}\nClick here to exit"));
         }
 
         private void Button_Resign_Click(object sender, System.Windows.RoutedEventArgs e)

@@ -48,8 +48,8 @@ namespace PA3BackEnd.src.Monopoly
 			fields[14] = new Street(14, groups[2], 160, new int[] { 12, 60, 180, 500, 700, 900 }, "Virginia Ave");
 
 			fields[16] = new Street(16, groups[3], 180, new int[] { 14, 70, 200, 550, 750, 950 }, "St James Place");
-			fields[18] = new Street(18, groups[3], 180, new int[] { 14, 70, 200, 550, 750, 950 }, "Tennessee");
-			fields[19] = new Street(19, groups[3], 200, new int[] { 16, 80, 220, 600, 800, 1000 }, "New York");
+			fields[18] = new Street(18, groups[3], 180, new int[] { 14, 70, 200, 550, 750, 950 }, "Tennessee Ave");
+			fields[19] = new Street(19, groups[3], 200, new int[] { 16, 80, 220, 600, 800, 1000 }, "New York Ave");
 
 			fields[21] = new Street(21, groups[4], 220, new int[] { 18, 90, 250, 700, 875, 1050 }, "Kentucky Ave");
 			fields[23] = new Street(23, groups[4], 220, new int[] { 18, 90, 250, 700, 875, 1050 }, "Indiana Ave");
