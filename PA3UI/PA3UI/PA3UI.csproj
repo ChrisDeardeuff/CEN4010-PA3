@@ -98,6 +98,9 @@
     <Compile Include="ViewModel\Startup.xaml.cs">
       <DependentUpon>Startup.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\Trade.xaml.cs">
+      <DependentUpon>Trade.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\UserToken.xaml.cs">
       <DependentUpon>UserToken.xaml</DependentUpon>
     </Compile>
@@ -152,6 +155,10 @@
     <Page Include="ViewModel\Startup.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ViewModel\Trade.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ViewModel\UserToken.xaml">
       <SubType>Designer</SubType>

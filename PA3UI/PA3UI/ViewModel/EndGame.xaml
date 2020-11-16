@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:PA3UI.ViewModel"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid ShowGridLines="True" Background="#D92427">
+    <Grid ShowGridLines="False" Background="#D92427">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
@@ -19,8 +19,9 @@
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         
-        <TextBlock Grid.Column="1" Grid.Row="1" Name="Winner" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" FontWeight="Bold" Foreground="White" Background="#D92427">
-            
-        </TextBlock>
+        
+        <Button Grid.Column="1" Grid.Row="1" Background="{x:Null}" BorderThickness="0" Click="CloseGame">
+            <TextBlock Grid.Column="1" Grid.Row="1" Name="Winner" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" FontWeight="Bold" Foreground="White" Background="#D92427"></TextBlock>
+        </Button>
     </Grid>
 </UserControl>
