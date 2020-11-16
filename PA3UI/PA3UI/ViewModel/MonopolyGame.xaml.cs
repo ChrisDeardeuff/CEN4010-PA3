@@ -7,6 +7,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using PA3UI.ViewModel;
 
 namespace PA3UI.ui
 {
@@ -85,6 +86,21 @@ namespace PA3UI.ui
         {
             timer.Stop();
             SetRemainingTime(0);
+
+            int highestScore = players[0].CalculateScore();
+            int id = 0;
+
+            for (int i = 1; i < players.Length; i++)
+            {
+                int score = players[i].CalculateScore();
+                if (score > highestScore)
+                {
+                    highestScore = score;
+                    id = i;
+                }
+            }
+            
+            MainWindow.ChangeUserControl(new EndGame($"Player {id} ({GetUserTokenName(id)}) won with a score of {highestScore}\nClick here to exit"));
         }
 
         private void Button_Resign_Click(object sender, System.Windows.RoutedEventArgs e)

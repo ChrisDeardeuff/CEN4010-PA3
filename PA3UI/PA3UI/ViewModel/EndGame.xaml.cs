@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
 using PA3BackEnd.src.Monopoly;
 
 namespace PA3UI.ViewModel
@@ -11,5 +12,9 @@ namespace PA3UI.ViewModel
             Winner.Text = $"The winner is {playerName}!";
         }
 
+        private void CloseGame(object sender, RoutedEventArgs e)
+        {
+            MainWindow.CloseWindow();
+        }
     }
 }

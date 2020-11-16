@@ -82,5 +82,30 @@ namespace PA3BackEnd.src.Monopoly
             return false;
         }
 
+        public int CalculateScore()
+        {
+            int score = balance;
+
+            foreach (var property in propertiesOwned)
+            {
+                //if developed
+                if (property.developmentValue > 0)
+                {
+                    for (int i = property.developmentValue; i > 0; i--)
+                    {
+                        score += property.group.priceToBuild;
+                    }
+                }else if (property.developmentValue < 0)
+                {
+                    score -= property.price / 2;
+                    
+                    continue;
+                }
+
+                score += property.price / 2;
+            }
+            
+            return score;
+        }
     }
 }
