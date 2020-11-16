@@ -322,6 +322,8 @@ namespace PA3UI.ui
             tradeDialog.SetValue(Grid.RowProperty, 2);
             tradeDialog.SetValue(Grid.ColumnProperty, 1);
             mainGrid.Children.Add(tradeDialog);
+            LoadPlayerDataTopBar();
+            LoadPlayerDataProperties();
         }
     }
 }

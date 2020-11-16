@@ -56,7 +56,7 @@ namespace PA3BackEnd.src.Monopoly
         }
 
         public void removeProperty(Property property){
-            propertiesOwned.Add(property);
+            propertiesOwned.Remove(property);
         }
 
         public void addProperty(Property property)

@@ -55,6 +55,10 @@ namespace PA3UI.ui
             CardHolderPlayer0.ClearDeeds();
             foreach (var prop in (List<Property>) players[playerid].getPropertiesOwned())
             {
+                if (prop.group.HasAnyBuildings())
+                {
+                    continue;
+                }
                 CardHolderPlayer0.Add_Deed(prop.GetLocation());
             }
 
@@ -88,6 +92,11 @@ namespace PA3UI.ui
 
             foreach (var prop in (List<Property>)players[index].getPropertiesOwned())
             {
+                if (prop.group.HasAnyBuildings())
+                {
+                    continue;
+                }
+
                 CardHolderPlayer1.Add_Deed(prop.GetLocation());
             }
 
