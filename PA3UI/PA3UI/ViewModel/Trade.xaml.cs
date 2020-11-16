@@ -23,7 +23,7 @@ namespace PA3UI.ui
         private Fields fields;
         private Rectangle cover;
 
-        public Trade(Player[] players, int playerid, Fields fields ,RoutedEventHandler routedEvent)
+        public Trade(Player[] players, int playerId, Fields fields ,RoutedEventHandler routedEvent)
         {
             InitializeComponent();
             properties0 = new List<Property>();
@@ -32,6 +32,7 @@ namespace PA3UI.ui
             this.routedEvent = routedEvent;
             this.players = players;
             this.fields = fields;
+            this.playerId = playerId;
 
             cover = new Rectangle();
             cover.SetValue(Grid.RowSpanProperty, 4);
@@ -44,7 +45,7 @@ namespace PA3UI.ui
 
             for (int i = 0; i < players.Length; i++)
             {
-                if (i == playerId)
+                if (i == this.playerId)
                 {
                     continue;
                 }
@@ -53,7 +54,7 @@ namespace PA3UI.ui
             }
 
             CardHolderPlayer0.ClearDeeds();
-            foreach (var prop in (List<Property>) players[playerid].getPropertiesOwned())
+            foreach (var prop in (List<Property>) players[playerId].getPropertiesOwned())
             {
                 if (prop.group.HasAnyBuildings())
                 {
