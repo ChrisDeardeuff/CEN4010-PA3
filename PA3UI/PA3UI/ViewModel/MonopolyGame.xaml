@@ -44,7 +44,7 @@
                 <RowDefinition Height="1*"/>
                 
             </Grid.RowDefinitions>
-            <local:CardViewer></local:CardViewer>
+            <local:CardViewer x:Name="cardViewer"></local:CardViewer>
             <Button Grid.Row="1" FontSize="15" FontWeight="Bold" Foreground="White" Background="#D92427">Develop Property</Button>
             <Button Grid.Row="2" FontSize="15" FontWeight="Bold" Foreground="White" Background="#D92427">Trade</Button>
             <Button Name="DiceButton" Grid.Row="3" FontSize="15" FontWeight="Bold" Foreground="White" Background="#D92427" Click="RoleDices">

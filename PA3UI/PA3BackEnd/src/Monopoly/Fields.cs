@@ -67,10 +67,10 @@ namespace PA3BackEnd.src.Monopoly
 			fields[39] = new Street(39, groups[7], 400, new int[] { 4, 20, 60, 180, 320, 450 }, "Baltic Ave");
 
 			// railRoads
-			fields[5]  = new Railroads(32, groups[8], 200, "Baltic Ave");
-			fields[15] = new Railroads(34, groups[8], 200, "Baltic Ave");
-			fields[25] = new Railroads(32, groups[8], 200, "Baltic Ave");
-			fields[35] = new Railroads(34, groups[8], 200, "Baltic Ave");
+			fields[5]  = new Railroads(5, groups[8], 200, "Baltic Ave");
+			fields[15] = new Railroads(15, groups[8], 200, "Baltic Ave");
+			fields[25] = new Railroads(25, groups[8], 200, "Baltic Ave");
+			fields[35] = new Railroads(35, groups[8], 200, "Baltic Ave");
 
 			// utility
 			fields[12] = new Utility(12, groups[9], 150, "Baltic Ave");

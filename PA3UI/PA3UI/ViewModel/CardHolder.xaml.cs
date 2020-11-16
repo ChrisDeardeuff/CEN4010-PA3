@@ -10,15 +10,19 @@ namespace PA3UI.ui
         public CardHolder()
         {
             InitializeComponent();
-            
         }
 
         public void Add_Deed(int id)
         {
             var deed = new Deed(id);
             deed.AddEvent_Handler(eHandler);
-            
-            mainGrid.Children.Add(deed);
+
+            stackPanel.Children.Add(deed);
+        }
+
+        public void ClearDeeds() 
+        {
+            stackPanel.Children.Clear();
         }
 
         public void Add_EventHandler(RoutedEventHandler eventHandler)

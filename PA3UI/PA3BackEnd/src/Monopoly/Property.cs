@@ -17,6 +17,7 @@
             this.name = name;
             isMortaged = false;
             owner = -1;
+            group.AddProperty(this);
         }
 
         public int MortageProperty()

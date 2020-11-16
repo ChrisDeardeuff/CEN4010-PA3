@@ -89,7 +89,12 @@ namespace PA3UI.ui
 
         private void viewDeed_OnClick(object sender, RoutedEventArgs e)
         {
-            
+            SetDeedIntoCardViewer((Deed) sender);
+        }
+
+        private void SetDeedIntoCardViewer(Deed deed)
+        {
+            cardViewer.SetDeed(new Deed(deed.id));
         }
 
         private void ShowDialogBox() 
@@ -228,6 +233,15 @@ namespace PA3UI.ui
         {
             EndTurnButton.IsEnabled = true;
             EndTurnButton.Visibility = Visibility.Visible;
+        }
+
+        private void LoadPlayerDataProperties() 
+        {
+            Ch.ClearDeeds();
+            foreach (var prop in currentPlayer.getPropertiesOwned())
+            {
+                Ch.Add_Deed(prop.GetLocation());
+            }
         }
     }
 }
