@@ -173,7 +173,8 @@ namespace PA3UI.ui
             {
                 var textBlock = new TextBlock();
                 textBlock.Text = prop.name;
-                textBlock.FontSize = 10;
+                textBlock.FontSize = 20;
+                textBlock.HorizontalAlignment = HorizontalAlignment.Center;
 
                 stackPanel1.Children.Add(textBlock);
             }
@@ -256,12 +257,14 @@ namespace PA3UI.ui
             {
                 players[playerId].removeProperty(prop);
                 players[index].addProperty(prop);
+                prop.BoughtByPlayer(index);
             }
 
             foreach (var prop in properties1)
             {
                 players[index].removeProperty(prop);
                 players[playerId].addProperty(prop);
+                prop.BoughtByPlayer(playerId);
             }
 
             players[playerId].subtractBalance((int)MoneySlider.Value);

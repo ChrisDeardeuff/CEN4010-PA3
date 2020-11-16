@@ -171,6 +171,8 @@ namespace PA3UI.ui
                 routedEventHandler = null;
                 tempEvent.Invoke(sender, args);
             }
+            LoadPlayerDataTopBar();
+            LoadPlayerDataProperties();
         }
 
         private void RoleDices(object sender, RoutedEventArgs e)
@@ -322,8 +324,6 @@ namespace PA3UI.ui
             tradeDialog.SetValue(Grid.RowProperty, 2);
             tradeDialog.SetValue(Grid.ColumnProperty, 1);
             mainGrid.Children.Add(tradeDialog);
-            LoadPlayerDataTopBar();
-            LoadPlayerDataProperties();
         }
     }
 }
