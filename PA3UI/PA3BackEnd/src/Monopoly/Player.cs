@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace PA3BackEnd.src.Monopoly
@@ -57,8 +58,11 @@ namespace PA3BackEnd.src.Monopoly
         public void removeProperty(Property property){
             propertiesOwned.Add(property);
         }
-        public void addProperty(Property property){
+
+        public void addProperty(Property property)
+        {
             propertiesOwned.Add(property);
+            propertiesOwned.Sort((Property l1,Property l2) => l1.GetLocation().CompareTo(l2.GetLocation()));
         }
 
         public List<Property> getPropertiesOwned() {
