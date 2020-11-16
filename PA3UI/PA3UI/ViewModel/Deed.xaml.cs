@@ -7,11 +7,15 @@ namespace PA3UI.ui
 {
     public partial class Deed : UserControl
     {
+        RoutedEventHandler eHandler;
+        public int id { private set; get; }
+
         public Deed(int id)
         {
             InitializeComponent();
             DeedImage.Source = new BitmapImage(new Uri($"/Assets/Deeds/{id}.png", UriKind.RelativeOrAbsolute));
-            
+            this.id = id;
+
         }
 
         public Deed()
@@ -21,11 +25,12 @@ namespace PA3UI.ui
 
         public void AddEvent_Handler(RoutedEventHandler eHandler)
         {
-            DeedButton.Click += eHandler;
+            this.eHandler = eHandler;
         }
 
         private void viewDeed_OnClick(object sender, RoutedEventArgs e)
         {
+            eHandler.Invoke(this, null);
         }
     }
 }

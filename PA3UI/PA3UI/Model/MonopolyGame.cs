@@ -58,6 +58,7 @@ namespace PA3UI.ui
 
             HideEndTurnButton();
             roles.Clear();
+            cardViewer.CLear();
             DiceButton.IsEnabled = true;
             currentsPlayerTurn++;
             currentsPlayerTurn %= players.Length;
@@ -68,6 +69,7 @@ namespace PA3UI.ui
             }
 
             LoadPlayerDataTopBar();
+            LoadPlayerDataProperties();
 
             if (currentPlayer.inPrison)
             {
@@ -208,14 +210,15 @@ namespace PA3UI.ui
                 BidForProperty(property, 0, -1, -1);
             }
 
-            ShowDialogBoxYesNo($"You have landed on a property that can be bought\n\nWould you like to buy it for ${property.price}?", (object sender, RoutedEventArgs args) =>
+            ShowDialogBoxYesNo($"{property.name} is not owned by anyone.\n\nWould you like to buy it for ${property.price}?", (object sender, RoutedEventArgs args) =>
             {
                 if (((Dialog)sender).yes)
                 {
                     currentPlayer.subtractBalance(property.BoughtByPlayer(currentsPlayerTurn));
                     currentPlayer.addProperty(property);
                     LoadPlayerDataTopBar();
-                    //and property list
+                    LoadPlayerDataProperties();
+
                 }
                 else
                 {
