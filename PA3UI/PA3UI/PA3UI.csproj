@@ -77,6 +77,9 @@
     <Compile Include="ViewModel\Dialog.xaml.cs">
       <DependentUpon>Dialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\EndGame.xaml.cs">
+      <DependentUpon>EndGame.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\MonopolyGame.xaml.cs">
       <DependentUpon>MonopolyGame.xaml</DependentUpon>
     </Compile>
@@ -128,6 +131,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ViewModel\EndGame.xaml" />
     <Page Include="ViewModel\MonopolyGame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
