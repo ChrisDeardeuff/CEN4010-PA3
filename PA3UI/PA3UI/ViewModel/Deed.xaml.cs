@@ -30,6 +30,10 @@ namespace PA3UI.ui
 
         private void viewDeed_OnClick(object sender, RoutedEventArgs e)
         {
+            if (eHandler == null)
+            {
+                return;
+            }
             eHandler.Invoke(this, null);
         }
     }
