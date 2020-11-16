@@ -39,13 +39,13 @@ namespace PA3BackEnd.src.Monopoly
 			fields[1] = new Street(1, groups[0], 60, new int[] {2, 10, 30, 90, 160, 250 }, "Mediterranean Ave");
 			fields[3] = new Street(3, groups[0], 60, new int[] { 4, 20, 60, 180, 320, 450 }, "Baltic Ave");
 
-			fields[6] = new Street(6, groups[1], 100, new int[] { 4, 20, 60, 180, 320, 450 }, "Baltic Ave");
-			fields[8] = new Street(8, groups[1], 100, new int[] { 4, 20, 60, 180, 320, 450 }, "Baltic Ave");
-			fields[9] = new Street(9, groups[1], 120, new int[] { 4, 20, 60, 180, 320, 450 }, "Baltic Ave");
+			fields[6] = new Street(6, groups[1], 100, new int[] { 6, 30, 90, 270, 400, 550 }, "Oriental Ave");
+			fields[8] = new Street(8, groups[1], 100, new int[] { 6, 30, 90, 270, 400, 550 }, "Vermont Ave");
+			fields[9] = new Street(9, groups[1], 120, new int[] { 8, 40, 100, 300, 450, 600 }, "Connecticut Ave");
 
-			fields[11] = new Street(11, groups[2], 140, new int[] { 4, 20, 60, 180, 320, 450 }, "Baltic Ave");
-			fields[13] = new Street(13, groups[2], 140, new int[] { 4, 20, 60, 180, 320, 450 }, "Baltic Ave");
-			fields[14] = new Street(14, groups[2], 160, new int[] { 4, 20, 60, 180, 320, 450 }, "Baltic Ave");
+			fields[11] = new Street(11, groups[2], 140, new int[] { 10, 50, 150, 450, 625, 750 }, "St. Charles Place");
+			fields[13] = new Street(13, groups[2], 140, new int[] { 10, 50, 150, 450, 625, 750 }, "States Ave");
+			fields[14] = new Street(14, groups[2], 160, new int[] { 12, 60, 180, 500, 700, 900 }, "Virginia Ave");
 
 			fields[16] = new Street(16, groups[3], 180, new int[] { 4, 20, 60, 180, 320, 450 }, "Baltic Ave");
 			fields[18] = new Street(18, groups[3], 180, new int[] { 4, 20, 60, 180, 320, 450 }, "Baltic Ave");
