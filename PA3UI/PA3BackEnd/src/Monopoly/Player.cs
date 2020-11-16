@@ -63,6 +63,34 @@ namespace PA3BackEnd.src.Monopoly
         {
             propertiesOwned.Add(property);
             propertiesOwned.Sort((Property l1,Property l2) => l1.GetLocation().CompareTo(l2.GetLocation()));
+            
+            List<Property> tempList = new List<Property>();
+            List<Property> tempList2 = new List<Property>();
+            
+            foreach (var p in propertiesOwned)
+            {
+                if (p.GetLocation() == 5 || p.GetLocation() == 15 || p.GetLocation() == 25 || p.GetLocation() == 35 )
+                {
+                    tempList.Add(p);
+                    
+                }else if (p.GetLocation() == 12 || p.GetLocation() == 28)
+                {
+                    tempList2.Add(p);
+                    
+                }
+            }
+
+            foreach (var p in tempList)
+            {
+                propertiesOwned.Remove(p);
+                propertiesOwned.Add(p);
+            }
+            foreach (var p in tempList2)
+            {
+                propertiesOwned.Remove(p);
+                propertiesOwned.Add(p);
+            }
+            
         }
 
         public List<Property> getPropertiesOwned() {
