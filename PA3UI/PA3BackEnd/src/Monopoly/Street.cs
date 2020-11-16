@@ -32,15 +32,6 @@ namespace PA3BackEnd.src.Monopoly
         public Street(int location, Group group, int price, int[] rent, string name):base(location, group, price, name) {
             this.rent = rent;
         }
-        int HousesAvailable(){
-            return houses;
-        }
-        int HotelsAvailable(){
-            return hotels;
-        }
-        int DevelopmentStatus(){
-            return developmentValue;
-        }
         
         public override bool CanBeMortaged() {
 

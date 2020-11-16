@@ -95,22 +95,6 @@ namespace PA3BackEnd.src.Monopoly
 			fields[36] = new Tile(36, Actions.none);
 		}
 
-		public bool CanPlayerBuildOnProperty(int index, int playerId)
-		{
-			if (!(fields[index] is Property))
-			{
-				return false;
-			}
-
-			if (!(fields[index] is Street))
-			{
-				return false;
-			}
-
-			//NOT YET FINISHED
-			return false;
-		}
-
 		public Field GetFieldAt(int location)
 		{
 			return fields[location];

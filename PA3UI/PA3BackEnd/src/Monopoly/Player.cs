@@ -97,10 +97,6 @@ namespace PA3BackEnd.src.Monopoly
             return propertiesOwned;
         }
 
-        public void setPosition(int position) {
-            this.position = position;
-        }
-
         public bool HasEnoughMoney(int amount)
         {
             if (balance >= amount)
