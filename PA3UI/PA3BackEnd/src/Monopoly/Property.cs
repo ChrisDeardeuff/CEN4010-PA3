@@ -21,29 +21,6 @@
             group.AddProperty(this);
         }
 
-        public int MortageProperty()
-        {
-            if (!CanBeMortaged())
-            {
-                return 0;
-            }
-
-            developmentValue = -1;
-
-            return price;
-        }
-
-        public int UnMortageProperty()
-        {
-            if (!isMortaged)
-            {
-                return 0;
-            }
-
-            developmentValue = 0;
-            return price * -1;
-        }
-
         public void DevelopProperty(int level)
         {
             this.developmentValue = level;
