@@ -298,5 +298,14 @@ namespace PA3UI.ui
                 }
             }
         }
+
+        private void Button_Click_Trade(object sender, RoutedEventArgs e)
+        {
+            ShowDialogBox();
+            var tradeDialog = new Trade(players, currentsPlayerTurn,fields, RemoveDialogBox);
+            tradeDialog.SetValue(Grid.RowProperty, 2);
+            tradeDialog.SetValue(Grid.ColumnProperty, 1);
+            mainGrid.Children.Add(tradeDialog);
+        }
     }
 }

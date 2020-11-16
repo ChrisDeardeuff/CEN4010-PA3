@@ -550,7 +550,7 @@ namespace PA3UI.ui
             }
         }
 
-        private string GetUserTokenName(int id)
+        public static string GetUserTokenName(int id)
         {
             switch (id)
             {
