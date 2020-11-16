@@ -7,7 +7,7 @@
              mc:Ignorable="d"
              SizeChanged="UserControl_SizeChanged"
              d:DesignHeight="1000" d:DesignWidth="1000">
-    <Grid Name="mainGrid" ShowGridLines="true">
+    <Grid Name="mainGrid" ShowGridLines="false">
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="5"/>
