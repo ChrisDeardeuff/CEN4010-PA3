@@ -321,7 +321,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PA3BackEnd\PA3BackEnd.csproj">
-      <Project>{d26de95e-1264-488b-89b3-9b245cd82a62}</Project>
+      <Project>{81fe85ed-e781-4b95-a4d0-ab82ff903a31}</Project>
       <Name>PA3BackEnd</Name>
     </ProjectReference>
   </ItemGroup>
