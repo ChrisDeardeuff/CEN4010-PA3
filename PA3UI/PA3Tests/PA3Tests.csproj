@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="tests\Monopoly\FieldsTest.cs" />
+    <Compile Include="tests\Monopoly\GroupTest.cs" />
     <Compile Include="tests\Monopoly\PlayerTest.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

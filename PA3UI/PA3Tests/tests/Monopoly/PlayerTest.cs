@@ -54,13 +54,13 @@ namespace PA3Tests.tests.Monopoly
         {
             var player = new Player();
             //test getting properties owned list
-           // Assert.That.GetType(List<>, player.getPropertiesOwned());
+                // Assert.That.GetType(List<>, player.getPropertiesOwned());
             player.getPropertiesOwned();
-        //    player.addProperty(property:);
-           // Assert.Equals(true, player.getPropertiesOwned().Contains());
-           // player.removeProperty(property:);
+                //  player.addProperty(property: Property);
+                // Assert.Equals(true, player.getPropertiesOwned().Contains());
+                // player.removeProperty(property:);
             //make sure list does not have property
-            //Assert.Equals(false, player.getPropertiesOwned().Contains());
+                //Assert.Equals(false, player.getPropertiesOwned().Contains());
         }
     }
 }
