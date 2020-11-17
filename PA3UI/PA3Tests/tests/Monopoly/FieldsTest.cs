@@ -10,6 +10,8 @@ namespace PA3Tests.tests.Monopoly
         [TestMethod]
         public void TestFieldsLocations()
         {
+            
+            
             var fields = new Fields();
             
             for (int i = 0; i < 40; i++)
