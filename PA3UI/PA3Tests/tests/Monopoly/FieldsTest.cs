@@ -16,6 +16,8 @@ namespace PA3Tests.tests.Monopoly
             
             for (int i = 0; i < 40; i++)
             {
+                
+                
                 Assert.AreEqual(fields.GetFieldAt(i).GetLocation(), i);
             }
         }
