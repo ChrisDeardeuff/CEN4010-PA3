@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace PA3Tests.tests.Monopoly
 {
     [TestClass]
-    public class UnitTest1
+    public class StreetTest
     {
         [TestMethod]
         public void TestMethod1()

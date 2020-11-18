@@ -26,6 +26,7 @@ namespace PA3UI.ui
             moneySlider.Minimum = min;
             moneySlider.Maximum = max;
             moneySlider.ValueChanged += MoneySlider_ValueChanged;
+            SetTextOfTextBlockAmount($"${(int)min}");
         }
 
         private void OnButtonClick(object sender, RoutedEventArgs e)
