@@ -38,5 +38,17 @@ namespace PA3Tests.tests.Monopoly
 
 
         }
+
+        [TestMethod]
+        public void CanPlayerBuildTest()
+        {
+            var player1 = 1;
+            var player2 = 2;
+            var group = new Group(3, 50);
+            var street = new Street(21, group, 220, new int[] { 18, 90, 250, 700, 875, 1050 }, "Kentucky Ave");
+            street.BoughtByPlayer(player1);
+            //Assert.IsTrue(street.CanPlayerBuild(player1));
+            Assert.IsFalse(street.CanPlayerBuild(player2));
+        }
     }
 }
