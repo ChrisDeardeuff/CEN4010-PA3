@@ -40,15 +40,45 @@ namespace PA3Tests.tests.Monopoly
         }
 
         [TestMethod]
-        public void CanPlayerBuildTest()
+        public void CanBuildTest()
+        {
+            var player1 = 1;
+            var player2 = 2;
+            var group = new Group(1, 50);
+            var group1 = new Group(3, 50);
+            var street = new Street(21, group, 220, new int[] { 18, 90, 250, 700, 875, 1050 }, "Kentucky Ave");
+            var street1 = new Street(21, group1, 220, new int[] { 18, 90, 250, 700, 875, 1050 }, "Kentucky Ave");
+            var street2 = new Street(21, group1, 220, new int[] { 18, 90, 250, 700, 875, 1050 }, "Kentucky Ave");
+            var street3 = new Street(21, group1, 220, new int[] { 18, 90, 250, 700, 875, 1050 }, "Kentucky Ave");
+            street.BoughtByPlayer(player1);
+            Assert.IsTrue(street.CanPlayerBuild(player1));
+            street1.BoughtByPlayer(player2);
+            street2.BoughtByPlayer(player2);
+            street3.BoughtByPlayer(player2);
+            Assert.IsTrue(street1.CanPlayerBuild(player2));
+            Assert.IsTrue(street2.CanPlayerBuild(player2));
+            Assert.IsTrue(street3.CanPlayerBuild(player2));
+
+        }
+
+        [TestMethod]
+        public void CannotBuildTest()
         {
             var player1 = 1;
             var player2 = 2;
             var group = new Group(3, 50);
+            var group1 = new Group(1, 50);
             var street = new Street(21, group, 220, new int[] { 18, 90, 250, 700, 875, 1050 }, "Kentucky Ave");
+            var street1 = new Street(21, group, 220, new int[] { 18, 90, 250, 700, 875, 1050 }, "Kentucky Ave");
+            var street2 = new Street(21, group, 220, new int[] { 18, 90, 250, 700, 875, 1050 }, "Kentucky Ave");
+            var street3 = new Street(21, group1, 220, new int[] { 18, 90, 250, 700, 875, 1050 }, "Kentucky Ave");
             street.BoughtByPlayer(player1);
-            //Assert.IsTrue(street.CanPlayerBuild(player1));
+            street1.BoughtByPlayer(player1);
+            street2.BoughtByPlayer(player2);
+            street3.BoughtByPlayer(player1);
+            Assert.IsFalse(street.CanPlayerBuild(player1));
             Assert.IsFalse(street.CanPlayerBuild(player2));
+            Assert.IsFalse(street3.CanPlayerBuild(player2));
         }
     }
 }
