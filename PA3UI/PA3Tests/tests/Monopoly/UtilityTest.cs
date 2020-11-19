@@ -1,14 +1,22 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PA3BackEnd.src.Monopoly;
+
 
 namespace PA3Tests.tests.Monopoly
 {
     [TestClass]
-    public class UnitTest1
+    public class UtilityTest
     {
         [TestMethod]
-        public void TestMethod1()
+        public void CanPlayerBuildTest()
         {
+            var group = new Group(2);
+            var ec = new Utility(12, group, 150, "Electric Company");
+            var ww = new Utility(28, group, 150, "Water Works");
+            var player1 = 1;
+            Assert.IsFalse(ec.CanPlayerBuild(player1));
+            Assert.IsFalse(ww.CanPlayerBuild(player1));
         }
     }
 }
