@@ -19,5 +19,19 @@ namespace PA3Tests.tests.Monopoly
             property.DevelopProperty(1);
             Assert.IsFalse(property.CanBeMortaged());
         }
+
+        [TestMethod]
+        public void MultipleMortgageTest()
+        {
+            var group = new Group(3, 300);
+            Property property = new Street(31, group, 300, new int[] { 26, 130, 390, 900, 1100, 1275 }, "Pacific Ave");
+            Property property1 = new Street(32, group, 300, new int[] { 26, 130, 390, 900, 1100, 1275 }, "North Carolina Ave");
+            Property property2 = new Street(34, group, 320, new int[] { 28, 150, 390, 900, 1200, 1400 }, "Pennsylvania Ave");
+            Assert.IsTrue(property1.CanBeMortaged());
+            property2.DevelopProperty(2);
+            property.DevelopProperty(-1);
+            Assert.IsFalse(property2.CanBeMortaged());
+            Assert.IsFalse(property.CanBeMortaged());
+        }
     }
 }
