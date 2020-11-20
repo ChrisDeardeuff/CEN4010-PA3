@@ -58,6 +58,7 @@ namespace PA3Tests.tests.Monopoly
             var group = new Group(1, 50);
             Property property = new Street(1, group, 60, new int[] { 2, 10, 30, 90, 160, 250 }, "Mediterranean Ave");
             Assert.AreEqual(60, property.BoughtByPlayer(player)); //player purchased property
+            Assert.AreEqual(player, property.owner);     //Player owns the property
         }
 
         [TestMethod]
