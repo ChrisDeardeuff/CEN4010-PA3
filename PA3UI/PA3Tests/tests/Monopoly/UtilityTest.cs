@@ -32,5 +32,34 @@ namespace PA3Tests.tests.Monopoly
             Assert.IsFalse(ec.CanBeMortaged()); //Utility is already mortgaged
             Assert.IsTrue(ww.CanBeMortaged()); //Unmortgaged utility
         }
+
+        [TestMethod]
+        public void GetRentTest()
+        {
+            var player = 1;
+            var player1 = 2;
+            var group = new Group(2);
+            var ec = new Utility(12, group, 150, "Electric Company");
+            var ww = new Utility(28, group, 150, "Water Works");
+            var amount = group.GetAmountPlayerOwns(player);
+
+            //Each player owns only one utility (rent*4)
+            ec.BoughtByPlayer(player1);
+            ww.BoughtByPlayer(player);
+            ec.DevelopProperty(-1);     //Utility has been mortgaged
+
+            Assert.AreEqual(16, ww.GetRent(4));
+            Assert.AreEqual(48, ww.GetRent(12));
+            Assert.AreEqual(0, ec.GetRent(6));
+
+            //A player owns both utilities (rent*10)
+            ec.BoughtByPlayer(player);
+            ww.BoughtByPlayer(player);
+            ec.DevelopProperty(0);      //Utility has been unmortgaged
+
+            Assert.AreEqual(50, ww.GetRent(5));
+            Assert.AreEqual(100, ec.GetRent(10));
+            
+        }
     }
 }
