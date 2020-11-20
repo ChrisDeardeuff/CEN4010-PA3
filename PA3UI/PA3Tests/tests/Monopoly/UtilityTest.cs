@@ -43,7 +43,7 @@ namespace PA3Tests.tests.Monopoly
             var group = new Group(2);
             var ec = new Utility(12, group, 150, "Electric Company");
             var ww = new Utility(28, group, 150, "Water Works");
-            var amount = group.GetAmountPlayerOwns(player);
+            //var amount = group.GetAmountPlayerOwns(player);
 
             //Each player owns only one utility (rent*4)
             ec.BoughtByPlayer(player1);

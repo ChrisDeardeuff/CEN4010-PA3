@@ -11,10 +11,18 @@ namespace PA3Tests.tests.Monopoly
         public void CanBeMortgagedOneStreet()
         {
             //Test one Street
+            var player = 1;
             var group = new Group(1, 50);
             var street = new Street(21, group, 220, new int[] { 18, 90, 250, 700, 875, 1050 }, "Kentucky Ave");
+
+            //Player owns the street
+            street.BoughtByPlayer(player);
+            group.GetAmountPlayerOwns(player);
+           
             Assert.IsTrue(street.CanBeMortaged());
-            street.DevelopProperty(-1);
+            
+            street.DevelopProperty(-1);     //Street already mortgaged
+
             Assert.IsFalse(street.CanBeMortaged());
         }
 
@@ -31,15 +39,13 @@ namespace PA3Tests.tests.Monopoly
             Assert.IsTrue(street1.CanBeMortaged());
             Assert.IsTrue(street2.CanBeMortaged());
             
-            //1 house on property
+            //Street already mortgaged
             street.DevelopProperty(-1);
             street1.DevelopProperty(-1);
             street2.DevelopProperty(-1);
             Assert.IsFalse(street.CanBeMortaged());
             Assert.IsFalse(street1.CanBeMortaged());
             Assert.IsFalse(street2.CanBeMortaged());
-
-
 
         }
 
@@ -58,6 +64,7 @@ namespace PA3Tests.tests.Monopoly
             //Player owns a monopoly
             street.BoughtByPlayer(player1);
             Assert.IsTrue(street.CanPlayerBuild(player1));
+           
             street1.BoughtByPlayer(player2);
             street2.BoughtByPlayer(player2);
             street3.BoughtByPlayer(player2);
@@ -89,6 +96,28 @@ namespace PA3Tests.tests.Monopoly
             
             //Monopoly belongs to another player
             Assert.IsFalse(street3.CanPlayerBuild(player2));
+        }
+
+        [TestMethod]
+        public void GetStreetRent()
+        {
+
+            var group = new Group(1, 50);
+            var street = new Street(21, group, 220, new int[] { 18, 90, 250, 700, 875, 1050 }, "Kentucky Ave");
+
+            Assert.AreEqual(18, street.GetRent());  //Undeveloped
+            street.DevelopProperty(1);
+            Assert.AreEqual(90, street.GetRent());  //1 house
+            street.DevelopProperty(2);
+            Assert.AreEqual(250, street.GetRent()); //2 houses
+            street.DevelopProperty(3);
+            Assert.AreEqual(700, street.GetRent()); //3 houses
+            street.DevelopProperty(4);
+            Assert.AreEqual(875, street.GetRent()); //4 houses
+            street.DevelopProperty(5);
+            Assert.AreEqual(1050, street.GetRent());  //Hotel
+            street.DevelopProperty(-1);
+            Assert.AreEqual(0, street.GetRent());   //Mortgaged street
         }
     }
 }
