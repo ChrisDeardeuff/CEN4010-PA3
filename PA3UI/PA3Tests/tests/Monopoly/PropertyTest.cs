@@ -37,11 +37,18 @@ namespace PA3Tests.tests.Monopoly
         [TestMethod]
         public void CanBuyTest()
         {
-            var owner = -1;
+            var unowned = -1;
+            var owner = 2;
             var group = new Group(1, 50);
             Property property = new Street(1, group, 60, new int[] { 2, 10, 30, 90, 160, 250 }, "Mediterranean Ave");
+            
+            //Property is not owned, can be bought
+            property.BoughtByPlayer(unowned);
+            Assert.AreEqual(Actions.canBuy, property.GetAction());
 
-            //Assert.AreEqual(Actions.canBuy);
+            //Property is owned, must pay rent
+            property.BoughtByPlayer(owner);
+            Assert.AreEqual(Actions.payRent, property.GetAction());
         }
 
         [TestMethod]
