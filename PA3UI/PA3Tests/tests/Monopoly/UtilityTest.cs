@@ -27,8 +27,10 @@ namespace PA3Tests.tests.Monopoly
             var group = new Group(2);
             var ec = new Utility(12, group, 150, "Electric Company");
             var ww = new Utility(28, group, 150, "Water Works");
+           
             ec.DevelopProperty(-1);
             ww.DevelopProperty(0);
+            
             Assert.IsFalse(ec.CanBeMortaged()); //Utility is already mortgaged
             Assert.IsTrue(ww.CanBeMortaged()); //Unmortgaged utility
         }
@@ -59,6 +61,11 @@ namespace PA3Tests.tests.Monopoly
 
             Assert.AreEqual(50, ww.GetRent(5));
             Assert.AreEqual(100, ec.GetRent(10));
+
+            ec.DevelopProperty(-1);     //Utility has been mortgaged
+
+            Assert.AreEqual(0, ec.GetRent(7));
+            Assert.AreEqual(70, ww.GetRent(7));
             
         }
     }
