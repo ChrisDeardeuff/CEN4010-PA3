@@ -92,10 +92,13 @@ namespace PA3Tests.tests.Monopoly
             street2.BoughtByPlayer(player2);
             street3.BoughtByPlayer(player1);
             Assert.IsFalse(street.CanPlayerBuild(player1));
-            Assert.IsFalse(street.CanPlayerBuild(player2));
+            Assert.IsFalse(street2.CanPlayerBuild(player2));
             
             //Monopoly belongs to another player
             Assert.IsFalse(street3.CanPlayerBuild(player2));
+
+            //street3.DevelopProperty(-1);
+            //Assert.IsFalse(street3.CanPlayerBuild(player1));
         }
 
         [TestMethod]
