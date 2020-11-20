@@ -25,9 +25,13 @@ namespace PA3Tests.tests.Monopoly
             var street = new Street(21, group, 220, new int[] { 18, 90, 250, 700, 875, 1050 }, "Kentucky Ave");
             var street1 = new Street(21, group, 220, new int[] { 18, 90, 250, 700, 875, 1050 }, "Kentucky Ave");
             var street2 = new Street(21, group, 220, new int[] { 18, 90, 250, 700, 875, 1050 }, "Kentucky Ave");
+
+            //Undeveloped property
             Assert.IsTrue(street.CanBeMortaged());
             Assert.IsTrue(street1.CanBeMortaged());
             Assert.IsTrue(street2.CanBeMortaged());
+            
+            //1 house on property
             street.DevelopProperty(-1);
             street1.DevelopProperty(-1);
             street2.DevelopProperty(-1);
@@ -50,6 +54,8 @@ namespace PA3Tests.tests.Monopoly
             var street1 = new Street(21, group1, 220, new int[] { 18, 90, 250, 700, 875, 1050 }, "Kentucky Ave");
             var street2 = new Street(21, group1, 220, new int[] { 18, 90, 250, 700, 875, 1050 }, "Kentucky Ave");
             var street3 = new Street(21, group1, 220, new int[] { 18, 90, 250, 700, 875, 1050 }, "Kentucky Ave");
+           
+            //Player owns a monopoly
             street.BoughtByPlayer(player1);
             Assert.IsTrue(street.CanPlayerBuild(player1));
             street1.BoughtByPlayer(player2);
@@ -72,12 +78,16 @@ namespace PA3Tests.tests.Monopoly
             var street1 = new Street(21, group, 220, new int[] { 18, 90, 250, 700, 875, 1050 }, "Kentucky Ave");
             var street2 = new Street(21, group, 220, new int[] { 18, 90, 250, 700, 875, 1050 }, "Kentucky Ave");
             var street3 = new Street(21, group1, 220, new int[] { 18, 90, 250, 700, 875, 1050 }, "Kentucky Ave");
+            
+            //Player does not have a monopoly
             street.BoughtByPlayer(player1);
             street1.BoughtByPlayer(player1);
             street2.BoughtByPlayer(player2);
             street3.BoughtByPlayer(player1);
             Assert.IsFalse(street.CanPlayerBuild(player1));
             Assert.IsFalse(street.CanPlayerBuild(player2));
+            
+            //Monopoly belongs to another player
             Assert.IsFalse(street3.CanPlayerBuild(player2));
         }
     }

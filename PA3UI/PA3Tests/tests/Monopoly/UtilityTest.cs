@@ -15,6 +15,8 @@ namespace PA3Tests.tests.Monopoly
             var ec = new Utility(12, group, 150, "Electric Company");
             var ww = new Utility(28, group, 150, "Water Works");
             var player1 = 1;
+
+            //Cannot build on a utility
             Assert.IsFalse(ec.CanPlayerBuild(player1));
             Assert.IsFalse(ww.CanPlayerBuild(player1));
         }
@@ -27,8 +29,8 @@ namespace PA3Tests.tests.Monopoly
             var ww = new Utility(28, group, 150, "Water Works");
             ec.DevelopProperty(-1);
             ww.DevelopProperty(0);
-            Assert.IsFalse(ec.CanBeMortaged());
-            Assert.IsTrue(ww.CanBeMortaged());
+            Assert.IsFalse(ec.CanBeMortaged()); //Utility is already mortgaged
+            Assert.IsTrue(ww.CanBeMortaged()); //Unmortgaged utility
         }
     }
 }
