@@ -157,7 +157,7 @@ namespace PA3Tests.tests.Monopoly
             var street3 = new Street(9, new Group(2,50), 120, new int[] { 8, 40, 100, 300, 450, 600 }, "Connecticut Ave");
             
             player.addProperty(street1);
-            street1.DevelopProperty(1);
+            street1.DevelopProperty(0);
             Assert.AreEqual(1600, player.CalculateScore());
             Assert.AreEqual(1500, player2.CalculateScore());
         }
