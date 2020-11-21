@@ -64,7 +64,6 @@ namespace PA3Tests.tests.Monopoly
             player.goToJail();
             player.UpdateInPrisonCounter();
             player.GetOutOfJail();
-            player.UpdateInPrisonCounter();
             Assert.AreEqual(false, player.inPrison);
             Assert.AreEqual(0,player.inPrisonCounter);
         }
@@ -74,10 +73,10 @@ namespace PA3Tests.tests.Monopoly
         {
             var player = new Player();
             //test prison counter with 0 prisoners
-            player.UpdateInPrisonCounter();
             Assert.AreEqual(0, player.inPrisonCounter);
             //test prison counter with 1 prisoner
             player.goToJail();
+            player.UpdateInPrisonCounter();
             Assert.AreEqual(1, player.inPrisonCounter);
         }
         
@@ -157,8 +156,8 @@ namespace PA3Tests.tests.Monopoly
             var street3 = new Street(9, new Group(2,50), 120, new int[] { 8, 40, 100, 300, 450, 600 }, "Connecticut Ave");
             
             player.addProperty(street1);
-            street1.DevelopProperty(0);
-            Assert.AreEqual(1600, player.CalculateScore());
+            //street1.DevelopProperty(0);
+            Assert.AreEqual(1550, player.CalculateScore());
             Assert.AreEqual(1500, player2.CalculateScore());
         }
     }
