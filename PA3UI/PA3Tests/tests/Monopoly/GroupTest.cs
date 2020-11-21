@@ -39,12 +39,14 @@ namespace PA3Tests.tests.Monopoly
         public void HasBuildingsTest()
         {
             var group = new Group(3);
-            //test 'has any buildings' with no buildings
-            Assert.AreEqual(false, group.HasAnyBuildings());
-            //test with 1 building
             var street1 = new Street(6,group, 100, new int[] {6, 30, 90, 270, 400, 550}, "Oriental Ave");
             var street2 = new Street(8, group, 100, new int[] { 6, 30, 90, 270, 400, 550 }, "Vermont Ave");
             var street3 = new Street(9, group, 120, new int[] {8, 40, 100, 300, 450, 600}, "Connecticut Ave");
+            
+            //test 'has any buildings' with no buildings
+            Assert.AreEqual(false, group.HasAnyBuildings());
+            
+            //test with 1 building
             street1.DevelopProperty(1);
             Assert.AreEqual(true, group.HasAnyBuildings());
         }
