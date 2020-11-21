@@ -6,12 +6,10 @@ namespace PA3BackEnd.src.Monopoly
 {
 	public class Fields
 	{
-		Group[] groups;
 		Field[] fields;
 
 		public Fields()
 		{
-			groups = new Group[10];
 			fields = new Field[40];
 			LoadFields();
 		}
@@ -20,6 +18,7 @@ namespace PA3BackEnd.src.Monopoly
 		{
 			// Initialize groups
 			// groups for Streets
+			var groups = new Group[10];
 			groups[0] = new Group(2, 50);
 			groups[1] = new Group(3, 50);
 			groups[2] = new Group(3, 100);

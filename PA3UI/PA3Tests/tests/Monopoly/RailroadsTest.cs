@@ -7,33 +7,38 @@ namespace PA3Tests.tests.Monopoly
     public class RailroadsTest
     {
         [TestMethod]
-        public void CanBuildTest()
+        public void RailroadTest()
         {
-            var rails = new Railroads(5, new Group(8), 200, "Reading Railroad");
-            var rail = new Railroads(15, new Group(8), 200, "Pennsylvania Railroad");
-            var rail3 = new Railroads(25, new Group(8), 200, "B & 0 Railroad");
-            var rail4 = new Railroads(35, new Group(8), 200, "Short Line");
-            var player = new Player();
-            player.addProperty(rails);
+            var group = new Group(4);
+            var rail1 = new Railroads(15, group, 200, "Pennsylvania Railroad");
+            var rail2 = new Railroads(5, group, 200, "Reading Railroad");
+            var rail3 = new Railroads(25, group, 200, "B & 0 Railroad");
+            var rail4 = new Railroads(35, group, 200, "Short Line");
+            //var player = new Player();
+            rail1.BoughtByPlayer(0);
+           // player.addProperty(rails);
             //test can be mortgaged and can player build
-            Assert.AreEqual(false, rails.CanBeMortaged());
-            Assert.AreEqual(false, rails.CanPlayerBuild(0));
+            Assert.AreEqual(true, rail1.CanBeMortaged()); //separate method for this
+           // Assert.AreEqual(false, rail.CanPlayerBuild(0));
             //get rent when railroad is mortgaged
-            rails.DevelopProperty(-1);
-            Assert.AreEqual(0, rails.GetRent());
+            Assert.AreEqual(25, rail1.GetRent());
+            rail1.DevelopProperty(-1);
+            Assert.AreEqual(0, rail1.GetRent());
             //get rent when one railroad is owned
-            player.addProperty(rail);
-            Assert.AreEqual(25, rail.GetRent());
-            //get rent with two railroads
-            rails.DevelopProperty(0);
-            Assert.AreEqual(50, rails.GetRent());
+           // player.addProperty(rail);
+           //get rent with two railroads
+            rail1.DevelopProperty(0);
+            Assert.AreEqual(25, rail1.GetRent());
+            rail2.BoughtByPlayer(0);
+            Assert.AreEqual(50, rail1.GetRent());
             //get rent with 3 railroads
-            player.addProperty(rail3);
-            Assert.AreEqual(75, rails.GetRent());
+         //   player.addProperty(rail3);
+            rail3.BoughtByPlayer(0);
+            Assert.AreEqual(100, rail1.GetRent());
+            rail4.BoughtByPlayer(0);
             //get rent with 4 railroads
-            player.addProperty(rail4);
-            Assert.AreEqual(100, rail3.GetRent());
-            Assert.AreEqual(100, rail4.GetRent());
+          //  player.addProperty(rail4);
+            Assert.AreEqual(200, rail1.GetRent());
         }
     }
 }
