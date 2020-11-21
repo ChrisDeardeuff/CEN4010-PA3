@@ -17,7 +17,7 @@ namespace PA3Tests.tests.Monopoly
             
             //test moving player forward
             player.movePlayerForward(2);
-            Assert.AreEqual(1, player.position);
+            Assert.AreEqual(2, player.position);
             //test adding balance
             player.addBalance(40);
             Assert.AreEqual(1540, player.balance);
@@ -31,15 +31,15 @@ namespace PA3Tests.tests.Monopoly
             
             player.GetOutOfJail();
             //test get out of jail
-            Assert.Equals(false, player.inPrison);
+            Assert.AreEqual(false, player.inPrison);
             Assert.AreEqual(0,player.inPrisonCounter);
             //test subtract balance
             player.subtractBalance(40);
             Assert.AreEqual(1500, player.balance);
             //test has enough money
                 //current balance should be 0
-            Assert.Equals(false, player.HasEnoughMoney(2000));
-            Assert.Equals(true, player.HasEnoughMoney(160));
+            Assert.AreEqual(false, player.HasEnoughMoney(2000));
+            Assert.AreEqual(true, player.HasEnoughMoney(160));
         }
         [TestMethod]
         public void GoTest()
@@ -62,15 +62,15 @@ namespace PA3Tests.tests.Monopoly
             player.addProperty(street);
             player.addProperty(railroad);
             player.addProperty(utility);
-            Assert.Equals(true, player.getPropertiesOwned().Contains(street));
-            Assert.Equals(true, player.getPropertiesOwned().Contains(railroad));
-            Assert.Equals(true, player.getPropertiesOwned().Contains(utility));
+            Assert.AreEqual(true, player.getPropertiesOwned().Contains(street));
+            Assert.AreEqual(true, player.getPropertiesOwned().Contains(railroad));
+            Assert.AreEqual(true, player.getPropertiesOwned().Contains(utility));
             player.removeProperty(railroad);
             player.removeProperty(street);
             player.removeProperty(utility);
-            Assert.Equals(false, player.getPropertiesOwned().Contains(street));
-            Assert.Equals(false, player.getPropertiesOwned().Contains(railroad));
-            Assert.Equals(false, player.getPropertiesOwned().Contains(utility));
+            Assert.AreEqual(false, player.getPropertiesOwned().Contains(street));
+            Assert.AreEqual(false, player.getPropertiesOwned().Contains(railroad));
+            Assert.AreEqual(false, player.getPropertiesOwned().Contains(utility));
         }
         [TestMethod]
         public void CalculateScoreTest()
@@ -82,9 +82,10 @@ namespace PA3Tests.tests.Monopoly
             var street2 = new Street(8, new Group(2,50), 100, new int[] { 6, 30, 90, 270, 400, 550 }, "Vermont Ave");
             var street3 = new Street(9, new Group(2,50), 120, new int[] { 8, 40, 100, 300, 450, 600 }, "Connecticut Ave");
             
+            player.addProperty(street1);
             street1.DevelopProperty(1);
-            Assert.AreEqual(50, player.CalculateScore());
-            Assert.AreEqual(0, player2.CalculateScore());
+            Assert.AreEqual(1600, player.CalculateScore());
+            Assert.AreEqual(1500, player2.CalculateScore());
         }
     }
 }
