@@ -122,5 +122,6 @@ namespace PA3Tests.tests.Monopoly
             street.DevelopProperty(-1);
             Assert.AreEqual(0, street.GetRent());   //Mortgaged street
         }
+
     }
 }
