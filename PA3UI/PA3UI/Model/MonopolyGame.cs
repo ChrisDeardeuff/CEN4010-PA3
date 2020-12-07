@@ -39,7 +39,7 @@ namespace PA3UI.ui
             monopolyGame.NextPlayersTurn();
             HideEndTurnButton();
             cardViewer.CLear();
-            DiceButton.IsEnabled = true;
+            DiceButton.IsEnabled = monopolyGame.CanRoleDice;
 
             LoadPlayerDataTopBar();
             LoadPlayerDataProperties();
@@ -56,123 +56,64 @@ namespace PA3UI.ui
 
         private void DiceRole(int x, int y)
         {
-            roles.Add(new int[] { x, y });
-
-            if (currentPlayer.inPrison)
+            RoutedEventHandler action;
+            switch (monopolyGame.DiceRole(x, y, out action))
             {
-                currentPlayer.UpdateInPrisonCounter();
-                if (x == y)
-                {
-                    ShowDialogBoxOK($"You rolled doubles and got out of Prison!\n\tHowever, this ends your turn!", (object sender, RoutedEventArgs args) =>
+                case 0:
+                    break;
+                case 1:
+                    ShowDialogBoxOK($"You now have to pay the fine of $50", (object sender, RoutedEventArgs args) =>
                     {
-                        currentPlayer.GetOutOfJail();
+                        action.Invoke(sender, args);
                         NextPlayersTurn();
                     });
-                }
-                else
-                {
-
-                    if (currentPlayer.inPrisonCounter != 3)
+                    break;
+                case 2:
+                    ShowDialogBoxOK($"You rolled doubles and got out of Prison!\n\tHowever, this ends your turn!", (object sender, RoutedEventArgs args) =>
                     {
-                        ShowDialogBoxYesNo($"You did not role doubles,\n but you can pay a fine of $50 to get out of prison.\n Would you like to pay the fine?", (object sender, RoutedEventArgs args) =>
-                        {
-                            if (((Dialog)sender).yes)
-                            {
-                                currentPlayer.GetOutOfJail();
-                                currentPlayer.subtractBalance(50);
-                                NextPlayersTurn();
-                            }
-                            else
-                            {
-                                NextPlayersTurn();
-                            }
-                        });
-                    }
-                    else
+                        action.Invoke(sender, args);
+                        NextPlayersTurn();
+                    });
+                    break;
+                case 3:
+                    ShowDialogBoxYesNo($"You did not role doubles,\n but you can pay a fine of $50 to get out of prison.\n Would you like to pay the fine?", (object sender, RoutedEventArgs args) =>
                     {
-                        ShowDialogBoxOK($"You now have to pay the fine of $50", (object sender, RoutedEventArgs args) =>
-                        {
-                            currentPlayer.subtractBalance(50);
-                            currentPlayer.GetOutOfJail();
-                            NextPlayersTurn();
-                        });
+                        action.Invoke(((Dialog)sender).yes, args);
+                        NextPlayersTurn();
+                    });
+                    break;
+                case 4:
+                    ShowDialogBoxOK($"You rolled 3 doubles and are now in Prison!\n\tThis ends your turn!", (object sender, RoutedEventArgs args) =>
+                    {
+                        NextPlayersTurn();
+                    });
+                    break;
+                case 5:
+                    ShowDialogBoxOK($"You have to pay $100 in taxes", action);
+                    break;
+                case 6:
+                    ShowDialogBoxOK($"You have to pay $200 in taxes", action);
+                    break;
+                case 7:
+                    int rent;
+                    int owner;
+                    string propertyName;
+                    monopolyGame.PayRent(out rent, out owner, out propertyName, out action);
+                    if (action != null)
+                    {
+                        ShowDialogBoxOK($"You need To pay ${rent} rent to player {owner} ({PA3BackEnd.src.Monopoly.MonopolyGame.GetUserTokenName(owner)})\n on {propertyName}", action);
                     }
-                }
-                return;
-            }
-
-            if (roles.Count == 3 && x == y)
-            {
-                GoToPrison();
-                return;
-            }
-            else if (x != y)
-            {
-                DiceButton.IsEnabled = false;
-                ShowEndTurnButton();
-            }
-
-            int oldPosition = currentPlayer.position;
-            currentPlayer.movePlayerForward(x + y);
-            board.SetPositionOfPlayer(oldPosition, currentPlayer.position, currentsPlayerTurn);
-            LoadPlayerDataTopBar();
-
-            switch (fields.GetFieldAt(currentPlayer.position).GetAction())
-            {
-                case Actions.canBuy:
-                    CanBuy();
                     break;
-                case Actions.payRent:
-                    PayRent();
-                    break;
-                case Actions.goToPrison:
-                    GoToPrison();
-                    break;
-                case Actions.payTax100:
-                    PayTax(100);
-                    break;
-                case Actions.payTax200:
-                    PayTax(200);
-                    break;
-                default:
-                    break;
-            }
-        }
+                case 8:
 
-        private void PayTax(int amount)
-        {
-            ShowDialogBoxOK($"You have to pay ${amount} in taxes", (object sender, RoutedEventArgs args) =>
-            {
-                currentPlayer.subtractBalance(amount);
-                LoadPlayerDataTopBar();
-            });
-        }
+                case 9:
+                    ShowDialogBoxOK("You are now in prison, and you turn is over!", (object sender, RoutedEventArgs args) =>
+                    {
+                        NextPlayersTurn();
+                    });
+                    break;
 
-        private void PayRent()
-        {
-            var property = (Property)fields.GetFieldAt(currentPlayer.position);
-            if (property.owner == currentsPlayerTurn)
-            {
-                return;
             }
-            int rent = 0;
-
-            if (property is Utility)
-            {
-                rent = roles[roles.Count - 1][0] + roles[roles.Count - 1][1];
-                rent = ((Utility)property).GetRent(rent);
-            }
-            else 
-            {
-                rent = property.GetRent();
-            }
-
-            ShowDialogBoxOK($"You need To pay ${rent} rent to player {property.owner + 1} ({GetUserTokenName(property.owner)})\n on {property.name}", (object sender, RoutedEventArgs args) =>
-            {
-                currentPlayer.subtractBalance(rent);
-                players[property.owner].addBalance(rent);
-                LoadPlayerDataTopBar();
-            });
         }
 
         private void CanBuy()
@@ -242,20 +183,6 @@ namespace PA3UI.ui
                 property.BoughtByPlayer(highestBider);
                 ShowDialogBoxOK($"Player {highestBider +1} ({GetUserTokenName(highestBider)}) won the biding with a bid of ${highestBid}!", null);
             }
-        }
-
-        private void GoToPrison()
-        {
-            int oldPosition = currentPlayer.position;
-            currentPlayer.goToJail();
-            board.SetPositionOfPlayer(oldPosition, currentPlayer.position, currentsPlayerTurn);
-            ShowDialogBoxOK("You are now in prison, and you turn is over!", (object sender, RoutedEventArgs args) => { NextPlayersTurn(); });
-        }
-
-        private void ResetDevelopValues()
-        {
-            outstandingDevelopment = null;
-            SetTextBlockMoneyNeeded("$0");
         }
 
         private void DevelopProperty()
