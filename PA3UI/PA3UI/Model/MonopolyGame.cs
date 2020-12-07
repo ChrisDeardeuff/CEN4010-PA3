@@ -1,28 +1,20 @@
 ﻿
 using PA3BackEnd.src.Monopoly;
 using System;
-using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Shapes;
 using System.Windows.Threading;
+
 
 namespace PA3UI.ui
 {
     public partial class MonopolyGame : UserControl
     {
-        private int currentsPlayerTurn;
         private DispatcherTimer timer;
         private int timerTime;
         private int timeElapsed;
-        private int Round;
-        private Player[] players;
-        private Fields fields;
-        private List<int[]> roles;
-        private int[][] outstandingDevelopment;
         private Random rnd;
-        private Player currentPlayer { get { return players[currentsPlayerTurn]; } }
+        private PA3BackEnd.src.Monopoly.MonopolyGame monopolyGame;
 
         private void Timer_Elapsed(object sender, EventArgs e)
         {
@@ -38,61 +30,28 @@ namespace PA3UI.ui
 
         private void InitilizeData(int amountOfPlayers)
         {
-            roles = new List<int[]>();
-            Round = 0;
-            currentsPlayerTurn = -1;
-
-            players = new Player[amountOfPlayers];
-
-            for (int i = 0; i < amountOfPlayers; i++)
-            {
-                players[i] = new Player();
-            }
-
-            fields = new Fields();
-
-            //players[0].addProperty((Property) fields.GetFieldAt(1));
-            //((Property)fields.GetFieldAt(1)).BoughtByPlayer(0);
-            //players[0].addProperty((Property) fields.GetFieldAt(3));
-            //((Property)fields.GetFieldAt(3)).BoughtByPlayer(0);
-            //players[0].addProperty((Property)fields.GetFieldAt(5));
-            //((Property)fields.GetFieldAt(5)).BoughtByPlayer(0);
-            //players[0].addProperty((Property)fields.GetFieldAt(6));
-            //((Property)fields.GetFieldAt(6)).BoughtByPlayer(0);
-            //players[0].addProperty((Property)fields.GetFieldAt(8));
-            //((Property)fields.GetFieldAt(8)).BoughtByPlayer(0);
-            //players[0].addProperty((Property)fields.GetFieldAt(9));
-            //((Property)fields.GetFieldAt(9)).BoughtByPlayer(0);
-
+            monopolyGame = new PA3BackEnd.src.Monopoly.MonopolyGame(amountOfPlayers);
             NextPlayersTurn();
         }
 
         private void NextPlayersTurn()
         {
-
+            monopolyGame.NextPlayersTurn();
             HideEndTurnButton();
-            roles.Clear();
             cardViewer.CLear();
             DiceButton.IsEnabled = true;
-            currentsPlayerTurn++;
-            currentsPlayerTurn %= players.Length;
-
-            if (currentsPlayerTurn == 0)
-            {
-                Round++;
-            }
 
             LoadPlayerDataTopBar();
             LoadPlayerDataProperties();
             LoadDevelopmentValues();
 
-            if (currentPlayer.inPrison)
+            if (monopolyGame.currentPlayerInPrison)
             {
-                ShowDialogBoxOK($"Player {currentsPlayerTurn + 1} ({GetUserTokenName(currentsPlayerTurn)}) it is your turn now !\n\t but you are in Prison!", null);
+                ShowDialogBoxOK($"Player {monopolyGame.currentPlayerID + 1} ({monopolyGame.currentPlayerTokenName}) it is your turn now !\n\t but you are in Prison!", null);
                 return;
             }
 
-            ShowDialogBoxOK($"Player {currentsPlayerTurn + 1} ({GetUserTokenName(currentsPlayerTurn)}) it is your turn now !\n Roll the dice!", null);
+            ShowDialogBoxOK($"Player {monopolyGame.currentPlayerID + 1} ({monopolyGame.currentPlayerTokenName}) it is your turn now !\n Roll the dice!", null);
         }
 
         private void DiceRole(int x, int y)
@@ -548,22 +507,6 @@ namespace PA3UI.ui
                     outstandingDevelopment[i][1]--;
                 }
             }
-        }
-
-        public static string GetUserTokenName(int id)
-        {
-            switch (id)
-            {
-                case 0:
-                    return "Shoe";
-                case 1:
-                    return "Thimble";
-                case 2:
-                    return "Car";
-                case 3:
-                    return "TopHat";
-            }
-            return "";
         }
     }
 }
