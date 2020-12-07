@@ -22,6 +22,7 @@ namespace PA3BackEnd.src.Monopoly
         public int currentPlayerID { get { return currentsPlayerTurn + 1; } }
         public string currentPlayerTokenName { get { return GetUserTokenName(currentsPlayerTurn); } }
         public int currentsPlayerLocation { get { return currentPlayer.position;  } }
+        public int currentPlayerBalance { get { return currentPlayer.balance; } }
         public bool CanRoleDice { get; private set; }
         public bool CanEndTurn { get; private set; }
 
@@ -130,6 +131,7 @@ namespace PA3BackEnd.src.Monopoly
             var prop = (Property)fields.GetFieldAt(location);
             prop.DevelopProperty(level);
         }
+
         /// <summary>
         /// Calculates the ressources neccessary for the planed development
         /// </summary>
@@ -438,7 +440,7 @@ namespace PA3BackEnd.src.Monopoly
         }
 
         /// <summary>
-        /// 
+        /// Method to pay rent to the owner of the property the currentPlayer is standing on
         /// </summary>
         /// <param name="amount"></param>
         /// <param name="toPlayer"></param>
@@ -481,6 +483,110 @@ namespace PA3BackEnd.src.Monopoly
             {
                 currentPlayer.subtractBalance(amount);
             };
+        }
+
+        /// <summary>
+        /// method that returns wheather or not a player can buy the property on which he is standing
+        /// </summary>
+        /// <returns>
+        ///     if the player can buy the property
+        /// </returns>
+        public bool CanBuy(out string name, out int price)
+        {
+            var property = (Property)fields.GetFieldAt(currentPlayer.position);
+            name = property.name;
+            price = property.price;
+
+            if (!currentPlayer.HasEnoughMoney(property.price))
+            {
+                //BidForProperty(property, 0, -1, -1);
+                return false;
+            }
+            return true;
+
+            //ShowDialogBoxYesNo($"{property.name} is not owned by anyone.\n\nWould you like to buy it for ${property.price}?", (object sender, RoutedEventArgs args) =>
+            //{
+            //    if (((Dialog)sender).yes)
+            //    {
+            //        currentPlayer.subtractBalance(property.BoughtByPlayer(currentsPlayerTurn));
+            //        currentPlayer.addProperty(property);
+            //        LoadPlayerDataTopBar();
+            //        LoadPlayerDataProperties();
+
+            //    }
+            //    else
+            //    {
+            //        BidForProperty(property, 0, -1, -1);
+            //    }
+            //});
+        }
+
+        /// <summary>
+        /// Buys the propertie on which the currentPlayer is standing on
+        /// </summary>
+        /// <returns></returns>
+        public void BuyProperty() 
+        {
+            var property = (Property)fields.GetFieldAt(currentPlayer.position);
+
+            currentPlayer.subtractBalance(property.BoughtByPlayer(currentsPlayerTurn));
+            currentPlayer.addProperty(property);
+        }
+
+        /// <summary>
+        /// Recursive bidding for the property the currentPlayer is standing on
+        /// </summary>
+        /// <param name="highestBid"></param>
+        /// <param name="highestBider"></param>
+        /// <param name="playerid"></param>
+        /// <param name="name"></param>
+        /// <param name="price"></param>
+        /// <param name="priceMax"></param>
+        /// <param name="currentBidder"></param>
+        /// <returns>
+        /// 0 - Bidding done currentBidder won
+        /// 1 - Bidding done Nobody Bid for the property
+        /// 2 - currentBidder needs to place his bid
+        /// 3 - currentBidder cant bid
+        /// </returns>
+        public int BidForProperty(int highestBid, int highestBider, int playerid, out string name, out int price, out int priceMax, out int currentBidder)
+        {
+            var property = (Property)fields.GetFieldAt(currentsPlayerLocation);
+            name = property.name;
+            price = property.price;
+            priceMax = 0;
+
+
+            playerid++;
+            currentBidder = playerid + 1;
+            priceMax = players[playerid].balance;
+
+            if (playerid < players.Length)
+            {
+
+                if (playerid == currentsPlayerTurn || !players[playerid].HasEnoughMoney(property.price))
+                {
+                    BidForProperty(highestBid, highestBider, playerid, out _, out _, out _, out _);
+                    return 3;
+                }
+
+
+                return 2;
+            }
+
+            if (highestBider == -1)
+            {
+                return 1;
+            }
+            else
+            {
+                players[highestBider].subtractBalance(highestBid);
+                players[highestBider].addProperty(property);
+                property.BoughtByPlayer(highestBider);
+                currentBidder = highestBider;
+                price = highestBid;
+                return 0;
+            }
         }
     }
 }
