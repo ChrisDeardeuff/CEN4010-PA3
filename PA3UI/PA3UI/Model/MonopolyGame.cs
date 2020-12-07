@@ -190,7 +190,16 @@ namespace PA3UI.ui
             switch (monopolyGame.ApplyDevelopProperty())
             {
                 case 0:
-                    // message for success
+                    ShowDialogBoxOK($"You developed your property!", null);
+                    break;
+                case -1:
+                    ShowDialogBoxOK($"No OutStanding Development!\n Use + and - button above", null);
+                    break;
+                case -2:
+                    ShowDialogBoxOK($"You do not Have Enough Money!", null);
+                    break;
+                case -3:
+                    ShowDialogBoxOK($"There are not enough houses or hotels left!", null);
                     break;
             }
 
