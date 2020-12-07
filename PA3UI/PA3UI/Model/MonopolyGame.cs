@@ -51,18 +51,18 @@ namespace PA3UI.ui
 
             fields = new Fields();
 
-            //players[0].addProperty((Property) fields.GetFieldAt(1));
-            //((Property)fields.GetFieldAt(1)).BoughtByPlayer(0);
-            //players[0].addProperty((Property) fields.GetFieldAt(3));
-            //((Property)fields.GetFieldAt(3)).BoughtByPlayer(0);
-            //players[0].addProperty((Property)fields.GetFieldAt(5));
-            //((Property)fields.GetFieldAt(5)).BoughtByPlayer(0);
-            //players[0].addProperty((Property)fields.GetFieldAt(6));
-            //((Property)fields.GetFieldAt(6)).BoughtByPlayer(0);
-            //players[0].addProperty((Property)fields.GetFieldAt(8));
-            //((Property)fields.GetFieldAt(8)).BoughtByPlayer(0);
-            //players[0].addProperty((Property)fields.GetFieldAt(9));
-            //((Property)fields.GetFieldAt(9)).BoughtByPlayer(0);
+            players[0].addProperty((Property) fields.GetFieldAt(1));
+            ((Property)fields.GetFieldAt(1)).BoughtByPlayer(0);
+            players[0].addProperty((Property) fields.GetFieldAt(3));
+            ((Property)fields.GetFieldAt(3)).BoughtByPlayer(0);
+            players[0].addProperty((Property)fields.GetFieldAt(5));
+            ((Property)fields.GetFieldAt(5)).BoughtByPlayer(0);
+            players[0].addProperty((Property)fields.GetFieldAt(6));
+            ((Property)fields.GetFieldAt(6)).BoughtByPlayer(0);
+            players[0].addProperty((Property)fields.GetFieldAt(8));
+            ((Property)fields.GetFieldAt(8)).BoughtByPlayer(0);
+            players[0].addProperty((Property)fields.GetFieldAt(9));
+            ((Property)fields.GetFieldAt(9)).BoughtByPlayer(0);
 
             NextPlayersTurn();
         }
