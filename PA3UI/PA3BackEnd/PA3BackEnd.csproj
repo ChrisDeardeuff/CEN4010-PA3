@@ -45,6 +45,7 @@
     <Compile Include="src\Monopoly\Field.cs" />
     <Compile Include="src\Monopoly\Fields.cs" />
     <Compile Include="src\Monopoly\Group.cs" />
+    <Compile Include="src\Monopoly\MonopolyGame.cs" />
     <Compile Include="src\Monopoly\Player.cs" />
     <Compile Include="src\Monopoly\Property.cs" />
     <Compile Include="src\Monopoly\Railroads.cs" />
