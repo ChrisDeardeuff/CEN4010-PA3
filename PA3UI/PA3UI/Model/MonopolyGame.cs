@@ -260,6 +260,13 @@ namespace PA3UI.ui
 
         private void DevelopProperty()
         {
+            switch (monopolyGame.ApplyDevelopProperty())
+            {
+                case 0:
+                    // message for success
+                    break;
+            }
+
             if (outstandingDevelopment == null)
             {
                 ShowDialogBoxOK($"No OutStanding Development!\n Use + and - button above", null);
@@ -297,216 +304,11 @@ namespace PA3UI.ui
             LoadPlayerDataTopBar();
         }
 
-        private void DevelopProperty(int location, int level) 
-        {
-            var prop = (Property)fields.GetFieldAt(location);
-            prop.DevelopProperty(level);
-        }
-
         private void PlaningDevelopment() 
         {
             int moneyNeeded;
-            int HousesNeeded;
-            int HotelsNeeded;
-            CalculateMoneyAndHousesNeeded(out moneyNeeded, out HousesNeeded, out HotelsNeeded);
+            monopolyGame.CalculateMoneyAndHousesNeeded(out moneyNeeded, out _, out _);
             SetTextBlockMoneyNeeded($"${moneyNeeded}");
-        }
-
-        private void CalculateMoneyAndHousesNeeded(out int moneyNeeded, out int HousesNeeded, out int HotelsNeeded) 
-        {
-            moneyNeeded = 0;
-            HousesNeeded = 0;
-            HotelsNeeded = 0;
-
-            if (outstandingDevelopment == null)
-            {
-                return;
-            }
-
-            for (int i = 0; i < outstandingDevelopment.Length; i++)
-            {
-                var prop = (Property)fields.GetFieldAt(outstandingDevelopment[i][0]);
-                if (outstandingDevelopment[i][1] == prop.developmentValue)
-                {
-                    continue;
-                }
-                else if (outstandingDevelopment[i][1] == 5)
-                {
-                    HotelsNeeded++;
-                    if (prop.developmentValue == -1)
-                    {
-                        moneyNeeded += prop.price / 2;
-                        moneyNeeded += 5 * prop.group.priceToBuild;
-                        continue;
-                    }
-
-                    HousesNeeded -= prop.developmentValue;
-                    moneyNeeded += (5 - prop.developmentValue) * prop.group.priceToBuild;
-                }
-                else if (outstandingDevelopment[i][1] >= 0)
-                {
-                    if (prop.developmentValue >= 0)
-                    {
-                        moneyNeeded -= (prop.developmentValue - outstandingDevelopment[i][1]) * prop.group.priceToBuild;
-
-                        if (prop.developmentValue == 5)
-                        {
-                            HotelsNeeded--;
-                            HousesNeeded += outstandingDevelopment[i][1];
-                        }
-                        else
-                        {
-                            HousesNeeded += outstandingDevelopment[i][1] - prop.developmentValue;
-                        }
-                        continue;
-                    }
-                    else
-                    {
-                        HousesNeeded += outstandingDevelopment[i][1];
-                        moneyNeeded += prop.price / 2;
-                        moneyNeeded += outstandingDevelopment[i][1] * prop.group.priceToBuild;
-                    }
-                }
-                else
-                {
-                    moneyNeeded -= (prop.developmentValue ) * prop.group.priceToBuild;
-                    moneyNeeded -= prop.price / 2;
-                    if (prop.developmentValue == 5)
-                    {
-                        HotelsNeeded--;
-                    }
-                    else
-                    {
-                        HousesNeeded -= prop.developmentValue;
-                    }
-                }
-
-            }
-        }
-
-        private void DevelopProperty(int property)
-        {
-            var prop = ((Property)fields.GetFieldAt(property));
-
-            var properties = prop.group.properties;
-
-            if (outstandingDevelopment == null)
-            {
-                int newLevel = prop.developmentValue + 1;
-
-                if (newLevel >= 1)
-                {
-                    if (!prop.CanPlayerBuild(currentsPlayerTurn))
-                    {
-                        return;
-                    }
-                }
-
-                if (newLevel > 5)
-                {
-                    return;
-                }
-
-                outstandingDevelopment = new int[properties.Length][];
-                for (int i = 0; i < properties.Length; i++)
-                {
-                    outstandingDevelopment[i] = new int[] { properties[i].GetLocation(), properties[i].developmentValue };
-                    if (outstandingDevelopment[i][0] == property)
-                    {
-                        outstandingDevelopment[i][1]++;
-                    }
-                    else if(newLevel - outstandingDevelopment[i][1] > 1)
-                    {
-                        outstandingDevelopment[i][1]++;
-                    }
-                }
-                return;
-            }
-
-            int newLevel1 = 0;
-            for (int i = 0; i < properties.Length; i++)
-            {
-                if (outstandingDevelopment[i][0] == property)
-                {
-                    newLevel1 = outstandingDevelopment[i][1] + 1;
-                }
-            }
-
-            if (newLevel1 > 5)
-            {
-                return;
-            }
-
-            for (int i = 0; i < properties.Length; i++)
-            {
-                if (outstandingDevelopment[i][0] == property)
-                {
-                    outstandingDevelopment[i][1]++;
-                }
-                else if (newLevel1 - outstandingDevelopment[i][1] > 1)
-                {
-                    outstandingDevelopment[i][1]++;
-                }
-            }
-
-        }
-
-        private void UnDevelopProperty(int property)
-        {
-            var prop = ((Property)fields.GetFieldAt(property));
-
-            var properties = prop.group.properties;
-
-            if (outstandingDevelopment == null)
-            {
-                int newLevel = prop.developmentValue - 1;
-
-                if (newLevel < -1)
-                {
-                    return;
-                }
-
-                outstandingDevelopment = new int[properties.Length][];
-                for (int i = 0; i < properties.Length; i++)
-                {
-                    outstandingDevelopment[i] = new int[] { properties[i].GetLocation(), properties[i].developmentValue };
-                    if (outstandingDevelopment[i][0] == property)
-                    {
-                        outstandingDevelopment[i][1]--;
-                    }
-                    else if (outstandingDevelopment[i][1] - newLevel > 1)
-                    {
-                        outstandingDevelopment[i][1]--;
-                    }
-                }
-                return;
-            }
-
-            int newLevel1 = 0;
-            for (int i = 0; i < properties.Length; i++)
-            {
-                if (outstandingDevelopment[i][0] == property)
-                {
-                    newLevel1 = outstandingDevelopment[i][1] - 1;
-                }
-            }
-
-            if (newLevel1 < -1)
-            {
-                return;
-            }
-
-            for (int i = 0; i < properties.Length; i++)
-            {
-                if (outstandingDevelopment[i][0] == property)
-                {
-                    outstandingDevelopment[i][1]--;
-                }
-                else if (outstandingDevelopment[i][1] - newLevel1 > 1)
-                {
-                    outstandingDevelopment[i][1]--;
-                }
-            }
         }
     }
 }
