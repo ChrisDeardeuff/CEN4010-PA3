@@ -203,39 +203,6 @@ namespace PA3UI.ui
                     break;
             }
 
-            if (outstandingDevelopment == null)
-            {
-                ShowDialogBoxOK($"No OutStanding Development!\n Use + and - button above", null);
-                return;
-            }
-
-            int moneyNeeded;
-            int HousesNeeded;
-            int HotelsNeeded;
-            CalculateMoneyAndHousesNeeded(out moneyNeeded, out HousesNeeded, out HotelsNeeded);
-
-            if (!currentPlayer.HasEnoughMoney(moneyNeeded))
-            {
-                ShowDialogBoxOK($"You do not Have Enough Money!", null);
-                return;
-            }
-
-            if (!Street.EnoughHousesAndHotelsAvailable(HousesNeeded, HotelsNeeded))
-            {
-                ShowDialogBoxOK($"You developed your property!", null);
-            }
-            else
-            {
-                ShowDialogBoxOK($"There are not enough houses or hotels left!", null);
-            }
-
-            currentPlayer.subtractBalance(moneyNeeded);
-
-            for (int i = 0; i < outstandingDevelopment.Length; i++)
-            {
-                DevelopProperty(outstandingDevelopment[i][0], outstandingDevelopment[i][1]);
-            }
-            ResetDevelopValues();
             LoadDevelopmentValues();
             LoadPlayerDataTopBar();
         }
