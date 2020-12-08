@@ -75,11 +75,11 @@ namespace PA3UI.ui
 
         private void LoadPlayerDataTopBar() 
         {
-            var playersToken = GetUserTokenName(currentsPlayerTurn);
+            var playersToken = PA3BackEnd.src.Monopoly.MonopolyGame.GetUserTokenName(monopolyGame.currentPlayerID);
 
-            textBlockPlayersTurn.Text = $"Player: {currentsPlayerTurn + 1 } ({playersToken})";
-            textBlockRound.Content = $"Round: {Round}";
-            textBlockMoney.Content = $"${players[currentsPlayerTurn].balance}";
+            textBlockPlayersTurn.Text = $"Player: {monopolyGame.currentPlayerID} ({playersToken})";
+            textBlockRound.Content = $"Round: {monopolyGame.Round}";
+            textBlockMoney.Content = $"${monopolyGame.currentPlayerBalance}";
         }
 
         private void EndGame()
@@ -87,20 +87,12 @@ namespace PA3UI.ui
             timer.Stop();
             SetRemainingTime(0);
 
-            int highestScore = players[0].CalculateScore();
+            int highestScore;
             int id = 0;
 
-            for (int i = 1; i < players.Length; i++)
-            {
-                int score = players[i].CalculateScore();
-                if (score > highestScore)
-                {
-                    highestScore = score;
-                    id = i;
-                }
-            }
+            monopolyGame.CalculateHighestPlayerScore(out id, out highestScore);
             
-            MainWindow.ChangeUserControl(new EndGame($"Player {id+1} ({GetUserTokenName(id)}) won with a score of {highestScore}\nClick here to exit"));
+            MainWindow.ChangeUserControl(new EndGame($"Player {id+1} ({PA3BackEnd.src.Monopoly.MonopolyGame.GetUserTokenName(id+1)}) won with a score of {highestScore}\nClick here to exit"));
         }
 
         private void Button_Resign_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -116,7 +108,7 @@ namespace PA3UI.ui
         private void SetDeedIntoCardViewer(Deed deed)
         {
             cardViewer.SetDeed(new Deed(deed.id));
-            ResetDevelopValues();
+            monopolyGame.ResetDevelopValues();
         }
 
         private void ShowDialogBox() 
@@ -262,9 +254,9 @@ namespace PA3UI.ui
         private void LoadPlayerDataProperties() 
         {
             Ch.ClearDeeds();
-            foreach (var prop in currentPlayer.getPropertiesOwned())
+            foreach (var prop in monopolyGame.GetPropertiesOwnedByPlayer())
             {
-                Ch.Add_Deed(prop.GetLocation());
+                Ch.Add_Deed(prop);
             }
         }
 
@@ -290,7 +282,7 @@ namespace PA3UI.ui
                 return;
             }
 
-            DevelopProperty(cardViewer.deed.id);
+            monopolyGame.DevelopProperty(cardViewer.deed.id);
             PlaningDevelopment();
         }
 
@@ -301,7 +293,7 @@ namespace PA3UI.ui
                 return;
             }
 
-            UnDevelopProperty(cardViewer.deed.id);
+            monopolyGame.UnDevelopProperty(cardViewer.deed.id);
             PlaningDevelopment();
         }
 
@@ -309,10 +301,10 @@ namespace PA3UI.ui
         {
             for (int i = 0; i < 40; i++)
             {
-                var tile = this.fields.GetFieldAt(i);
-                if (tile is Property)
+                var tile = monopolyGame.GetDevelopmentValue(i);
+                if (tile != -2)
                 {
-                    board.SetDevelopmentLevelOfTile(i, ((Property)tile).developmentValue);
+                    board.SetDevelopmentLevelOfTile(i, tile);
                 }
             }
         }
@@ -320,7 +312,7 @@ namespace PA3UI.ui
         private void Button_Click_Trade(object sender, RoutedEventArgs e)
         {
             ShowDialogBox();
-            var tradeDialog = new Trade(players, currentsPlayerTurn,fields, RemoveDialogBox);
+            var tradeDialog = new Trade(monopolyGame, RemoveDialogBox);
             tradeDialog.SetValue(Grid.RowProperty, 2);
             tradeDialog.SetValue(Grid.ColumnProperty, 1);
             mainGrid.Children.Add(tradeDialog);

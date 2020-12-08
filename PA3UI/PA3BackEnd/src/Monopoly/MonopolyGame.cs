@@ -20,9 +20,10 @@ namespace PA3BackEnd.src.Monopoly
 
         public bool currentPlayerInPrison { get { return currentPlayer.inPrison; } }
         public int currentPlayerID { get { return currentsPlayerTurn + 1; } }
-        public string currentPlayerTokenName { get { return GetUserTokenName(currentsPlayerTurn); } }
+        public string currentPlayerTokenName { get { return GetUserTokenName(currentPlayerID); } }
         public int currentsPlayerLocation { get { return currentPlayer.position;  } }
         public int currentPlayerBalance { get { return currentPlayer.balance; } }
+        public int amountOfPlayers { get { return players.Length; } }
         public bool CanRoleDice { get; private set; }
         public bool CanEndTurn { get; private set; }
 
@@ -44,10 +45,31 @@ namespace PA3BackEnd.src.Monopoly
         }
 
         /// <summary>
+        /// GetDevelopmentValue of property at location
+        /// </summary>
+        /// <param name="location"></param>
+        /// <returns>
+        ///     returns developmentValue if property,
+        ///     else returns -2
+        /// </returns>
+        public int GetDevelopmentValue(int location)
+        {
+            try
+            {
+                return ((Property)fields.GetFieldAt(location)).developmentValue;
+            }
+            catch 
+            {
+                return -2;
+            }
+        }
+
+        /// <summary>
         /// Starts the next Players turn
         /// </summary>
         public void NextPlayersTurn()
         {
+            ResetDevelopValues();
 
             roles.Clear();
             CanRoleDice = true;
@@ -210,7 +232,7 @@ namespace PA3BackEnd.src.Monopoly
             }
         }
 
-        private void DevelopProperty(int property)
+        public void DevelopProperty(int property)
         {
             var prop = ((Property)fields.GetFieldAt(property));
 
@@ -277,7 +299,7 @@ namespace PA3BackEnd.src.Monopoly
 
         }
 
-        private void UnDevelopProperty(int property)
+        public void UnDevelopProperty(int property)
         {
             var prop = ((Property)fields.GetFieldAt(property));
 
@@ -335,6 +357,25 @@ namespace PA3BackEnd.src.Monopoly
             }
         }
 
+        public void CalculateHighestPlayerScore(out int playerid, out int highestScore)
+        {
+            highestScore = players[0].CalculateScore();
+            playerid = 0;
+
+            for (int i = 1; i < players.Length; i++)
+            {
+                int score = players[i].CalculateScore();
+                if (score > highestScore)
+                {
+                    highestScore = score;
+                    playerid = i;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Resets Develop Values
+        /// </summary>
         public void ResetDevelopValues()
         {
             outstandingDevelopment = null;
@@ -555,14 +596,15 @@ namespace PA3BackEnd.src.Monopoly
             name = property.name;
             price = property.price;
             priceMax = 0;
+            currentBidder = 0;
 
 
             playerid++;
-            currentBidder = playerid + 1;
-            priceMax = players[playerid].balance;
 
             if (playerid < players.Length)
             {
+                currentBidder = playerid + 1;
+                priceMax = players[playerid].balance;
 
                 if (playerid == currentsPlayerTurn || !players[playerid].HasEnoughMoney(property.price))
                 {
@@ -583,10 +625,80 @@ namespace PA3BackEnd.src.Monopoly
                 players[highestBider].subtractBalance(highestBid);
                 players[highestBider].addProperty(property);
                 property.BoughtByPlayer(highestBider);
-                currentBidder = highestBider;
+                currentBidder = highestBider +1;
                 price = highestBid;
                 return 0;
             }
+        }
+
+        /// <summary>
+        /// Returns list of property owned by currentPlayer
+        /// </summary>
+        /// <returns></returns>
+        public List<int> GetPropertiesOwnedByPlayer(int player = -1)
+        {
+            if (player == -1)
+            {
+                player = currentsPlayerTurn;
+            }
+
+            var list = new List<int>();
+            foreach (var prop in players[player].getPropertiesOwned()) 
+            {
+                list.Add(prop.GetLocation());
+            }
+
+            return list;
+        }
+
+        /// <summary>
+        /// Returns the name of a Property
+        /// </summary>
+        /// <param name="location"></param>
+        /// <returns></returns>
+        public string GetNameOfProperty(int location)
+        {
+            var field = fields.GetFieldAt(location);
+            if (field is Property)
+            {
+                return ((Property)field).name;
+            }
+            return "";
+        }
+
+        public bool HasAnyBuildingsOnIt(int location)
+        {
+            var field = fields.GetFieldAt(location);
+            if (field is Property)
+            {
+                return ((Property) field).group.HasAnyBuildings();
+            }
+            return false;
+        }
+
+        public int GetBalanceOfPlayer(int index)
+        {
+            return players[index].balance;
+        }
+
+        public void CompleteTrade(List<int> properties0, List<int> properties1, int money, int p0, int p1)
+        {
+            foreach (var prop in properties0)
+            {
+                players[p0].removeProperty((Property)fields.GetFieldAt(prop));
+                players[p1].addProperty((Property)fields.GetFieldAt(prop));
+                ((Property)fields.GetFieldAt(prop)).BoughtByPlayer(p1);
+            }
+
+            foreach (var prop in properties1)
+            {
+                players[p1].removeProperty((Property)fields.GetFieldAt(prop));
+                players[p0].addProperty((Property)fields.GetFieldAt(prop));
+                ((Property)fields.GetFieldAt(prop)).BoughtByPlayer(p0);
+            }
+
+            players[p0].subtractBalance(money);
+            players[p1].addBalance(money);
         }
     }
 }

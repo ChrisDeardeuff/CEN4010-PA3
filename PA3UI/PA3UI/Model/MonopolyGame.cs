@@ -37,9 +37,8 @@ namespace PA3UI.ui
         private void NextPlayersTurn()
         {
             monopolyGame.NextPlayersTurn();
-            HideEndTurnButton();
+            UpdateDiceRoleAndNextPlayerTurnButton();
             cardViewer.CLear();
-            DiceButton.IsEnabled = monopolyGame.CanRoleDice;
 
             LoadPlayerDataTopBar();
             LoadPlayerDataProperties();
@@ -54,10 +53,28 @@ namespace PA3UI.ui
             ShowDialogBoxOK($"Player {monopolyGame.currentPlayerID + 1} ({monopolyGame.currentPlayerTokenName}) it is your turn now !\n Roll the dice!", null);
         }
 
+        private void UpdateDiceRoleAndNextPlayerTurnButton()
+        {
+            if (monopolyGame.CanRoleDice)
+            {
+                HideEndTurnButton();
+                DiceButton.IsEnabled = true;
+            }
+            else
+            {
+                ShowEndTurnButton();
+                DiceButton.IsEnabled = false;
+            }
+        }
+
         private void DiceRole(int x, int y)
         {
+            int oldPosition = monopolyGame.currentsPlayerLocation;
             RoutedEventHandler action;
-            switch (monopolyGame.DiceRole(x, y, out action))
+            int result = monopolyGame.DiceRole(x, y, out action);
+            LoadPlayerDataTopBar();
+            UpdateDiceRoleAndNextPlayerTurnButton();
+            switch (result)
             {
                 case 0:
                     break;
@@ -117,13 +134,13 @@ namespace PA3UI.ui
                             }
                             else
                             {
-                                //startBidding      
+                                BidForProperty();
                             }
                         });
                     }
                     else 
                     {
-                        //startBidding
+                        BidForProperty();
                     }
                     break;
                 case 9:
@@ -132,8 +149,8 @@ namespace PA3UI.ui
                         NextPlayersTurn();
                     });
                     break;
-
             }
+            board.SetPositionOfPlayer(oldPosition, monopolyGame.currentsPlayerLocation, monopolyGame.currentPlayerID-1);
         }
 
         private void BidForProperty(int highestBid = -1, int highestBider = -1, int playerid = -1)
