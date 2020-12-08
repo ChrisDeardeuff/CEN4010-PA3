@@ -151,6 +151,7 @@ namespace PA3UI.ui
                     break;
             }
             board.SetPositionOfPlayer(oldPosition, monopolyGame.currentsPlayerLocation, monopolyGame.currentPlayerID-1);
+            LoadPlayerDataTopBar();
         }
 
         private void BidForProperty(int highestBid = -1, int highestBider = -1, int playerid = -1)
