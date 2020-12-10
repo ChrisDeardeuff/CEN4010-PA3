@@ -49,8 +49,9 @@ namespace PA3BackEnd.src.Monopoly
         /// </summary>
         /// <param name="location"></param>
         /// <returns>
-        ///     returns developmentValue if property,
+        /// n    returns developmentValue if property,
         ///     else returns -2
+        /// 
         /// </returns>
         public int GetDevelopmentValue(int location)
         {
