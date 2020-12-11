@@ -42,6 +42,36 @@ namespace PA3Tests.tests.Monopoly
         {
             
         }
+
+        [TestMethod]
+        public void BuyPropertyTest() 
+        {
+            
+        }
         
+        [TestMethod]
+        public void GetPropertiesOwnedByPlayerTest() 
+        {
+            
+        }
+        
+        [TestMethod]
+        public void GetNamesForPropertyTest() 
+        {
+            
+        }
+        
+        [TestMethod]
+        public void HasAnyBuildingsOnItTest() 
+        {
+            
+        }
+        
+        [TestMethod]
+        public void CompleteTradeTest() 
+        {
+        
+        }
+
     }
 }
