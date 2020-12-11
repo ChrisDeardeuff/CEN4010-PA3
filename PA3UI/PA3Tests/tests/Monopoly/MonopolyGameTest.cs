@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PA3BackEnd.src.Monopoly;
 
@@ -213,6 +214,25 @@ namespace PA3Tests.tests.Monopoly
 
             mg.NextPlayersTurn();
             Assert.AreEqual(0, mg.DiceRole(2, 3, out _));
+        }
+
+        [TestMethod]
+        public void TestDiceRole()
+        {
+            MonopolyGame mg = new MonopolyGame(2);
+            mg.NextPlayersTurn();
+
+            RoutedEventHandler action;
+            Assert.AreEqual(0, mg.DiceRole(1, 1, out action));
+            Assert.IsNull(action);
+            Assert.AreEqual(2, mg.currentsPlayerLocation);
+
+            Assert.AreEqual(6, mg.DiceRole(1, 1, out action));
+            Assert.IsNotNull(action);
+            Assert.AreEqual(4, mg.currentsPlayerLocation);
+            action.Invoke(null, null);
+            Assert.AreEqual(1300, mg.GetBalanceOfPlayer(0));
+
         }
     }
 }
