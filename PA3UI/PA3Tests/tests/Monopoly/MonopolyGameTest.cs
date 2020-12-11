@@ -10,7 +10,14 @@ namespace PA3Tests.tests.Monopoly
         [TestMethod]
         public void GetDevelopmentValueTest()
         {
+            MonopolyGame mg = new MonopolyGame(2);
             
+            
+            var value = mg.GetDevelopmentValue(11);
+            Assert.AreEqual(0, value);
+            var dneValue = mg.GetDevelopmentValue(45);
+            Assert.AreEqual(-2, dneValue);
+
         }
 
         [TestMethod]
