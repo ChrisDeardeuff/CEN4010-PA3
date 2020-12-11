@@ -115,7 +115,7 @@ namespace PA3BackEnd.src.Monopoly
         /// <returns>
         ///  0 for success
         /// -1 if no outstanding Developments are available
-        /// -2 player has not enough money
+        /// -2 player does not enough money
         /// -3 not enough houses or hotels left
         /// </returns>
         public int ApplyDevelopProperty()

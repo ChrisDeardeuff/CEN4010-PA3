@@ -51,13 +51,24 @@ namespace PA3Tests.tests.Monopoly
         [TestMethod]
         public void GetUserTokenNameTest()
         {
+
+            Assert.AreEqual("Shoe", MonopolyGame.GetUserTokenName(1));
+            Assert.AreEqual("Thimble", MonopolyGame.GetUserTokenName(2));
+            Assert.AreEqual("Car", MonopolyGame.GetUserTokenName(3));
+            Assert.AreEqual("TopHat", MonopolyGame.GetUserTokenName(4));
+            Assert.AreEqual("", MonopolyGame.GetUserTokenName(5));
             
         }
 
         [TestMethod]
         public void ApplyDevelopPropertyTest()
         {
-            
+           /* MonopolyGame mg = new MonopolyGame(4);
+            //no outstanding developments available
+            var value = mg.ApplyDevelopProperty();
+            Assert.Equals(-1, value);
+            //player does not have enough money to develop
+            mg.currentPlayerBalance.*/
         }
 
         [TestMethod]
