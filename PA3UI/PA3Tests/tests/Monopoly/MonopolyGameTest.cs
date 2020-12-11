@@ -233,6 +233,9 @@ namespace PA3Tests.tests.Monopoly
             action.Invoke(null, null);
             Assert.AreEqual(1300, mg.GetBalanceOfPlayer(0));
 
+            Assert.AreEqual(4, mg.DiceRole(1, 1, out action));
+            Assert.IsNull(action);
+            Assert.AreEqual(10, mg.currentsPlayerLocation);
         }
     }
 }
