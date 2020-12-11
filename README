@@ -1,0 +1,11 @@
+This project is a MonopolyGame written in C# using WPF
+by Per Sander,.
+
+Inorder to run this project, a Windows 10 Computer is needed
+
+Steps to run the precompiled version:
+- Run the monopolyGame.exe located in ./compiled/MonopolyGame.exe
+
+To compile and run from the code, 
+a vs2019 with .net framework installed is needed.
+(project can simply be loaded by the PA3UI.sln)
