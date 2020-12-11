@@ -71,7 +71,7 @@ namespace PA3UI.ui
         {
             int oldPosition = monopolyGame.currentsPlayerLocation;
             RoutedEventHandler action;
-            int result = monopolyGame.DiceRole(x, y, out action);
+            int result = monopolyGame.DiceRolle(x, y, out action);
             LoadPlayerDataTopBar();
             UpdateDiceRoleAndNextPlayerTurnButton();
             switch (result)

@@ -25,7 +25,7 @@ namespace PA3BackEnd.src.Monopoly
         public int currentPlayerBalance { get { return currentPlayer.balance; } }
         public int amountOfPlayers { get { return players.Length; } }
         public bool CanRoleDice { get; private set; }
-        public bool CanEndTurn { get; private set; }
+        public bool CanEndTurn { get { return !CanRoleDice; } }
 
         public MonopolyGame(int Amountplayers)
         {
@@ -400,12 +400,13 @@ namespace PA3BackEnd.src.Monopoly
         ///     8 - Can Buy
         ///     9 - landed on go to prison
         /// </returns>
-        public int DiceRole(int x, int y, out RoutedEventHandler action)
+        public int DiceRolle(int x, int y, out RoutedEventHandler action)
         {
             roles.Add(new int[] { x, y });
 
             if (currentPlayer.inPrison)
             {
+                CanRoleDice = false;
                 currentPlayer.UpdateInPrisonCounter();
                 if (x == y)
                 {
@@ -446,6 +447,7 @@ namespace PA3BackEnd.src.Monopoly
             {
                 currentPlayer.goToJail();
                 action = null;
+                CanRoleDice = false;
                 return 4;
             }
 
@@ -474,6 +476,7 @@ namespace PA3BackEnd.src.Monopoly
                 case Actions.goToPrison:
                     action = null;
                     currentPlayer.goToJail();
+                    CanRoleDice = false;
                     return 9;
                 case Actions.payTax100:
                     PayTax(100, out action);
