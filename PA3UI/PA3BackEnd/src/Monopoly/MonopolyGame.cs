@@ -541,26 +541,9 @@ namespace PA3BackEnd.src.Monopoly
 
             if (!currentPlayer.HasEnoughMoney(property.price))
             {
-                //BidForProperty(property, 0, -1, -1);
                 return false;
             }
             return true;
-
-            //ShowDialogBoxYesNo($"{property.name} is not owned by anyone.\n\nWould you like to buy it for ${property.price}?", (object sender, RoutedEventArgs args) =>
-            //{
-            //    if (((Dialog)sender).yes)
-            //    {
-            //        currentPlayer.subtractBalance(property.BoughtByPlayer(currentsPlayerTurn));
-            //        currentPlayer.addProperty(property);
-            //        LoadPlayerDataTopBar();
-            //        LoadPlayerDataProperties();
-
-            //    }
-            //    else
-            //    {
-            //        BidForProperty(property, 0, -1, -1);
-            //    }
-            //});
         }
 
         /// <summary>
@@ -576,60 +559,16 @@ namespace PA3BackEnd.src.Monopoly
         }
 
         /// <summary>
-        /// Recursive bidding for the property the currentPlayer is standing on
+        /// Method to Complete Bid
         /// </summary>
-        /// <param name="highestBid"></param>
         /// <param name="highestBider"></param>
-        /// <param name="playerid"></param>
-        /// <param name="name"></param>
         /// <param name="price"></param>
-        /// <param name="priceMax"></param>
-        /// <param name="currentBidder"></param>
-        /// <returns>
-        /// 0 - Bidding done currentBidder won
-        /// 1 - Bidding done Nobody Bid for the property
-        /// 2 - currentBidder needs to place his bid
-        /// 3 - currentBidder cant bid
-        /// </returns>
-        public int BidForProperty(int highestBid, int highestBider, int playerid, out string name, out int price, out int priceMax, out int currentBidder)
+        public void CompleteBid(int highestBider, int highestBid) 
         {
             var property = (Property)fields.GetFieldAt(currentsPlayerLocation);
-            name = property.name;
-            price = property.price;
-            priceMax = 0;
-            currentBidder = 0;
-
-
-            playerid++;
-
-            if (playerid < players.Length)
-            {
-                currentBidder = playerid + 1;
-                priceMax = players[playerid].balance;
-
-                if (playerid == currentsPlayerTurn || !players[playerid].HasEnoughMoney(property.price))
-                {
-                    BidForProperty(highestBid, highestBider, playerid, out _, out _, out _, out _);
-                    return 3;
-                }
-
-
-                return 2;
-            }
-
-            if (highestBider == -1)
-            {
-                return 1;
-            }
-            else
-            {
-                players[highestBider].subtractBalance(highestBid);
-                players[highestBider].addProperty(property);
-                property.BoughtByPlayer(highestBider);
-                currentBidder = highestBider +1;
-                price = highestBid;
-                return 0;
-            }
+            players[highestBider].subtractBalance(highestBid);
+            players[highestBider].addProperty(property);
+            property.BoughtByPlayer(highestBider);
         }
 
         /// <summary>
@@ -665,6 +604,21 @@ namespace PA3BackEnd.src.Monopoly
                 return ((Property)field).name;
             }
             return "";
+        }
+
+        /// <summary>
+        /// Returns price of a Property
+        /// </summary>
+        /// <param name="location"></param>
+        /// <returns></returns>
+        public int GetPriceOfProperty(int location) 
+        {
+            var field = fields.GetFieldAt(location);
+            if (field is Property)
+            {
+                return ((Property)field).price;
+            }
+            return -1;
         }
 
         public bool HasAnyBuildingsOnIt(int location)
