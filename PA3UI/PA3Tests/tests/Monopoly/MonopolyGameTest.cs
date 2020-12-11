@@ -87,7 +87,23 @@ namespace PA3Tests.tests.Monopoly
         [TestMethod]
         public void HasAnyBuildingsOnItTest() 
         {
-            
+            MonopolyGame mg = new MonopolyGame(2);
+
+            var medAve = mg.HasAnyBuildingsOnIt(1);
+            var boardwalk = mg.HasAnyBuildingsOnIt(39);
+            var rr = mg.HasAnyBuildingsOnIt(5);
+            var ec = mg.HasAnyBuildingsOnIt(12);
+            var go = mg.HasAnyBuildingsOnIt(0);
+            var tax = mg.HasAnyBuildingsOnIt(4);
+            var card = mg.HasAnyBuildingsOnIt(7);
+
+            Assert.IsFalse(medAve);
+            Assert.IsFalse(boardwalk);
+            Assert.IsFalse(rr);
+            Assert.IsFalse(ec);
+            Assert.IsFalse(go);
+            Assert.IsFalse(tax);
+            Assert.IsFalse(card);
         }
         
         [TestMethod]
