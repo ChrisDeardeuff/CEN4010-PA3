@@ -156,5 +156,28 @@ namespace PA3Tests.tests.Monopoly
             MonopolyGame mg = new MonopolyGame(2);
         }
 
+        [TestMethod]
+        public void CompleteBidTest()
+        {
+            // Setup
+            MonopolyGame mg = new MonopolyGame(2);
+            mg.NextPlayersTurn();
+            mg.DiceRole(2, 3, out _);
+
+            // Test
+            mg.CompleteBid(1, 100);
+
+            // Assert
+            var propList = mg.GetPropertiesOwnedByPlayer(1);
+            var balance = mg.GetBalanceOfPlayer(1);
+
+            Assert.AreEqual(1400, balance);
+            var propertyList = mg.GetPropertiesOwnedByPlayer(1);
+            Assert.AreEqual(1, propertyList.Count);
+            Assert.AreEqual(5, propertyList[0]);
+
+            mg.NextPlayersTurn();
+            Assert.AreEqual(0, mg.DiceRole(2, 3, out _));
+        }
     }
 }
