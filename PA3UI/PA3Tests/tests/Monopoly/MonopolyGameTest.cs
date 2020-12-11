@@ -51,13 +51,24 @@ namespace PA3Tests.tests.Monopoly
         [TestMethod]
         public void GetUserTokenNameTest()
         {
+
+            Assert.AreEqual("Shoe", MonopolyGame.GetUserTokenName(1));
+            Assert.AreEqual("Thimble", MonopolyGame.GetUserTokenName(2));
+            Assert.AreEqual("Car", MonopolyGame.GetUserTokenName(3));
+            Assert.AreEqual("TopHat", MonopolyGame.GetUserTokenName(4));
+            Assert.AreEqual("", MonopolyGame.GetUserTokenName(5));
             
         }
 
         [TestMethod]
         public void ApplyDevelopPropertyTest()
         {
-            
+           /* MonopolyGame mg = new MonopolyGame(4);
+            //no outstanding developments available
+            var value = mg.ApplyDevelopProperty();
+            Assert.Equals(-1, value);
+            //player does not have enough money to develop
+            mg.currentPlayerBalance.*/
         }
 
         [TestMethod]
@@ -75,7 +86,24 @@ namespace PA3Tests.tests.Monopoly
         [TestMethod]
         public void BuyPropertyTest() 
         {
-             
+            MonopolyGame mg = new MonopolyGame(2);
+            
+            //Player may buy unowned property, 
+            //cost is subtracted from player balance,
+            //property added to players list of owned properties
+            mg.NextPlayersTurn();
+            mg.DiceRole(1, 2, out _);
+
+            mg.BuyProperty();
+            Assert.AreEqual(1440, mg.GetBalanceOfPlayer(0));
+
+            var propertyList = mg.GetPropertiesOwnedByPlayer();
+            Assert.AreEqual(1, propertyList.Count);
+            Assert.AreEqual(3, propertyList[0]);
+
+            //Non owner must pay rent
+            mg.NextPlayersTurn();
+            Assert.AreEqual(7, mg.DiceRole(1, 2, out _));
         }
         
         [TestMethod]
@@ -88,11 +116,13 @@ namespace PA3Tests.tests.Monopoly
         public void GetNamesForPropertyTest() 
         {
             MonopolyGame mg = new MonopolyGame(2);
-
+            
+            //valid properties
             var medAve = mg.GetNameOfProperty(1);
             var boardwalk = mg.GetNameOfProperty(39);
             var rr = mg.GetNameOfProperty(5);
             var ec = mg.GetNameOfProperty(12);
+            //Non properties
             var go = mg.GetNameOfProperty(0);
             var tax = mg.GetNameOfProperty(4);
             var card = mg.GetNameOfProperty(7);
@@ -111,10 +141,13 @@ namespace PA3Tests.tests.Monopoly
         {
             MonopolyGame mg = new MonopolyGame(2);
 
+
+            //valid properties
             var medAve = mg.GetPriceOfProperty(1);
             var boardwalk = mg.GetPriceOfProperty(39);
             var rr = mg.GetPriceOfProperty(5);
             var ec = mg.GetPriceOfProperty(12);
+            //non properties
             var go = mg.GetPriceOfProperty(0);
             var tax = mg.GetPriceOfProperty(4);
             var card = mg.GetPriceOfProperty(7);
@@ -133,10 +166,12 @@ namespace PA3Tests.tests.Monopoly
         {
             MonopolyGame mg = new MonopolyGame(2);
 
+            //valid properties
             var medAve = mg.HasAnyBuildingsOnIt(1);
             var boardwalk = mg.HasAnyBuildingsOnIt(39);
             var rr = mg.HasAnyBuildingsOnIt(5);
             var ec = mg.HasAnyBuildingsOnIt(12);
+            //non properties
             var go = mg.HasAnyBuildingsOnIt(0);
             var tax = mg.HasAnyBuildingsOnIt(4);
             var card = mg.HasAnyBuildingsOnIt(7);
