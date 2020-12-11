@@ -110,9 +110,35 @@ namespace PA3Tests.tests.Monopoly
         [TestMethod]
         public void GetPropertiesOwnedByPlayerTest() 
         {
+            MonopolyGame mg = new MonopolyGame(2);
+
+            //Player does not own property
+            mg.NextPlayersTurn();
+            mg.DiceRole(1, 2, out _);
+            var propertyList = mg.GetPropertiesOwnedByPlayer();
+            Assert.AreEqual(0, propertyList.Count);
+
+            //Player owns 1 property
+            mg.NextPlayersTurn();
+            mg.DiceRole(1, 2, out _);
+            mg.BuyProperty();
+            var propertyList1 = mg.GetPropertiesOwnedByPlayer();
+            Assert.AreEqual(1, propertyList1.Count);
+            Assert.AreEqual(3, propertyList1[0]);
+
+            //Player owns multiple properties
+            mg.NextPlayersTurn();
+            mg.DiceRole(3, 3, out _);
+            mg.BuyProperty();
+            mg.DiceRole(1, 1, out _);
+            mg.BuyProperty();
+            var propertyList2 = mg.GetPropertiesOwnedByPlayer();
+            Assert.AreEqual(2, propertyList2.Count);
+            Assert.AreEqual(6, propertyList2[0]);
+            //Assert.AreEqual(, propertyList2[1]);
 
         }
-        
+
         [TestMethod]
         public void GetNamesForPropertyTest() 
         {
