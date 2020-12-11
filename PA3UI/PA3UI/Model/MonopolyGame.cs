@@ -154,18 +154,20 @@ namespace PA3UI.ui
             LoadPlayerDataTopBar();
         }
 
-        private void BidForProperty(int highestBid = -1, int highestBider = -1, int playerid = -1)
+        private void BidForProperty(int highestBid = -1, int highestBider = -1, int playerid = 0) 
         {
-            string name;
-            int price;
-            int priceMax;
-            int currentBidder;
-            int result = monopolyGame.BidForProperty(highestBid, highestBider, playerid, out name, out price, out priceMax, out currentBidder);
+            playerid++;
 
-            switch (result)
+            if (playerid < monopolyGame.amountOfPlayers +1)
             {
-                case 2:
-                ShowDialogBoxBidding($"Player {currentBidder} ({PA3BackEnd.src.Monopoly.MonopolyGame.GetUserTokenName(currentBidder)}) you can bid for a Property!\n Please Enter your bid!", price, priceMax, (object sender, RoutedEventArgs args) =>
+
+                if (playerid == monopolyGame.currentPlayerID || monopolyGame.GetBalanceOfPlayer(playerid - 1) < monopolyGame.GetPriceOfProperty(monopolyGame.currentsPlayerLocation) )
+                {
+                    BidForProperty(highestBid, highestBider, playerid);
+                    return;
+                }
+
+                ShowDialogBoxBidding($"Player {playerid} ({PA3BackEnd.src.Monopoly.MonopolyGame.GetUserTokenName(playerid)}) you can bid for a Property!\n Please Enter your bid!", monopolyGame.GetPriceOfProperty(monopolyGame.currentsPlayerLocation), monopolyGame.GetBalanceOfPlayer(playerid - 1), (object sender, RoutedEventArgs args) =>
                 {
                     var dialog = (Dialog)sender;
                     if (dialog.yes)
@@ -173,21 +175,22 @@ namespace PA3UI.ui
                         if (dialog.amount > highestBid)
                         {
                             highestBid = dialog.amount;
-                            highestBider = currentBidder - 1;
+                            highestBider = playerid;
                         }
                     }
-                    BidForProperty(highestBid, highestBider, currentBidder - 1);
+                    BidForProperty(highestBid, highestBider, playerid);
                 });
-                    break;
-                case 3:
-                    BidForProperty(highestBid, highestBider, currentBidder - 1);
-                    break;
-                case 1:
-                    ShowDialogBoxOK("Nobody bid for the property !", null);
-                    break;
-                case 0:
-                    ShowDialogBoxOK($"Player {currentBidder} ({PA3BackEnd.src.Monopoly.MonopolyGame.GetUserTokenName(currentBidder)}) won the biding with a bid of ${price}!", null);
-                    break;
+                return;
+            }
+
+            if (highestBider == -1)
+            {
+                ShowDialogBoxOK("Nobody bid for the property !", null);
+            }
+            else
+            {
+                monopolyGame.CompleteBid(highestBider - 1, highestBid);
+                ShowDialogBoxOK($"Player {highestBider + 1} ({PA3BackEnd.src.Monopoly.MonopolyGame.GetUserTokenName(highestBider)}) won the biding with a bid of ${highestBid}!", null);
             }
         }
 
