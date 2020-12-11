@@ -457,13 +457,19 @@ namespace PA3BackEnd.src.Monopoly
             int oldPosition = currentPlayer.position;
             currentPlayer.movePlayerForward(x + y);
 
-            switch (fields.GetFieldAt(currentPlayer.position).GetAction())
+            var prop = fields.GetFieldAt(currentPlayer.position);
+
+            switch (prop.GetAction())
             {
                 case Actions.canBuy:
                     action = null;
                     return 8;
                 case Actions.payRent:
                     action = null;
+                    if (((Property)prop).owner == currentsPlayerTurn)
+                    {
+                        return 0;
+                    }
                     return 7;
                 case Actions.goToPrison:
                     action = null;
