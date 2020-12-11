@@ -118,15 +118,53 @@ namespace PA3Tests.tests.Monopoly
         }
 
         [TestMethod]
+        public void GetPriceOfPropertyTest()
+        {
+            MonopolyGame mg = new MonopolyGame(2);
+
+            var medAve = mg.GetPriceOfProperty(1);
+            var boardwalk = mg.GetPriceOfProperty(39);
+            var rr = mg.GetPriceOfProperty(5);
+            var ec = mg.GetPriceOfProperty(12);
+            var go = mg.GetPriceOfProperty(0);
+            var tax = mg.GetPriceOfProperty(4);
+            var card = mg.GetPriceOfProperty(7);
+
+            Assert.AreEqual(60, medAve);
+            Assert.AreEqual(400, boardwalk);
+            Assert.AreEqual(200, rr);
+            Assert.AreEqual(150, ec);
+            Assert.AreEqual(-1, go);
+            Assert.AreEqual(-1, tax);
+            Assert.AreEqual(-1, card);
+        }
+
+        [TestMethod]
         public void HasAnyBuildingsOnItTest() 
         {
-            
+            MonopolyGame mg = new MonopolyGame(2);
+
+            var medAve = mg.HasAnyBuildingsOnIt(1);
+            var boardwalk = mg.HasAnyBuildingsOnIt(39);
+            var rr = mg.HasAnyBuildingsOnIt(5);
+            var ec = mg.HasAnyBuildingsOnIt(12);
+            var go = mg.HasAnyBuildingsOnIt(0);
+            var tax = mg.HasAnyBuildingsOnIt(4);
+            var card = mg.HasAnyBuildingsOnIt(7);
+
+            Assert.IsFalse(medAve);
+            Assert.IsFalse(boardwalk);
+            Assert.IsFalse(rr);
+            Assert.IsFalse(ec);
+            Assert.IsFalse(go);
+            Assert.IsFalse(tax);
+            Assert.IsFalse(card);
         }
         
         [TestMethod]
         public void CompleteTradeTest() 
         {
-        
+            MonopolyGame mg = new MonopolyGame(2);
         }
 
     }
