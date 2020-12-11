@@ -112,13 +112,13 @@ namespace PA3Tests.tests.Monopoly
         {
             MonopolyGame mg = new MonopolyGame(2);
 
-            //Player does not own property
+            //Player 1 does not own property location = 3
             mg.NextPlayersTurn();
             mg.DiceRolle(1, 2, out _);
             var propertyList = mg.GetPropertiesOwnedByPlayer();
             Assert.AreEqual(0, propertyList.Count);
 
-            //Player owns 1 property
+            //Player 2 owns 1 property location = 3
             mg.NextPlayersTurn();
             mg.DiceRolle(1, 2, out _);
             mg.BuyProperty();
@@ -126,7 +126,7 @@ namespace PA3Tests.tests.Monopoly
             Assert.AreEqual(1, propertyList1.Count);
             Assert.AreEqual(3, propertyList1[0]);
 
-            //Player owns multiple properties
+            //Player 1 owns multiple properties location = 11
             mg.NextPlayersTurn();
             mg.DiceRolle(3, 3, out _);
             mg.BuyProperty();
@@ -134,8 +134,8 @@ namespace PA3Tests.tests.Monopoly
             mg.BuyProperty();
             var propertyList2 = mg.GetPropertiesOwnedByPlayer();
             Assert.AreEqual(2, propertyList2.Count);
-            Assert.AreEqual(6, propertyList2[0]);
-            //Assert.AreEqual(, propertyList2[1]);
+            Assert.AreEqual(9, propertyList2[0]);
+            Assert.AreEqual(11, propertyList2[1]);
 
         }
 
