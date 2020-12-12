@@ -327,6 +327,48 @@ namespace PA3Tests.tests.Monopoly
             Assert.AreEqual(1250, mg.GetBalanceOfPlayer(0));
             action.Invoke(null, null);
             Assert.AreEqual(1150, mg.GetBalanceOfPlayer(0));
+
+            // player lands on go to prison
+            Assert.AreEqual(9, mg.DiceRolle(16, 16, out action));
+            Assert.IsNull(action);
+            Assert.AreEqual(10, mg.currentsPlayerLocation);
+            Assert.AreEqual(false, mg.CanRoleDice);
+            Assert.AreEqual(true, mg.CanEndTurn);
+
+            mg.NextPlayersTurn();
+            mg.NextPlayersTurn();
+
+            //player does not rolle doubles and needs to pay the fine
+            Assert.AreEqual(3, mg.DiceRolle(1, 2, out action));
+            Assert.IsNotNull(action);
+            Assert.AreEqual(10, mg.currentsPlayerLocation);
+            Assert.AreEqual(false, mg.CanRoleDice);
+            Assert.AreEqual(true, mg.CanEndTurn);
+            action.Invoke(false, null);
+
+            mg.NextPlayersTurn();
+            mg.NextPlayersTurn();
+
+            Assert.AreEqual(3, mg.DiceRolle(1, 2, out action));
+            Assert.IsNotNull(action);
+            Assert.AreEqual(10, mg.currentsPlayerLocation);
+            Assert.AreEqual(false, mg.CanRoleDice);
+            Assert.AreEqual(true, mg.CanEndTurn);
+            action.Invoke(false, null);
+
+            mg.NextPlayersTurn();
+            mg.NextPlayersTurn();
+
+            Assert.AreEqual(1, mg.DiceRolle(1, 2, out action));
+            Assert.IsNotNull(action);
+            Assert.AreEqual(10, mg.currentsPlayerLocation);
+            Assert.AreEqual(false, mg.CanRoleDice);
+            Assert.AreEqual(true, mg.CanEndTurn);
+            action.Invoke(null, null);
+            Assert.AreEqual(1300, mg.GetBalanceOfPlayer(0));
+
+            mg.NextPlayersTurn();
+            mg.NextPlayersTurn();
         }
     }
 }

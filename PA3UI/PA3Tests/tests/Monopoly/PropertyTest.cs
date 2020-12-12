@@ -11,12 +11,16 @@ namespace PA3Tests.tests.Monopoly
         [TestMethod]
         public void CanBeMortgagedTest()
         {
-            var group = new Group(1, 200);
+            var group = new Group(2, 200);
             Property property = new Street(37, group, 350, new int[] { 35, 175, 500, 1100, 1300, 1500 }, "Park Place");
+            Property property1 = new Street(37, group, 350, new int[] { 35, 175, 500, 1100, 1300, 1500 }, "Park Place");
             Assert.IsTrue(property.CanBeMortaged()); //Undeveloped property
             property.DevelopProperty(-1);
             Assert.IsFalse(property.CanBeMortaged()); //Already mortgaged
             property.DevelopProperty(1);
+            Assert.IsFalse(property.CanBeMortaged()); //1 house on property
+            property.DevelopProperty(0);
+            property1.DevelopProperty(1);
             Assert.IsFalse(property.CanBeMortaged()); //1 house on property
         }
 
@@ -69,6 +73,15 @@ namespace PA3Tests.tests.Monopoly
 
             property.DevelopProperty(2);
             Assert.AreEqual(2, property.developmentValue);
+        }
+
+        [TestMethod]
+        public void TestEnoughHousesAndHotelsAvailable() 
+        {
+            Assert.IsTrue(Street.EnoughHousesAndHotelsAvailable(1, 2));
+            Assert.IsTrue(Street.EnoughHousesAndHotelsAvailable(3, 0));
+            Assert.IsFalse(Street.EnoughHousesAndHotelsAvailable(35, 0));
+            Assert.IsFalse(Street.EnoughHousesAndHotelsAvailable(0, 35));
         }
     }
 }
