@@ -8,6 +8,9 @@ namespace PA3Tests.tests.Monopoly
     
     public class GroupTest
     {
+        /// <summary>
+        /// Test that tests if getAmount player owns returns the number of properties a player owns in a group
+        /// </summary>
         [TestMethod]
         public void GetAmountTest()
         {
@@ -34,6 +37,9 @@ namespace PA3Tests.tests.Monopoly
             Assert.AreEqual(3,group.GetAmountPlayerOwns(0));
         }
 
+        /// <summary>
+        /// Test that tests if HasAnyBuildings returns the true if there are any buildings on any property in this group
+        /// </summary>
         [TestMethod]
 
         public void HasBuildingsTest()

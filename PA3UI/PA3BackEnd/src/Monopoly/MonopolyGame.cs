@@ -145,6 +145,7 @@ namespace PA3BackEnd.src.Monopoly
             for (int i = 0; i < outstandingDevelopment.Length; i++)
             {
                 DevelopProperty(outstandingDevelopment[i][0], outstandingDevelopment[i][1]);
+                ResetDevelopValues();
             }
             return 0;
         }

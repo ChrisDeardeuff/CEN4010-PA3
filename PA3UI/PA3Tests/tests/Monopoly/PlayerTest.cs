@@ -10,6 +10,10 @@ namespace PA3Tests.tests.Monopoly
     [TestClass]
     public class PlayerTest
     {
+        /// <summary>
+        /// This test tests the moveForward method by moving a player 
+        /// forward and checking if he is standing at the right location
+        /// </summary>
         [TestMethod]
         public void MoveTest()
         {
@@ -18,9 +22,12 @@ namespace PA3Tests.tests.Monopoly
             player.movePlayerForward(2);
             Assert.AreEqual(2, player.position);
         }
-
+        /// <summary>
+        /// This test tests the hasEnoughMoney method, by using one valuethat is smaller than the balance of the player,
+        /// and one that is bigger than the balance of the player
+        /// </summary>
         [TestMethod]
-        public void HasEnoughTest()
+        public void HasEnoughMoneyTest()
         {
             var player = new Player();
             //test has enough money (balance is 1500)
@@ -28,8 +35,11 @@ namespace PA3Tests.tests.Monopoly
             Assert.AreEqual(true, player.HasEnoughMoney(160));
         }
 
+        /// <summary>
+        /// money is added to a player to test AddBalance
+        /// </summary>
         [TestMethod]
-        public void AddTest()
+        public void AddBalanceTest()
         {
             var player = new Player();
             Assert.AreEqual(1500, player.balance);
@@ -37,6 +47,11 @@ namespace PA3Tests.tests.Monopoly
             player.addBalance(40);
             Assert.AreEqual(1540, player.balance);
         }
+
+        /// <summary>
+        /// money is subtracted from a player to test removeBalance balance 
+        /// is checked after subtract balance
+        /// </summary>
         [TestMethod]
         public void SubtractTest()
         {
@@ -46,6 +61,11 @@ namespace PA3Tests.tests.Monopoly
             player.subtractBalance(100);
             Assert.AreEqual(1400, player.balance);
         }
+
+        /// <summary>
+        /// This test tests if the goToJail method works, by sending a player to jail,
+        /// and then checking if he is in jail
+        /// </summary>
         [TestMethod]
         public void GoToJailTest()
         {
@@ -57,6 +77,10 @@ namespace PA3Tests.tests.Monopoly
             Assert.AreEqual(1, player.inPrisonCounter);
         }
 
+        /// <summary>
+        /// Tests the GetOutOfJailMethod, by putting a player
+        /// in prison, and then calling GetOutOfJail
+        /// </summary>
         [TestMethod]
         public void GetOutOfJailTest()
         {
@@ -68,6 +92,10 @@ namespace PA3Tests.tests.Monopoly
             Assert.AreEqual(0,player.inPrisonCounter);
         }
 
+        /// <summary>
+        /// This test checks if the prisonCounter is updated 
+        /// whenever UpdateInPrisonCounter is called
+        /// </summary>
         [TestMethod]
         public void PrisonCounterTest()
         {
@@ -79,7 +107,11 @@ namespace PA3Tests.tests.Monopoly
             player.UpdateInPrisonCounter();
             Assert.AreEqual(1, player.inPrisonCounter);
         }
-        
+
+        /// <summary>
+        /// This test tests if the player gets 200$ when passing go,
+        /// by letting a player move 45 places forward
+        /// </summary>
         [TestMethod]
         public void GoTest()
         {
@@ -89,6 +121,11 @@ namespace PA3Tests.tests.Monopoly
             Assert.AreEqual(1700, player.balance);
         }
 
+        /// <summary>
+        /// 3 properties are created and added to a player,
+        /// then Getproperties is tested by checking if its output contains
+        /// the 3 properties
+        /// </summary>
         [TestMethod]
 
         public void GetPropertiesTest()
@@ -112,6 +149,9 @@ namespace PA3Tests.tests.Monopoly
             Assert.AreEqual(false, player.getPropertiesOwned().Contains(utility));
         }
 
+        /// <summary>
+        /// 4 properties are added to one player inorder to test AddProperty
+        /// </summary>
         [TestMethod]
         public void AddPropertyTest()
         {
@@ -130,8 +170,12 @@ namespace PA3Tests.tests.Monopoly
             Assert.AreEqual(true, player.getPropertiesOwned().Contains(utility1));
         }
 
+        /// <summary>
+        /// 4 properties are added to one player and than removed from the 
+        /// player to check the removeProperty method
+        /// </summary>
         [TestMethod]
-        public void RemoveTest()
+        public void RemovePropertyTest()
         {
             //test remove property
             var player = new Player();
@@ -148,6 +192,11 @@ namespace PA3Tests.tests.Monopoly
             Assert.AreEqual(false, player.getPropertiesOwned().Contains(railroad));
             Assert.AreEqual(false, player.getPropertiesOwned().Contains(utility));
         }
+
+        /// <summary>
+        /// two players and 3 streets are created and added to the players,
+        /// than the score of each player is Calculated
+        /// </summary>
         [TestMethod]
         public void CalculateScoreTest()
         {

@@ -8,6 +8,10 @@ namespace PA3Tests.tests.Monopoly
     [TestClass]
     public class MonopolyGameTest
     {
+        /// <summary>
+        /// This test tests if GetDevelopmentValue returns the development value of the property specified,
+        /// should be -2 if the tile specified is not a property
+        /// </summary>
         [TestMethod]
         public void GetDevelopmentValueTest()
         {
@@ -278,7 +282,12 @@ namespace PA3Tests.tests.Monopoly
             
             Assert.AreEqual(false, mg.CanBuy(out _, out _));
         }
-    
+
+        /// <summary>
+        /// Tests if BuyProperty correctly subtracts the cost of the property 
+        /// from the players balance, as well as adding the property to the 
+        /// list of properties owned by the player
+        /// </summary>
         [TestMethod]
         public void BuyPropertyTest() 
         {
@@ -302,8 +311,11 @@ namespace PA3Tests.tests.Monopoly
             Assert.AreEqual(7, mg.DiceRoll(1, 2, out _));
         }
 
-        
 
+        /// <summary>
+        /// Tests if GetPropertiesOwnedByPlayer returns the correct 
+        /// list of properties owned by a player
+        /// </summary>
         [TestMethod]
         public void GetPropertiesOwnedByPlayerTest() 
         {
@@ -336,6 +348,10 @@ namespace PA3Tests.tests.Monopoly
 
         }
 
+        /// <summary>
+        /// Tests if GetNameOfProperty returns the correct name for a piece of property, 
+        /// should return an empty string if field is not property
+        /// </summary>
         [TestMethod]
         public void GetNamesForPropertyTest() 
         {
@@ -360,6 +376,10 @@ namespace PA3Tests.tests.Monopoly
             Assert.AreEqual("", card);
         }
 
+        /// <summary>
+        /// Tests if GetPriceOfProperty returns the correct price for a piece of property, 
+        /// should return -1 if current field is not property
+        /// </summary>
         [TestMethod]
         public void GetPriceOfPropertyTest()
         {
@@ -385,6 +405,9 @@ namespace PA3Tests.tests.Monopoly
             Assert.AreEqual(-1, card);
         }
 
+        /// <summary>
+        /// Tests whether or not a piece of property has any buildings on it
+        /// </summary>
         [TestMethod]
         public void HasAnyBuildingsOnItTest() 
         {
@@ -408,29 +431,50 @@ namespace PA3Tests.tests.Monopoly
             Assert.IsFalse(tax);
             Assert.IsFalse(card);
         }
-        
+
+        /// <summary>
+        /// Tests if CompleteTrade correctly trades the amount of money 
+        /// and properties traded between two players
+        /// </summary>
         [TestMethod]
         public void CompleteTradeTest() 
         {
             MonopolyGame mg = new MonopolyGame(2);
 
             mg.NextPlayersTurn();
-            var propList1 = mg.GetPropertiesOwnedByPlayer();
+            mg.DiceRoll(3, 2, out _);
+            mg.BuyProperty();
+            var propList1 = mg.GetPropertiesOwnedByPlayer(0);
+            var balance1 = mg.GetBalanceOfPlayer(0);
 
             mg.NextPlayersTurn();
-            var propList2 = mg.GetPropertiesOwnedByPlayer();
+            mg.DiceRoll(3, 3, out _);
+            mg.BuyProperty();
+            var propList2 = mg.GetPropertiesOwnedByPlayer(1);
+            var balance2 = mg.GetBalanceOfPlayer(1);
 
-            //var balance1 = mg.GetBalanceOfPlayer(1);
-            //var balance2 = mg.GetBalanceOfPlayer(2);
-            mg.NextPlayersTurn();
+            mg.CompleteTrade(propList1, propList2, 100, 0, 1);
 
-            //mg.CompleteTrade(propList1, propList2, 100, 1, 2);
 
-            //Assert.AreEqual(1400, balance1);
-            //Assert.AreEqual(1600, balance2);
+            Assert.AreEqual(propList2.Count, mg.GetPropertiesOwnedByPlayer(0).Count);
+            Assert.AreEqual(propList1.Count, mg.GetPropertiesOwnedByPlayer(1).Count);
+            foreach(var prop in mg.GetPropertiesOwnedByPlayer(0)) 
+            {
+                Assert.IsTrue(propList2.Contains(prop));
+            }
+            foreach (var prop in mg.GetPropertiesOwnedByPlayer(1))
+            {
+                Assert.IsTrue(propList1.Contains(prop));
+            }
 
+            Assert.AreEqual(balance1 - 100, mg.GetBalanceOfPlayer(0));
+            Assert.AreEqual(balance2 + 100, mg.GetBalanceOfPlayer(1));
         }
 
+        /// <summary>
+        /// Tests if Complete Bid sets the right owner of the property 
+        /// and subtracts the right amount of money from the player
+        /// </summary>
         [TestMethod]
         public void CompleteBidTest()
         {

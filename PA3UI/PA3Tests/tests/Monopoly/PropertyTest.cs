@@ -8,6 +8,10 @@ namespace PA3Tests.tests.Monopoly
     [TestClass]
     public class PropertyTest
     {
+        /// <summary>
+        /// Tests if CanBeMortaged Returns true when the property canbeMortaged (no houses on any property in the group, not mortaged)
+        /// otherwise should return false
+        /// </summary>
         [TestMethod]
         public void CanBeMortgagedTest()
         {
@@ -24,6 +28,9 @@ namespace PA3Tests.tests.Monopoly
             Assert.IsFalse(property.CanBeMortaged()); //1 house on property
         }
 
+        /// <summary>
+        /// Test that works just like CanBeMortgaged but with multiple properties
+        /// </summary>
         [TestMethod]
         public void MultipleMortgageTest()
         {
@@ -38,8 +45,11 @@ namespace PA3Tests.tests.Monopoly
             Assert.IsFalse(property.CanBeMortaged()); //Already mortgaged
         }
 
+        /// <summary>
+        /// Tests if getAction returns the right value after the property has been bought (should be Action.payRent)
+        /// </summary>
         [TestMethod]
-        public void CanBuyTest()
+        public void GetActionTest()
         {
             var unowned = -1;
             var owner = 2;
@@ -55,6 +65,9 @@ namespace PA3Tests.tests.Monopoly
             Assert.AreEqual(Actions.payRent, property.GetAction());
         }
 
+        /// <summary>
+        /// Tests if Bought by player sets the owner of the property, and returns the price of the property
+        /// </summary>
         [TestMethod]
         public void BoughtByPlayerTest()
         {
@@ -65,6 +78,9 @@ namespace PA3Tests.tests.Monopoly
             Assert.AreEqual(player, property.owner);     //Player owns the property
         }
 
+        /// <summary>
+        /// Tests if Develop Property develops the property to the right value
+        /// </summary>
         [TestMethod]
         public void DevelopPropertyTest()
         {
@@ -75,6 +91,10 @@ namespace PA3Tests.tests.Monopoly
             Assert.AreEqual(2, property.developmentValue);
         }
 
+        /// <summary>
+        /// Tests EnoughHousesAndHotelsAvailable by first inserting values and houses available (should return true),
+        /// and then by inserting values that are not available (should return false)
+        /// </summary>
         [TestMethod]
         public void TestEnoughHousesAndHotelsAvailable() 
         {
