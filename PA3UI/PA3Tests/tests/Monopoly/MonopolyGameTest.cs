@@ -147,6 +147,7 @@ namespace PA3Tests.tests.Monopoly
         [TestMethod]
         public void CalculateMoneyAndHousesNeededTest()
         {
+            Street.InitializeHousesAndHotels();
             var mg = new MonopolyGame(2);
             int m;
             int h;
