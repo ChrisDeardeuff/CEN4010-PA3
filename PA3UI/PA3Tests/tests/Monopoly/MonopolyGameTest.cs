@@ -141,16 +141,61 @@ namespace PA3Tests.tests.Monopoly
 
         }
 
+        /// <summary>
+        /// Tests the CalculateMoneyAndHousesNeeded method
+        /// </summary>
         [TestMethod]
         public void CalculateMoneyAndHousesNeededTest()
         {
+            var mg = new MonopolyGame(2);
+            int m;
+            int h;
+            int H;
+            mg.CalculateMoneyAndHousesNeeded(out m, out h, out H);
+            Assert.AreEqual(0, m);
+            Assert.AreEqual(0, h);
+            Assert.AreEqual(0, H);
 
-        }
+            mg.NextPlayersTurn();
+            mg.DiceRoll(1, 0, out _);
+            mg.BuyProperty();
+            mg.DiceRoll(1, 1, out _);
+            mg.BuyProperty();
 
-        [TestMethod]
-        public void DevelopPropertyTest()
-        {
+            mg.UnDevelopProperty(1);
+            mg.CalculateMoneyAndHousesNeeded(out m, out h, out H);
+            Assert.AreEqual(-30, m);
+            Assert.AreEqual(0, h);
+            Assert.AreEqual(0, H);
+            mg.ApplyDevelopProperty();
 
+            mg.DevelopProperty(1);
+            mg.DevelopProperty(1);
+            mg.DevelopProperty(1);
+            mg.DevelopProperty(1);
+            mg.DevelopProperty(1);
+            mg.CalculateMoneyAndHousesNeeded(out m, out h, out H);
+            Assert.AreEqual(380, m);
+            Assert.AreEqual(7, h);
+            Assert.AreEqual(0, H);
+            mg.DevelopProperty(1);
+            mg.ApplyDevelopProperty();
+
+            mg.UnDevelopProperty(1);
+            mg.CalculateMoneyAndHousesNeeded(out m, out h, out H);
+            Assert.AreEqual(-50, m);
+            Assert.AreEqual(4, h);
+            Assert.AreEqual(-1, H);
+
+            mg.UnDevelopProperty(1);
+            mg.UnDevelopProperty(1);
+            mg.UnDevelopProperty(1);
+            mg.UnDevelopProperty(1);
+            mg.UnDevelopProperty(1);
+            mg.CalculateMoneyAndHousesNeeded(out m, out h, out H);
+            Assert.AreEqual(-480, m);
+            Assert.AreEqual(0, h);
+            Assert.AreEqual(-1, H);
         }
 
         [TestMethod]
@@ -191,6 +236,7 @@ namespace PA3Tests.tests.Monopoly
             Street.InitializeHousesAndHotels();
             MonopolyGame polyGame = new MonopolyGame(2);
             polyGame.NextPlayersTurn();
+            polyGame.NextPlayersTurn();
 
             //test if player 0 wins with score 1500 (No change in anyones score)
             int playerId;
@@ -218,7 +264,7 @@ namespace PA3Tests.tests.Monopoly
 
             polyGame.CalculateHighestPlayerScore(out playerId, out score);
             Assert.AreEqual(1890, score);
-            Assert.AreEqual(0, playerId);
+            Assert.AreEqual(1, playerId);
 
         }
 
