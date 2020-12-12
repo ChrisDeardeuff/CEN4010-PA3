@@ -155,6 +155,39 @@ namespace PA3Tests.tests.Monopoly
         }
 
         [TestMethod]
+        public void PayRentTest()
+        {
+            MonopolyGame mp = new MonopolyGame(2);
+            mp.NextPlayersTurn();
+
+            mp.DiceRoll(1, 0, out _);
+            mp.BuyProperty();
+            
+            mp.NextPlayersTurn();
+
+            mp.DiceRoll(1, 0, out _);
+            mp.PayRent(out _, out _, out _,out var a);
+            a.Invoke(null,null);
+            
+            Assert.AreEqual(1498,mp.GetBalanceOfPlayer(1));
+            
+            //Check Utility Rent
+            mp.NextPlayersTurn();
+            mp.DiceRoll(0, 0, out _);
+            mp.DiceRoll(6, 5, out _);
+            mp.BuyProperty();
+            
+            mp.NextPlayersTurn();
+            mp.DiceRoll(6, 5, out _);
+            
+            mp.PayRent(out _, out _, out _,out var b);
+            b.Invoke(null,null);
+            
+            Assert.AreEqual((1498 - 44),mp.GetBalanceOfPlayer(1));
+
+           }
+    
+        [TestMethod]
         public void BuyPropertyTest() 
         {
             MonopolyGame mg = new MonopolyGame(2);

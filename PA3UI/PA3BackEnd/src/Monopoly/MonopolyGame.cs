@@ -498,14 +498,7 @@ namespace PA3BackEnd.src.Monopoly
         public void PayRent(out int amount, out int toPlayer,out string propertyName, out RoutedEventHandler action)
         {
             var property = (Property)fields.GetFieldAt(currentPlayer.position);
-            if (property.owner == currentsPlayerTurn)
-            {
-                amount = 0;
-                toPlayer = 0;
-                action = null;
-                propertyName = "";
-                return;
-            }
+            
             int rent = 0;
 
             if (property is Utility)
