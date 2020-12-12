@@ -354,17 +354,33 @@ namespace PA3Tests.tests.Monopoly
             MonopolyGame mg = new MonopolyGame(2);
 
             mg.NextPlayersTurn();
-            mg.DiceRolle(3, 2, out _);
+            mg.DiceRoll(3, 2, out _);
             mg.BuyProperty();
-            var propList1 = mg.GetPropertiesOwnedByPlayer();
+            var propList1 = mg.GetPropertiesOwnedByPlayer(0);
+            var balance1 = mg.GetBalanceOfPlayer(0);
 
             mg.NextPlayersTurn();
-            mg.DiceRolle(3, 3, out _);
+            mg.DiceRoll(3, 3, out _);
             mg.BuyProperty();
-            var propList2 = mg.GetPropertiesOwnedByPlayer();
+            var propList2 = mg.GetPropertiesOwnedByPlayer(1);
+            var balance2 = mg.GetBalanceOfPlayer(1);
 
-            //mg.CompleteTrade(propList1, propList2, 0, 1, 2);
+            mg.CompleteTrade(propList1, propList2, 100, 0, 1);
 
+
+            Assert.AreEqual(propList2.Count, mg.GetPropertiesOwnedByPlayer(0).Count);
+            Assert.AreEqual(propList1.Count, mg.GetPropertiesOwnedByPlayer(1).Count);
+            foreach(var prop in mg.GetPropertiesOwnedByPlayer(0)) 
+            {
+                Assert.IsTrue(propList2.Contains(prop));
+            }
+            foreach (var prop in mg.GetPropertiesOwnedByPlayer(1))
+            {
+                Assert.IsTrue(propList1.Contains(prop));
+            }
+
+            Assert.AreEqual(balance1 - 100, mg.GetBalanceOfPlayer(0));
+            Assert.AreEqual(balance2 + 100, mg.GetBalanceOfPlayer(1));
         }
 
         [TestMethod]
