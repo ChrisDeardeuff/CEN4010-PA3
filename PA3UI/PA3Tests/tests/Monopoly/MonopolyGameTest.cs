@@ -63,12 +63,14 @@ namespace PA3Tests.tests.Monopoly
         [TestMethod]
         public void ApplyDevelopPropertyTest()
         {
-           /* MonopolyGame mg = new MonopolyGame(4);
+          /*  MonopolyGame mg = new MonopolyGame(4);
             //no outstanding developments available
             var value = mg.ApplyDevelopProperty();
             Assert.Equals(-1, value);
             //player does not have enough money to develop
-            mg.currentPlayerBalance.*/
+            mg.currentPlayer.subtractBalance(1000);
+            //player has enough money and
+        */
         }
 
         [TestMethod]
@@ -81,6 +83,38 @@ namespace PA3Tests.tests.Monopoly
         public void DevelopPropertyTest()
         {
             
+        }
+
+        [TestMethod]
+        public void UnDevelopPropertyTest()
+        {
+            MonopolyGame monoGame = new MonopolyGame(2);
+            monoGame.NextPlayersTurn();
+            monoGame.UnDevelopProperty(3);
+            monoGame.ApplyDevelopProperty();
+            Assert.AreEqual(-1,monoGame.GetDevelopmentValue(3));
+            
+            monoGame.NextPlayersTurn();
+            //build 'uneven' forcing all properties in group to have 1 house
+            monoGame.DevelopProperty(6);
+            monoGame.DevelopProperty(6);
+            //apply development
+            monoGame.ApplyDevelopProperty();
+            //get rid of both testing if it has undeveloped evenly
+            monoGame.UnDevelopProperty(6);
+            monoGame.UnDevelopProperty(6);
+            monoGame.ApplyDevelopProperty();
+            
+            //test if both in group are even
+            Assert.AreEqual(0,monoGame.GetDevelopmentValue(8));
+
+            
+            monoGame.UnDevelopProperty(8);
+            monoGame.ApplyDevelopProperty();
+            monoGame.UnDevelopProperty(8);
+            monoGame.ApplyDevelopProperty();
+            
+            Assert.AreEqual(-1,monoGame.GetDevelopmentValue(8));
         }
 
         [TestMethod]
