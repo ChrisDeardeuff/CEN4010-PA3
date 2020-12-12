@@ -64,14 +64,75 @@ namespace PA3Tests.tests.Monopoly
         [TestMethod]
         public void ApplyDevelopPropertyTest()
         {
-          /*  MonopolyGame mg = new MonopolyGame(4);
+          MonopolyGame mg = new MonopolyGame(4);
+          mg.NextPlayersTurn();
             //no outstanding developments available
-            var value = mg.ApplyDevelopProperty();
-            Assert.Equals(-1, value);
-            //player does not have enough money to develop
-            mg.currentPlayer.subtractBalance(1000);
-            //player has enough money and
-        */
+          var value = mg.ApplyDevelopProperty(); 
+          Assert.AreEqual(-1, value);
+          
+          //not enough money
+          for (var i = 1; i <= 40; i++)
+          {
+              if (i == 30)
+              {
+                  mg.DiceRoll(2, 2, out _);
+              }
+              else
+              {
+                  mg.DiceRoll(1, 0, out _);
+              }
+                
+              try
+              {
+                  mg.BuyProperty();
+              }
+              catch
+              {
+                  // ignored
+              }
+          }
+          mg.DevelopProperty(3);
+          Assert.AreEqual(-2,mg.ApplyDevelopProperty());
+          
+          MonopolyGame newGame = new MonopolyGame(2);
+          newGame.NextPlayersTurn();
+          newGame.DiceRoll(1, 0, out _);
+          newGame.BuyProperty();
+
+          newGame.DiceRoll(1, 1,out _);
+          newGame.BuyProperty();
+          
+          newGame.DevelopProperty(3);
+          newGame.DevelopProperty(3);
+          newGame.DevelopProperty(3);
+          
+          Assert.AreEqual(0,newGame.ApplyDevelopProperty());
+          
+          mg.DevelopProperty(3);
+          mg.DevelopProperty(3);
+          mg.DevelopProperty(3);
+          mg.DevelopProperty(3);
+          mg.ApplyDevelopProperty();
+          
+          mg.DevelopProperty(6);
+          mg.DevelopProperty(6);
+          mg.DevelopProperty(6);
+          mg.DevelopProperty(6);
+          mg.ApplyDevelopProperty();
+          
+          mg.DevelopProperty(11);
+          mg.DevelopProperty(11);
+          mg.DevelopProperty(11);
+          mg.DevelopProperty(11);
+          mg.ApplyDevelopProperty();
+          
+          mg.DevelopProperty(16);
+          mg.DevelopProperty(16);
+          mg.DevelopProperty(16);
+          mg.DevelopProperty(16);
+          
+          Assert.AreEqual(-3,mg.ApplyDevelopProperty());
+
         }
 
         [TestMethod]
