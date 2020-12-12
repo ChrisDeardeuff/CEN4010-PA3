@@ -149,8 +149,8 @@ namespace PA3Tests.tests.Monopoly
             a.Invoke(null,null);
             
             polyGame.CalculateHighestPlayerScore(out playerId,out score);
-            Assert.AreEqual(1496,score);
-            Assert.AreEqual(1,playerId);
+            Assert.AreEqual(1890, score);
+            Assert.AreEqual(0,playerId);
 
         }
 

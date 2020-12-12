@@ -135,7 +135,7 @@ namespace PA3BackEnd.src.Monopoly
                 return -2;
             }
 
-            if (Street.EnoughHousesAndHotelsAvailable(HousesNeeded, HotelsNeeded))
+            if (!Street.EnoughHousesAndHotelsAvailable(HousesNeeded, HotelsNeeded))
             {
                 return -3;
             }
