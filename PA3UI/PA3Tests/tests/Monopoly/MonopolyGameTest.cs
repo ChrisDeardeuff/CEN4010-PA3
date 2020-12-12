@@ -188,6 +188,7 @@ namespace PA3Tests.tests.Monopoly
         [TestMethod]
         public void CalculateHighestPlayerScoreTest()
         {
+            Street.InitializeHousesAndHotels();
             MonopolyGame polyGame = new MonopolyGame(2);
             polyGame.NextPlayersTurn();
 

@@ -98,6 +98,7 @@ namespace PA3Tests.tests.Monopoly
         [TestMethod]
         public void TestEnoughHousesAndHotelsAvailable() 
         {
+            Street.InitializeHousesAndHotels();
             Assert.IsTrue(Street.EnoughHousesAndHotelsAvailable(1, 2));
             Assert.IsTrue(Street.EnoughHousesAndHotelsAvailable(3, 0));
             Assert.IsFalse(Street.EnoughHousesAndHotelsAvailable(35, 0));
