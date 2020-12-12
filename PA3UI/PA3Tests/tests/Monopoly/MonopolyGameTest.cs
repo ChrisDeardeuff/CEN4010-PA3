@@ -218,19 +218,16 @@ namespace PA3Tests.tests.Monopoly
             MonopolyGame mg = new MonopolyGame(2);
 
             mg.NextPlayersTurn();
+            mg.DiceRolle(3, 2, out _);
+            mg.BuyProperty();
             var propList1 = mg.GetPropertiesOwnedByPlayer();
 
             mg.NextPlayersTurn();
+            mg.DiceRolle(3, 3, out _);
+            mg.BuyProperty();
             var propList2 = mg.GetPropertiesOwnedByPlayer();
 
-            //var balance1 = mg.GetBalanceOfPlayer(1);
-            //var balance2 = mg.GetBalanceOfPlayer(2);
-            mg.NextPlayersTurn();
-
-            //mg.CompleteTrade(propList1, propList2, 100, 1, 2);
-
-            //Assert.AreEqual(1400, balance1);
-            //Assert.AreEqual(1600, balance2);
+            //mg.CompleteTrade(propList1, propList2, 0, 1, 2);
 
         }
 
