@@ -194,7 +194,7 @@ namespace PA3Tests.tests.Monopoly
             mg.UnDevelopProperty(1);
             mg.CalculateMoneyAndHousesNeeded(out m, out h, out H);
             Assert.AreEqual(-480, m);
-            Assert.AreEqual(0, h);
+            Assert.AreEqual(-4, h);
             Assert.AreEqual(-1, H);
         }
 
