@@ -221,7 +221,12 @@ namespace PA3Tests.tests.Monopoly
             
             Assert.AreEqual(false, mg.CanBuy(out _, out _));
         }
-    
+
+        /// <summary>
+        /// Tests if BuyProperty correctly subtracts the cost of the property 
+        /// from the players balance, as well as adding the property to the 
+        /// list of properties owned by the player
+        /// </summary>
         [TestMethod]
         public void BuyPropertyTest() 
         {
@@ -245,8 +250,11 @@ namespace PA3Tests.tests.Monopoly
             Assert.AreEqual(7, mg.DiceRoll(1, 2, out _));
         }
 
-        
 
+        /// <summary>
+        /// Tests if GetPropertiesOwnedByPlayer returns the correct 
+        /// list of properties owned by a player
+        /// </summary>
         [TestMethod]
         public void GetPropertiesOwnedByPlayerTest() 
         {
@@ -279,6 +287,10 @@ namespace PA3Tests.tests.Monopoly
 
         }
 
+        /// <summary>
+        /// Tests if GetNameOfProperty returns the correct name for a piece of property, 
+        /// should return an empty string if field is not property
+        /// </summary>
         [TestMethod]
         public void GetNamesForPropertyTest() 
         {
@@ -303,6 +315,10 @@ namespace PA3Tests.tests.Monopoly
             Assert.AreEqual("", card);
         }
 
+        /// <summary>
+        /// Tests if GetPriceOfProperty returns the correct price for a piece of property, 
+        /// should return -1 if current field is not property
+        /// </summary>
         [TestMethod]
         public void GetPriceOfPropertyTest()
         {
@@ -328,6 +344,9 @@ namespace PA3Tests.tests.Monopoly
             Assert.AreEqual(-1, card);
         }
 
+        /// <summary>
+        /// Tests whether or not a piece of property has any buildings on it
+        /// </summary>
         [TestMethod]
         public void HasAnyBuildingsOnItTest() 
         {
@@ -351,7 +370,11 @@ namespace PA3Tests.tests.Monopoly
             Assert.IsFalse(tax);
             Assert.IsFalse(card);
         }
-        
+
+        /// <summary>
+        /// Tests if CompleteTrade correctly trades the amount of money 
+        /// and properties traded between two players
+        /// </summary>
         [TestMethod]
         public void CompleteTradeTest() 
         {
