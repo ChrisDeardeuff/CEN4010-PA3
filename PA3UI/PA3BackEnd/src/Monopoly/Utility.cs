@@ -18,7 +18,9 @@ namespace PA3BackEnd.src.Monopoly
         }
 
         public override int GetRent() {
-            Debug.Fail("GetRent(int role) should be called instead of this");
+#if DEBUG
+            throw new Exception("GetRent(int role) should be called instead of this");
+#endif
             return 0;
         }
 
