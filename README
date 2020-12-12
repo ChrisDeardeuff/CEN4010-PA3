@@ -1,5 +1,5 @@
 This project is a MonopolyGame written in C# using WPF
-by Per Sander, Aaron Lamotte,.
+by Per Sander, Aaron Lamotte, Chris Deardeuff, Emily Ottesen.
 
 Inorder to run this project, a Windows 10 Computer is needed
 
@@ -11,3 +11,4 @@ a vs2019 with .net framework installed is needed.
 (project can simply be loaded by the PA3UI.sln)
 
 The project has no dependecies besides the base classes of .net framework
+
