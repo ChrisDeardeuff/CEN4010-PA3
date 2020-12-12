@@ -155,6 +155,70 @@ namespace PA3Tests.tests.Monopoly
         }
 
         [TestMethod]
+        public void PayRentTest()
+        {
+            MonopolyGame mp = new MonopolyGame(2);
+            mp.NextPlayersTurn();
+
+            mp.DiceRoll(1, 0, out _);
+            mp.BuyProperty();
+            
+            mp.NextPlayersTurn();
+
+            mp.DiceRoll(1, 0, out _);
+            mp.PayRent(out _, out _, out _,out var a);
+            a.Invoke(null,null);
+            
+            Assert.AreEqual(1498,mp.GetBalanceOfPlayer(1));
+            
+            //Check Utility Rent
+            mp.NextPlayersTurn();
+            mp.DiceRoll(0, 0, out _);
+            mp.DiceRoll(6, 5, out _);
+            mp.BuyProperty();
+            
+            mp.NextPlayersTurn();
+            mp.DiceRoll(6, 5, out _);
+            
+            mp.PayRent(out _, out _, out _,out var b);
+            b.Invoke(null,null);
+            
+            Assert.AreEqual((1498 - 44),mp.GetBalanceOfPlayer(1));
+
+           }
+        [TestMethod]
+        public void CanBuyTest()
+        {
+            MonopolyGame mg = new MonopolyGame(2);
+            mg.NextPlayersTurn();
+
+            for (int i = 1; i <= 40; i++)
+            {
+                if (i == 30)
+                {
+                    mg.DiceRoll(2, 2, out _);
+                }
+                else
+                {
+                    mg.DiceRoll(1, 0, out _);
+                }
+                
+                try
+                {
+                    mg.BuyProperty();
+                }
+                catch
+                {
+                    
+                }
+            }
+
+            int l = mg.currentsPlayerLocation;
+            
+            Assert.AreEqual(false, mg.CanBuy(out _, out _));
+        }
+    
+        [TestMethod]
         public void BuyPropertyTest() 
         {
             MonopolyGame mg = new MonopolyGame(2);
@@ -176,7 +240,9 @@ namespace PA3Tests.tests.Monopoly
             mg.NextPlayersTurn();
             Assert.AreEqual(7, mg.DiceRoll(1, 2, out _));
         }
+
         
+
         [TestMethod]
         public void GetPropertiesOwnedByPlayerTest() 
         {
@@ -288,20 +354,33 @@ namespace PA3Tests.tests.Monopoly
             MonopolyGame mg = new MonopolyGame(2);
 
             mg.NextPlayersTurn();
-            var propList1 = mg.GetPropertiesOwnedByPlayer();
+            mg.DiceRoll(3, 2, out _);
+            mg.BuyProperty();
+            var propList1 = mg.GetPropertiesOwnedByPlayer(0);
+            var balance1 = mg.GetBalanceOfPlayer(0);
 
             mg.NextPlayersTurn();
-            var propList2 = mg.GetPropertiesOwnedByPlayer();
+            mg.DiceRoll(3, 3, out _);
+            mg.BuyProperty();
+            var propList2 = mg.GetPropertiesOwnedByPlayer(1);
+            var balance2 = mg.GetBalanceOfPlayer(1);
 
-            //var balance1 = mg.GetBalanceOfPlayer(1);
-            //var balance2 = mg.GetBalanceOfPlayer(2);
-            mg.NextPlayersTurn();
+            mg.CompleteTrade(propList1, propList2, 100, 0, 1);
 
-            //mg.CompleteTrade(propList1, propList2, 100, 1, 2);
 
-            //Assert.AreEqual(1400, balance1);
-            //Assert.AreEqual(1600, balance2);
+            Assert.AreEqual(propList2.Count, mg.GetPropertiesOwnedByPlayer(0).Count);
+            Assert.AreEqual(propList1.Count, mg.GetPropertiesOwnedByPlayer(1).Count);
+            foreach(var prop in mg.GetPropertiesOwnedByPlayer(0)) 
+            {
+                Assert.IsTrue(propList2.Contains(prop));
+            }
+            foreach (var prop in mg.GetPropertiesOwnedByPlayer(1))
+            {
+                Assert.IsTrue(propList1.Contains(prop));
+            }
 
+            Assert.AreEqual(balance1 - 100, mg.GetBalanceOfPlayer(0));
+            Assert.AreEqual(balance2 + 100, mg.GetBalanceOfPlayer(1));
         }
 
         [TestMethod]
