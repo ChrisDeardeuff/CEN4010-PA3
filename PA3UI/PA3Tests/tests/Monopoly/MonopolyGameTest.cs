@@ -8,6 +8,10 @@ namespace PA3Tests.tests.Monopoly
     [TestClass]
     public class MonopolyGameTest
     {
+        /// <summary>
+        /// This test tests if GetDevelopmentValue returns the development value of the property specified,
+        /// should be -2 if the tile specified is not a property
+        /// </summary>
         [TestMethod]
         public void GetDevelopmentValueTest()
         {
@@ -383,6 +387,10 @@ namespace PA3Tests.tests.Monopoly
             Assert.AreEqual(balance2 + 100, mg.GetBalanceOfPlayer(1));
         }
 
+        /// <summary>
+        /// Tests if Complete Bid sets the right owner of the property 
+        /// and subtracts the right amount of money from the player
+        /// </summary>
         [TestMethod]
         public void CompleteBidTest()
         {
