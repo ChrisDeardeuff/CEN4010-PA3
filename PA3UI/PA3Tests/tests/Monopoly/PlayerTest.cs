@@ -119,12 +119,15 @@ namespace PA3Tests.tests.Monopoly
             var street = new Street(6, new Group(2, 50), 100, new int[] {6, 30, 90, 270, 400, 550}, "Oriental Ave");
             var railroad = new Railroads(15, new Group(4), 200, "Pennsylvania Railroad");
             var utility = new Utility(28, new Group(2), 150, "Water Works");
+            var utility1 = new Utility(12, new Group(2), 150, "Water Works");
             player.addProperty(street);
             player.addProperty(railroad);
             player.addProperty(utility);
+            player.addProperty(utility1);
             Assert.AreEqual(true, player.getPropertiesOwned().Contains(street));
             Assert.AreEqual(true, player.getPropertiesOwned().Contains(railroad));
             Assert.AreEqual(true, player.getPropertiesOwned().Contains(utility));
+            Assert.AreEqual(true, player.getPropertiesOwned().Contains(utility1));
         }
 
         [TestMethod]
@@ -154,11 +157,15 @@ namespace PA3Tests.tests.Monopoly
             var street1 = new Street(6, new Group(2, 50), 100, new int[] {6, 30, 90, 270, 400, 550}, "Oriental Ave");
             var street2 = new Street(8, new Group(2,50), 100, new int[] { 6, 30, 90, 270, 400, 550 }, "Vermont Ave");
             var street3 = new Street(9, new Group(2,50), 120, new int[] { 8, 40, 100, 300, 450, 600 }, "Connecticut Ave");
-            
+
+            street2.DevelopProperty(3);
+            street3.DevelopProperty(-1);
+
             player.addProperty(street1);
-            //street1.DevelopProperty(0);
-            Assert.AreEqual(1550, player.CalculateScore());
-            Assert.AreEqual(1500, player2.CalculateScore());
+            player.addProperty(street3);
+            player2.addProperty(street2);
+            Assert.AreEqual(1490, player.CalculateScore());
+            Assert.AreEqual(1700, player2.CalculateScore());
         }
     }
 }

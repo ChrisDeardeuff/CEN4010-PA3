@@ -20,7 +20,7 @@ namespace PA3BackEnd.src.Monopoly
 
         public static bool EnoughHousesAndHotelsAvailable(int houses, int hotels)
         {
-            if (houses >= Street.houses && hotels >= Street.hotels)
+            if (houses <= Street.houses && hotels <= Street.hotels)
             {
                 Street.houses -= houses;
                 Street.hotels -= hotels;

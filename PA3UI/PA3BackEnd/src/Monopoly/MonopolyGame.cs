@@ -135,7 +135,7 @@ namespace PA3BackEnd.src.Monopoly
                 return -2;
             }
 
-            if (Street.EnoughHousesAndHotelsAvailable(HousesNeeded, HotelsNeeded))
+            if (!Street.EnoughHousesAndHotelsAvailable(HousesNeeded, HotelsNeeded))
             {
                 return -3;
             }
@@ -400,7 +400,7 @@ namespace PA3BackEnd.src.Monopoly
         ///     8 - Can Buy
         ///     9 - landed on go to prison
         /// </returns>
-        public int DiceRolle(int x, int y, out RoutedEventHandler action)
+        public int DiceRoll(int x, int y, out RoutedEventHandler action)
         {
             roles.Add(new int[] { x, y });
 
@@ -498,14 +498,7 @@ namespace PA3BackEnd.src.Monopoly
         public void PayRent(out int amount, out int toPlayer,out string propertyName, out RoutedEventHandler action)
         {
             var property = (Property)fields.GetFieldAt(currentPlayer.position);
-            if (property.owner == currentsPlayerTurn)
-            {
-                amount = 0;
-                toPlayer = 0;
-                action = null;
-                propertyName = "";
-                return;
-            }
+            
             int rent = 0;
 
             if (property is Utility)
