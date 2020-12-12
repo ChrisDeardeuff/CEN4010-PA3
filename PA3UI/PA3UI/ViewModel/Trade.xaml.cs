@@ -13,26 +13,25 @@ namespace PA3UI.ui
     /// </summary>
     public partial class Trade : UserControl
     {
-        private Player[] players;
-        private int playerId;
         private int index;
         private RoutedEventHandler routedEvent;
         private RoutedEventHandler routedEventHandler;
-        private List<Property> properties0;
-        private List<Property> properties1;
-        private Fields fields;
+        private PA3BackEnd.src.Monopoly.MonopolyGame monopolyGame;       
+ 
+        private List<int> properties0;
+        private List<int> properties1;
         private Rectangle cover;
 
-        public Trade(Player[] players, int playerId, Fields fields ,RoutedEventHandler routedEvent)
+        public Trade(PA3BackEnd.src.Monopoly.MonopolyGame monopolyGame ,RoutedEventHandler routedEvent)
         {
             InitializeComponent();
-            properties0 = new List<Property>();
-            properties1 = new List<Property>();
+            this.monopolyGame = monopolyGame;
+
+
+            properties0 = new List<int>();
+            properties1 = new List<int>();
 
             this.routedEvent = routedEvent;
-            this.players = players;
-            this.fields = fields;
-            this.playerId = playerId;
 
             cover = new Rectangle();
             cover.SetValue(Grid.RowSpanProperty, 4);
@@ -43,24 +42,24 @@ namespace PA3UI.ui
             CardHolderPlayer0.Add_EventHandler(PlayerOneGives);
             CardHolderPlayer1.Add_EventHandler(PlayerTwoGives);
 
-            for (int i = 0; i < players.Length; i++)
+            for (int i = 0; i < monopolyGame.amountOfPlayers; i++)
             {
-                if (i == this.playerId)
+                if (i == monopolyGame.currentPlayerID -1)
                 {
                     continue;
                 }
 
-                ComboBoxSelectPlayer.Items.Add($"Player {i+1} ({MonopolyGame.GetUserTokenName(i)})");
+                ComboBoxSelectPlayer.Items.Add($"Player {i+1} ({PA3BackEnd.src.Monopoly.MonopolyGame.GetUserTokenName(i+1)})");
             }
 
             CardHolderPlayer0.ClearDeeds();
-            foreach (var prop in (List<Property>) players[playerId].getPropertiesOwned())
+            foreach (var prop in monopolyGame.GetPropertiesOwnedByPlayer())
             {
-                if (prop.group.HasAnyBuildings())
+                if (monopolyGame.HasAnyBuildingsOnIt(prop))
                 {
                     continue;
                 }
-                CardHolderPlayer0.Add_Deed(prop.GetLocation());
+                CardHolderPlayer0.Add_Deed(prop);
             }
 
             CardHolderPlayer1.ClearDeeds();
@@ -86,37 +85,37 @@ namespace PA3UI.ui
             Reset();
             CardHolderPlayer1.ClearDeeds();
             index = ComboBoxSelectPlayer.SelectedIndex;
-            if (index >= playerId)
+            if (index >= monopolyGame.currentPlayerID - 1)
             {
                 index++;
             }
 
-            foreach (var prop in (List<Property>)players[index].getPropertiesOwned())
+            foreach (var prop in monopolyGame.GetPropertiesOwnedByPlayer(index))
             {
-                if (prop.group.HasAnyBuildings())
+                if (monopolyGame.HasAnyBuildingsOnIt(prop))
                 {
                     continue;
                 }
 
-                CardHolderPlayer1.Add_Deed(prop.GetLocation());
+                CardHolderPlayer1.Add_Deed(prop);
             }
 
-            if (players[index].balance < 0)
+            if (monopolyGame.GetBalanceOfPlayer(index) < 0)
             {
                 MoneySlider.Minimum = 0;
             }
             else 
             {
-                MoneySlider.Minimum = -1 * players[index].balance;
+                MoneySlider.Minimum = -1 * monopolyGame.GetBalanceOfPlayer(index);
             }
 
-            if (players[playerId].balance < 0)
+            if (monopolyGame.currentPlayerBalance < 0)
             {
                 MoneySlider.Maximum = 0;
             }
             else 
             {
-                MoneySlider.Maximum = players[playerId].balance;
+                MoneySlider.Maximum = monopolyGame.currentPlayerBalance;
             }
 
             MoneySlider.Value = 0;
@@ -124,7 +123,7 @@ namespace PA3UI.ui
 
         private void PlayerOneGives(object sender, RoutedEventArgs args)
         {
-            var prop = (Property)fields.GetFieldAt(((Deed)sender).id);
+            var prop = ((Deed)sender).id;
 
             if (properties0.Contains(prop))
             {
@@ -139,7 +138,7 @@ namespace PA3UI.ui
 
         private void PlayerTwoGives(object sender, RoutedEventArgs args)
         {
-            var prop = (Property)fields.GetFieldAt(((Deed)sender).id);
+            var prop = ((Deed)sender).id;
 
             if (properties1.Contains(prop))
             {
@@ -158,7 +157,7 @@ namespace PA3UI.ui
             foreach (var prop in properties0)
             {
                 var textBlock = new TextBlock();
-                textBlock.Text = prop.name;
+                textBlock.Text = monopolyGame.GetNameOfProperty(prop);
                 textBlock.FontSize= 20;
                 textBlock.HorizontalAlignment = HorizontalAlignment.Center;
 
@@ -172,7 +171,7 @@ namespace PA3UI.ui
             foreach (var prop in properties1)
             {
                 var textBlock = new TextBlock();
-                textBlock.Text = prop.name;
+                textBlock.Text = monopolyGame.GetNameOfProperty(prop);
                 textBlock.FontSize = 20;
                 textBlock.HorizontalAlignment = HorizontalAlignment.Center;
 
@@ -192,7 +191,7 @@ namespace PA3UI.ui
 
         private void Button_Click_Propose(object sender, RoutedEventArgs e)
         {
-            ShowDialogBoxYesNo($"Player {index + 1} ({MonopolyGame.GetUserTokenName(index)}) do you accept the proposed Trade", (object s, RoutedEventArgs args) =>
+            ShowDialogBoxYesNo($"Player {index + 1} ({PA3BackEnd.src.Monopoly.MonopolyGame.GetUserTokenName(index)}) do you accept the proposed Trade", (object s, RoutedEventArgs args) =>
             {
                 var dialog = (Dialog)s;
                 if (dialog.yes)
@@ -253,22 +252,7 @@ namespace PA3UI.ui
 
         private void CompleteTrade() 
         {
-            foreach (var prop in properties0) 
-            {
-                players[playerId].removeProperty(prop);
-                players[index].addProperty(prop);
-                prop.BoughtByPlayer(index);
-            }
-
-            foreach (var prop in properties1)
-            {
-                players[index].removeProperty(prop);
-                players[playerId].addProperty(prop);
-                prop.BoughtByPlayer(playerId);
-            }
-
-            players[playerId].subtractBalance((int)MoneySlider.Value);
-            players[index].addBalance((int)MoneySlider.Value);
+            monopolyGame.CompleteTrade(properties0, properties1, (int)MoneySlider.Value, monopolyGame.currentPlayerID-1, index);
         }
     }
 }

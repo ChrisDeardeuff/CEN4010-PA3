@@ -8,18 +8,29 @@ namespace PA3Tests.tests.Monopoly
     [TestClass]
     public class PropertyTest
     {
+        /// <summary>
+        /// Tests if CanBeMortaged Returns true when the property canbeMortaged (no houses on any property in the group, not mortaged)
+        /// otherwise should return false
+        /// </summary>
         [TestMethod]
         public void CanBeMortgagedTest()
         {
-            var group = new Group(1, 200);
+            var group = new Group(2, 200);
             Property property = new Street(37, group, 350, new int[] { 35, 175, 500, 1100, 1300, 1500 }, "Park Place");
+            Property property1 = new Street(37, group, 350, new int[] { 35, 175, 500, 1100, 1300, 1500 }, "Park Place");
             Assert.IsTrue(property.CanBeMortaged()); //Undeveloped property
             property.DevelopProperty(-1);
             Assert.IsFalse(property.CanBeMortaged()); //Already mortgaged
             property.DevelopProperty(1);
             Assert.IsFalse(property.CanBeMortaged()); //1 house on property
+            property.DevelopProperty(0);
+            property1.DevelopProperty(1);
+            Assert.IsFalse(property.CanBeMortaged()); //1 house on property
         }
 
+        /// <summary>
+        /// Test that works just like CanBeMortgaged but with multiple properties
+        /// </summary>
         [TestMethod]
         public void MultipleMortgageTest()
         {
@@ -34,8 +45,11 @@ namespace PA3Tests.tests.Monopoly
             Assert.IsFalse(property.CanBeMortaged()); //Already mortgaged
         }
 
+        /// <summary>
+        /// Tests if getAction returns the right value after the property has been bought (should be Action.payRent)
+        /// </summary>
         [TestMethod]
-        public void CanBuyTest()
+        public void GetActionTest()
         {
             var unowned = -1;
             var owner = 2;
@@ -51,6 +65,9 @@ namespace PA3Tests.tests.Monopoly
             Assert.AreEqual(Actions.payRent, property.GetAction());
         }
 
+        /// <summary>
+        /// Tests if Bought by player sets the owner of the property, and returns the price of the property
+        /// </summary>
         [TestMethod]
         public void BoughtByPlayerTest()
         {
@@ -61,6 +78,9 @@ namespace PA3Tests.tests.Monopoly
             Assert.AreEqual(player, property.owner);     //Player owns the property
         }
 
+        /// <summary>
+        /// Tests if Develop Property develops the property to the right value
+        /// </summary>
         [TestMethod]
         public void DevelopPropertyTest()
         {
@@ -69,6 +89,20 @@ namespace PA3Tests.tests.Monopoly
 
             property.DevelopProperty(2);
             Assert.AreEqual(2, property.developmentValue);
+        }
+
+        /// <summary>
+        /// Tests EnoughHousesAndHotelsAvailable by first inserting values and houses available (should return true),
+        /// and then by inserting values that are not available (should return false)
+        /// </summary>
+        [TestMethod]
+        public void TestEnoughHousesAndHotelsAvailable() 
+        {
+            Street.InitializeHousesAndHotels();
+            Assert.IsTrue(Street.EnoughHousesAndHotelsAvailable(1, 2));
+            Assert.IsTrue(Street.EnoughHousesAndHotelsAvailable(3, 0));
+            Assert.IsFalse(Street.EnoughHousesAndHotelsAvailable(35, 0));
+            Assert.IsFalse(Street.EnoughHousesAndHotelsAvailable(0, 35));
         }
     }
 }

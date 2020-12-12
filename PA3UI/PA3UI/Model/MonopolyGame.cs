@@ -1,28 +1,20 @@
 ﻿
 using PA3BackEnd.src.Monopoly;
 using System;
-using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Shapes;
 using System.Windows.Threading;
+
 
 namespace PA3UI.ui
 {
     public partial class MonopolyGame : UserControl
     {
-        private int currentsPlayerTurn;
         private DispatcherTimer timer;
         private int timerTime;
         private int timeElapsed;
-        private int Round;
-        private Player[] players;
-        private Fields fields;
-        private List<int[]> roles;
-        private int[][] outstandingDevelopment;
         private Random rnd;
-        private Player currentPlayer { get { return players[currentsPlayerTurn]; } }
+        private PA3BackEnd.src.Monopoly.MonopolyGame monopolyGame;
 
         private void Timer_Elapsed(object sender, EventArgs e)
         {
@@ -51,212 +43,156 @@ namespace PA3UI.ui
 
             fields = new Fields();
 
-            players[0].addProperty((Property) fields.GetFieldAt(1));
-            ((Property)fields.GetFieldAt(1)).BoughtByPlayer(0);
-            players[0].addProperty((Property) fields.GetFieldAt(3));
-            ((Property)fields.GetFieldAt(3)).BoughtByPlayer(0);
-            players[0].addProperty((Property)fields.GetFieldAt(5));
-            ((Property)fields.GetFieldAt(5)).BoughtByPlayer(0);
-            players[0].addProperty((Property)fields.GetFieldAt(6));
-            ((Property)fields.GetFieldAt(6)).BoughtByPlayer(0);
-            players[0].addProperty((Property)fields.GetFieldAt(8));
-            ((Property)fields.GetFieldAt(8)).BoughtByPlayer(0);
-            players[0].addProperty((Property)fields.GetFieldAt(9));
-            ((Property)fields.GetFieldAt(9)).BoughtByPlayer(0);
+            //players[0].addProperty((Property) fields.GetFieldAt(1));
+            //((Property)fields.GetFieldAt(1)).BoughtByPlayer(0);
+            //players[0].addProperty((Property) fields.GetFieldAt(3));
+            //((Property)fields.GetFieldAt(3)).BoughtByPlayer(0);
+            //players[0].addProperty((Property)fields.GetFieldAt(5));
+            //((Property)fields.GetFieldAt(5)).BoughtByPlayer(0);
+            //players[0].addProperty((Property)fields.GetFieldAt(6));
+            //((Property)fields.GetFieldAt(6)).BoughtByPlayer(0);
+            //players[0].addProperty((Property)fields.GetFieldAt(8));
+            //((Property)fields.GetFieldAt(8)).BoughtByPlayer(0);
+            //players[0].addProperty((Property)fields.GetFieldAt(9));
+            //((Property)fields.GetFieldAt(9)).BoughtByPlayer(0);
 
             NextPlayersTurn();
         }
 
         private void NextPlayersTurn()
         {
-
-            HideEndTurnButton();
-            roles.Clear();
+            monopolyGame.NextPlayersTurn();
+            UpdateDiceRoleAndNextPlayerTurnButton();
             cardViewer.CLear();
-            DiceButton.IsEnabled = true;
-            currentsPlayerTurn++;
-            currentsPlayerTurn %= players.Length;
-
-            if (currentsPlayerTurn == 0)
-            {
-                Round++;
-            }
 
             LoadPlayerDataTopBar();
             LoadPlayerDataProperties();
             LoadDevelopmentValues();
 
-            if (currentPlayer.inPrison)
+            if (monopolyGame.currentPlayerInPrison)
             {
-                ShowDialogBoxOK($"Player {currentsPlayerTurn + 1} ({GetUserTokenName(currentsPlayerTurn)}) it is your turn now !\n\t but you are in Prison!", null);
+                ShowDialogBoxOK($"Player {monopolyGame.currentPlayerID + 1} ({monopolyGame.currentPlayerTokenName}) it is your turn now !\n\t but you are in Prison!", null);
                 return;
             }
 
-            ShowDialogBoxOK($"Player {currentsPlayerTurn + 1} ({GetUserTokenName(currentsPlayerTurn)}) it is your turn now !\n Roll the dice!", null);
+            ShowDialogBoxOK($"Player {monopolyGame.currentPlayerID + 1} ({monopolyGame.currentPlayerTokenName}) it is your turn now !\n Roll the dice!", null);
+        }
+
+        private void UpdateDiceRoleAndNextPlayerTurnButton()
+        {
+            if (monopolyGame.CanRoleDice)
+            {
+                HideEndTurnButton();
+                DiceButton.IsEnabled = true;
+            }
+            else
+            {
+                ShowEndTurnButton();
+                DiceButton.IsEnabled = false;
+            }
         }
 
         private void DiceRole(int x, int y)
         {
-            roles.Add(new int[] { x, y });
-
-            if (currentPlayer.inPrison)
+            int oldPosition = monopolyGame.currentsPlayerLocation;
+            RoutedEventHandler action;
+            int result = monopolyGame.DiceRoll(x, y, out action);
+            LoadPlayerDataTopBar();
+            UpdateDiceRoleAndNextPlayerTurnButton();
+            switch (result)
             {
-                currentPlayer.UpdateInPrisonCounter();
-                if (x == y)
-                {
-                    ShowDialogBoxOK($"You rolled doubles and got out of Prison!\n\tHowever, this ends your turn!", (object sender, RoutedEventArgs args) =>
+                case 0:
+                    break;
+                case 1:
+                    ShowDialogBoxOK($"You now have to pay the fine of $50", (object sender, RoutedEventArgs args) =>
                     {
-                        currentPlayer.GetOutOfJail();
+                        action.Invoke(sender, args);
                         NextPlayersTurn();
                     });
-                }
-                else
-                {
-
-                    if (currentPlayer.inPrisonCounter != 3)
+                    break;
+                case 2:
+                    ShowDialogBoxOK($"You rolled doubles and got out of Prison!\n\tHowever, this ends your turn!", (object sender, RoutedEventArgs args) =>
                     {
-                        ShowDialogBoxYesNo($"You did not role doubles,\n but you can pay a fine of $50 to get out of prison.\n Would you like to pay the fine?", (object sender, RoutedEventArgs args) =>
+                        action.Invoke(sender, args);
+                        NextPlayersTurn();
+                    });
+                    break;
+                case 3:
+                    ShowDialogBoxYesNo($"You did not role doubles,\n but you can pay a fine of $50 to get out of prison.\n Would you like to pay the fine?", (object sender, RoutedEventArgs args) =>
+                    {
+                        action.Invoke(((Dialog)sender).yes, args);
+                        NextPlayersTurn();
+                    });
+                    break;
+                case 4:
+                    ShowDialogBoxOK($"You rolled 3 doubles and are now in Prison!\n\tThis ends your turn!", (object sender, RoutedEventArgs args) =>
+                    {
+                        NextPlayersTurn();
+                    });
+                    break;
+                case 5:
+                    ShowDialogBoxOK($"You have to pay $100 in taxes", action);
+                    break;
+                case 6:
+                    ShowDialogBoxOK($"You have to pay $200 in taxes", action);
+                    break;
+                case 7:
+                    int rent;
+                    int owner;
+                    string propertyName;
+                    monopolyGame.PayRent(out rent, out owner, out propertyName, out action);
+                    if (action != null)
+                    {
+                        ShowDialogBoxOK($"You need To pay ${rent} rent to player {owner} ({PA3BackEnd.src.Monopoly.MonopolyGame.GetUserTokenName(owner)})\n on {propertyName}", action);
+                    }
+                    break;
+                case 8:
+                    string name;
+                    int price;
+                    if (monopolyGame.CanBuy(out name, out price))
+                    {
+                        ShowDialogBoxYesNo($"{name} is not owned by anyone.\n\nWould you like to buy it for ${price}?", (object sender, RoutedEventArgs args) =>
                         {
                             if (((Dialog)sender).yes)
                             {
-                                currentPlayer.GetOutOfJail();
-                                currentPlayer.subtractBalance(50);
-                                NextPlayersTurn();
+                                monopolyGame.BuyProperty();
                             }
                             else
                             {
-                                NextPlayersTurn();
+                                BidForProperty();
                             }
                         });
                     }
-                    else
+                    else 
                     {
-                        ShowDialogBoxOK($"You now have to pay the fine of $50", (object sender, RoutedEventArgs args) =>
-                        {
-                            currentPlayer.subtractBalance(50);
-                            currentPlayer.GetOutOfJail();
-                            NextPlayersTurn();
-                        });
+                        BidForProperty();
                     }
-                }
-                return;
+                    break;
+                case 9:
+                    ShowDialogBoxOK("You are now in prison, and you turn is over!", (object sender, RoutedEventArgs args) =>
+                    {
+                        NextPlayersTurn();
+                    });
+                    break;
             }
-
-            if (roles.Count == 3 && x == y)
-            {
-                GoToPrison();
-                return;
-            }
-            else if (x != y)
-            {
-                DiceButton.IsEnabled = false;
-                ShowEndTurnButton();
-            }
-
-            int oldPosition = currentPlayer.position;
-            currentPlayer.movePlayerForward(x + y);
-            board.SetPositionOfPlayer(oldPosition, currentPlayer.position, currentsPlayerTurn);
+            board.SetPositionOfPlayer(oldPosition, monopolyGame.currentsPlayerLocation, monopolyGame.currentPlayerID-1);
             LoadPlayerDataTopBar();
-
-            switch (fields.GetFieldAt(currentPlayer.position).GetAction())
-            {
-                case Actions.canBuy:
-                    CanBuy();
-                    break;
-                case Actions.payRent:
-                    PayRent();
-                    break;
-                case Actions.goToPrison:
-                    GoToPrison();
-                    break;
-                case Actions.payTax100:
-                    PayTax(100);
-                    break;
-                case Actions.payTax200:
-                    PayTax(200);
-                    break;
-                default:
-                    break;
-            }
         }
 
-        private void PayTax(int amount)
-        {
-            ShowDialogBoxOK($"You have to pay ${amount} in taxes", (object sender, RoutedEventArgs args) =>
-            {
-                currentPlayer.subtractBalance(amount);
-                LoadPlayerDataTopBar();
-            });
-        }
-
-        private void PayRent()
-        {
-            var property = (Property)fields.GetFieldAt(currentPlayer.position);
-            if (property.owner == currentsPlayerTurn)
-            {
-                return;
-            }
-            int rent = 0;
-
-            if (property is Utility)
-            {
-                rent = roles[roles.Count - 1][0] + roles[roles.Count - 1][1];
-                rent = ((Utility)property).GetRent(rent);
-            }
-            else 
-            {
-                rent = property.GetRent();
-            }
-
-            ShowDialogBoxOK($"You need To pay ${rent} rent to player {property.owner + 1} ({GetUserTokenName(property.owner)})\n on {property.name}", (object sender, RoutedEventArgs args) =>
-            {
-                currentPlayer.subtractBalance(rent);
-                players[property.owner].addBalance(rent);
-                LoadPlayerDataTopBar();
-            });
-        }
-
-        private void CanBuy()
-        {
-            var property = (Property)fields.GetFieldAt(currentPlayer.position);
-
-            if (!currentPlayer.HasEnoughMoney(property.price))
-            {
-                BidForProperty(property, 0, -1, -1);
-                return;
-            }
-
-            ShowDialogBoxYesNo($"{property.name} is not owned by anyone.\n\nWould you like to buy it for ${property.price}?", (object sender, RoutedEventArgs args) =>
-            {
-                if (((Dialog)sender).yes)
-                {
-                    currentPlayer.subtractBalance(property.BoughtByPlayer(currentsPlayerTurn));
-                    currentPlayer.addProperty(property);
-                    LoadPlayerDataTopBar();
-                    LoadPlayerDataProperties();
-
-                }
-                else
-                {
-                    BidForProperty(property, 0, -1, -1);
-                }
-            });
-        }
-
-        private void BidForProperty(Property property, int highestBid, int highestBider, int playerid)
+        private void BidForProperty(int highestBid = -1, int highestBider = -1, int playerid = 0) 
         {
             playerid++;
 
-            if (playerid < players.Length)
+            if (playerid < monopolyGame.amountOfPlayers +1)
             {
 
-                if (playerid == currentsPlayerTurn || !players[playerid].HasEnoughMoney(property.price))
+                if (playerid == monopolyGame.currentPlayerID || monopolyGame.GetBalanceOfPlayer(playerid - 1) < monopolyGame.GetPriceOfProperty(monopolyGame.currentsPlayerLocation) )
                 {
-                    BidForProperty(property, highestBid, highestBider, playerid);
+                    BidForProperty(highestBid, highestBider, playerid);
                     return;
                 }
 
-                ShowDialogBoxBidding($"Player {playerid + 1} ({GetUserTokenName(playerid)}) you can bid for a Property!\n Please Enter your bid!", property.price, players[playerid].balance, (object sender, RoutedEventArgs args) =>
+                ShowDialogBoxBidding($"Player {playerid} ({PA3BackEnd.src.Monopoly.MonopolyGame.GetUserTokenName(playerid)}) you can bid for a Property!\n Please Enter your bid!", monopolyGame.GetPriceOfProperty(monopolyGame.currentsPlayerLocation), monopolyGame.GetBalanceOfPlayer(playerid - 1), (object sender, RoutedEventArgs args) =>
                 {
                     var dialog = (Dialog)sender;
                     if (dialog.yes)
@@ -267,7 +203,7 @@ namespace PA3UI.ui
                             highestBider = playerid;
                         }
                     }
-                    BidForProperty(property, highestBid, highestBider, playerid);
+                    BidForProperty(highestBid, highestBider, playerid);
                 });
                 return;
             }
@@ -276,294 +212,40 @@ namespace PA3UI.ui
             {
                 ShowDialogBoxOK("Nobody bid for the property !", null);
             }
-            else 
+            else
             {
-                players[highestBider].subtractBalance(highestBid);
-                players[highestBider].addProperty(property);
-                property.BoughtByPlayer(highestBider);
-                ShowDialogBoxOK($"Player {highestBider +1} ({GetUserTokenName(highestBider)}) won the biding with a bid of ${highestBid}!", null);
+                monopolyGame.CompleteBid(highestBider - 1, highestBid);
+                ShowDialogBoxOK($"Player {highestBider + 1} ({PA3BackEnd.src.Monopoly.MonopolyGame.GetUserTokenName(highestBider)}) won the biding with a bid of ${highestBid}!", null);
             }
-        }
-
-        private void GoToPrison()
-        {
-            int oldPosition = currentPlayer.position;
-            currentPlayer.goToJail();
-            board.SetPositionOfPlayer(oldPosition, currentPlayer.position, currentsPlayerTurn);
-            ShowDialogBoxOK("You are now in prison, and you turn is over!", (object sender, RoutedEventArgs args) => { NextPlayersTurn(); });
-        }
-
-        private void ResetDevelopValues()
-        {
-            outstandingDevelopment = null;
-            SetTextBlockMoneyNeeded("$0");
         }
 
         private void DevelopProperty()
         {
-            if (outstandingDevelopment == null)
+            switch (monopolyGame.ApplyDevelopProperty())
             {
-                ShowDialogBoxOK($"No OutStanding Development!\n Use + and - button above", null);
-                return;
+                case 0:
+                    ShowDialogBoxOK($"You developed your property!", null);
+                    break;
+                case -1:
+                    ShowDialogBoxOK($"No OutStanding Development!\n Use + and - button above", null);
+                    break;
+                case -2:
+                    ShowDialogBoxOK($"You do not Have Enough Money!", null);
+                    break;
+                case -3:
+                    ShowDialogBoxOK($"There are not enough houses or hotels left!", null);
+                    break;
             }
 
-            int moneyNeeded;
-            int HousesNeeded;
-            int HotelsNeeded;
-            CalculateMoneyAndHousesNeeded(out moneyNeeded, out HousesNeeded, out HotelsNeeded);
-
-            if (!currentPlayer.HasEnoughMoney(moneyNeeded))
-            {
-                ShowDialogBoxOK($"You do not Have Enough Money!", null);
-                return;
-            }
-
-            if (!Street.EnoughHousesAndHotelsAvailable(HousesNeeded, HotelsNeeded))
-            {
-                ShowDialogBoxOK($"You developed your property!", null);
-            }
-            else
-            {
-                ShowDialogBoxOK($"There are not enough houses or hotels left!", null);
-            }
-
-            currentPlayer.subtractBalance(moneyNeeded);
-
-            for (int i = 0; i < outstandingDevelopment.Length; i++)
-            {
-                DevelopProperty(outstandingDevelopment[i][0], outstandingDevelopment[i][1]);
-            }
-            ResetDevelopValues();
             LoadDevelopmentValues();
             LoadPlayerDataTopBar();
-        }
-
-        private void DevelopProperty(int location, int level) 
-        {
-            var prop = (Property)fields.GetFieldAt(location);
-            prop.DevelopProperty(level);
         }
 
         private void PlaningDevelopment() 
         {
             int moneyNeeded;
-            int HousesNeeded;
-            int HotelsNeeded;
-            CalculateMoneyAndHousesNeeded(out moneyNeeded, out HousesNeeded, out HotelsNeeded);
+            monopolyGame.CalculateMoneyAndHousesNeeded(out moneyNeeded, out _, out _);
             SetTextBlockMoneyNeeded($"${moneyNeeded}");
-        }
-
-        private void CalculateMoneyAndHousesNeeded(out int moneyNeeded, out int HousesNeeded, out int HotelsNeeded) 
-        {
-            moneyNeeded = 0;
-            HousesNeeded = 0;
-            HotelsNeeded = 0;
-
-            if (outstandingDevelopment == null)
-            {
-                return;
-            }
-
-            for (int i = 0; i < outstandingDevelopment.Length; i++)
-            {
-                var prop = (Property)fields.GetFieldAt(outstandingDevelopment[i][0]);
-                if (outstandingDevelopment[i][1] == prop.developmentValue)
-                {
-                    continue;
-                }
-                else if (outstandingDevelopment[i][1] == 5)
-                {
-                    HotelsNeeded++;
-                    if (prop.developmentValue == -1)
-                    {
-                        moneyNeeded += prop.price / 2;
-                        moneyNeeded += 5 * prop.group.priceToBuild;
-                        continue;
-                    }
-
-                    HousesNeeded -= prop.developmentValue;
-                    moneyNeeded += (5 - prop.developmentValue) * prop.group.priceToBuild;
-                }
-                else if (outstandingDevelopment[i][1] >= 0)
-                {
-                    if (prop.developmentValue >= 0)
-                    {
-                        moneyNeeded -= (prop.developmentValue - outstandingDevelopment[i][1]) * prop.group.priceToBuild;
-
-                        if (prop.developmentValue == 5)
-                        {
-                            HotelsNeeded--;
-                            HousesNeeded += outstandingDevelopment[i][1];
-                        }
-                        else
-                        {
-                            HousesNeeded += outstandingDevelopment[i][1] - prop.developmentValue;
-                        }
-                        continue;
-                    }
-                    else
-                    {
-                        HousesNeeded += outstandingDevelopment[i][1];
-                        moneyNeeded += prop.price / 2;
-                        moneyNeeded += outstandingDevelopment[i][1] * prop.group.priceToBuild;
-                    }
-                }
-                else
-                {
-                    moneyNeeded -= (prop.developmentValue ) * prop.group.priceToBuild;
-                    moneyNeeded -= prop.price / 2;
-                    if (prop.developmentValue == 5)
-                    {
-                        HotelsNeeded--;
-                    }
-                    else
-                    {
-                        HousesNeeded -= prop.developmentValue;
-                    }
-                }
-
-            }
-        }
-
-        private void DevelopProperty(int property)
-        {
-            var prop = ((Property)fields.GetFieldAt(property));
-
-            var properties = prop.group.properties;
-
-            if (outstandingDevelopment == null)
-            {
-                int newLevel = prop.developmentValue + 1;
-
-                if (newLevel >= 1)
-                {
-                    if (!prop.CanPlayerBuild(currentsPlayerTurn))
-                    {
-                        return;
-                    }
-                }
-
-                if (newLevel > 5)
-                {
-                    return;
-                }
-
-                outstandingDevelopment = new int[properties.Length][];
-                for (int i = 0; i < properties.Length; i++)
-                {
-                    outstandingDevelopment[i] = new int[] { properties[i].GetLocation(), properties[i].developmentValue };
-                    if (outstandingDevelopment[i][0] == property)
-                    {
-                        outstandingDevelopment[i][1]++;
-                    }
-                    else if(newLevel - outstandingDevelopment[i][1] > 1)
-                    {
-                        outstandingDevelopment[i][1]++;
-                    }
-                }
-                return;
-            }
-
-            int newLevel1 = 0;
-            for (int i = 0; i < properties.Length; i++)
-            {
-                if (outstandingDevelopment[i][0] == property)
-                {
-                    newLevel1 = outstandingDevelopment[i][1] + 1;
-                }
-            }
-
-            if (newLevel1 > 5)
-            {
-                return;
-            }
-
-            for (int i = 0; i < properties.Length; i++)
-            {
-                if (outstandingDevelopment[i][0] == property)
-                {
-                    outstandingDevelopment[i][1]++;
-                }
-                else if (newLevel1 - outstandingDevelopment[i][1] > 1)
-                {
-                    outstandingDevelopment[i][1]++;
-                }
-            }
-
-        }
-
-        private void UnDevelopProperty(int property)
-        {
-            var prop = ((Property)fields.GetFieldAt(property));
-
-            var properties = prop.group.properties;
-
-            if (outstandingDevelopment == null)
-            {
-                int newLevel = prop.developmentValue - 1;
-
-                if (newLevel < -1)
-                {
-                    return;
-                }
-
-                outstandingDevelopment = new int[properties.Length][];
-                for (int i = 0; i < properties.Length; i++)
-                {
-                    outstandingDevelopment[i] = new int[] { properties[i].GetLocation(), properties[i].developmentValue };
-                    if (outstandingDevelopment[i][0] == property)
-                    {
-                        outstandingDevelopment[i][1]--;
-                    }
-                    else if (outstandingDevelopment[i][1] - newLevel > 1)
-                    {
-                        outstandingDevelopment[i][1]--;
-                    }
-                }
-                return;
-            }
-
-            int newLevel1 = 0;
-            for (int i = 0; i < properties.Length; i++)
-            {
-                if (outstandingDevelopment[i][0] == property)
-                {
-                    newLevel1 = outstandingDevelopment[i][1] - 1;
-                }
-            }
-
-            if (newLevel1 < -1)
-            {
-                return;
-            }
-
-            for (int i = 0; i < properties.Length; i++)
-            {
-                if (outstandingDevelopment[i][0] == property)
-                {
-                    outstandingDevelopment[i][1]--;
-                }
-                else if (outstandingDevelopment[i][1] - newLevel1 > 1)
-                {
-                    outstandingDevelopment[i][1]--;
-                }
-            }
-        }
-
-        public static string GetUserTokenName(int id)
-        {
-            switch (id)
-            {
-                case 0:
-                    return "Shoe";
-                case 1:
-                    return "Thimble";
-                case 2:
-                    return "Car";
-                case 3:
-                    return "TopHat";
-            }
-            return "";
         }
     }
 }

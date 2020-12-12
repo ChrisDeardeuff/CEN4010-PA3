@@ -1,0 +1,17 @@
+This project is a MonopolyGame written in C# using WPF
+by Per Sander, Aaron Lamotte, Chris Deardeuff, Emily Ottesen.
+
+The project has no dependencies besides the base classes of .net framework.
+
+2)
+Steps to run the precompiled version:
+- Run the monopolyGame.exe located in ./compiled/MonopolyGame.exe
+Steps to compile and run from the code:
+
+a vs2019 with .net framework installed is needed.
+(project can simply be loaded by the PA3UI.sln)
+      
+3)   Our UI design is satisfactory and functional and the strongest part of our project. The facade pattern with direct access to 
+all the classes in the backend not being in our initial design meant that all the interactions the UI had with the backend had to be changed. 
+This process created more bugs than we expected which translates to the weakest part of our assignment. 
+From our understanding, we do not have anything missing from our assignment.

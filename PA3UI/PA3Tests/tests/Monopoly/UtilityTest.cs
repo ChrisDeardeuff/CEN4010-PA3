@@ -35,6 +35,9 @@ namespace PA3Tests.tests.Monopoly
             Assert.IsTrue(ww.CanBeMortaged()); //Unmortgaged utility
         }
 
+        /// <summary>
+        /// Test if rent returns the right amount, based on dice roll.
+        /// </summary>
         [TestMethod]
         public void GetRentTest()
         {
@@ -66,7 +69,14 @@ namespace PA3Tests.tests.Monopoly
 
             Assert.AreEqual(0, ec.GetRent(7));
             Assert.AreEqual(70, ww.GetRent(7));
-            
+
+#if DEBUG
+            Assert.ThrowsException<Exception>(delegate { ec.GetRent(); });
+#else
+            Assert.AreEqual(0, ec.GetRent());
+#endif
+
+
         }
     }
 }
