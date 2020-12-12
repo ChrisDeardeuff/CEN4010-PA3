@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PA3BackEnd.src.Monopoly;
@@ -16,8 +17,7 @@ namespace PA3Tests.tests.Monopoly
         public void GetDevelopmentValueTest()
         {
             MonopolyGame mg = new MonopolyGame(2);
-            
-            
+
             var value = mg.GetDevelopmentValue(11);
             Assert.AreEqual(0, value);
             var dneValue = mg.GetDevelopmentValue(45);
@@ -32,11 +32,11 @@ namespace PA3Tests.tests.Monopoly
 
             var roll = mg.CanRoleDice;
             Assert.AreEqual(false, roll);
-            
+
             //round 1, player turn 1
             mg.NextPlayersTurn();
             roll = mg.CanRoleDice;
-            Assert.AreEqual(true,roll);
+            Assert.AreEqual(true, roll);
             var currentPlayer = mg.currentPlayerID;
             Assert.AreEqual(1, currentPlayer);
             var round = mg.Round;
@@ -62,93 +62,95 @@ namespace PA3Tests.tests.Monopoly
             Assert.AreEqual("Car", MonopolyGame.GetUserTokenName(3));
             Assert.AreEqual("TopHat", MonopolyGame.GetUserTokenName(4));
             Assert.AreEqual("", MonopolyGame.GetUserTokenName(5));
-            
+
         }
 
         [TestMethod]
         public void ApplyDevelopPropertyTest()
         {
-          MonopolyGame mg = new MonopolyGame(4);
-          mg.NextPlayersTurn();
+            MonopolyGame mg = new MonopolyGame(4);
+            mg.NextPlayersTurn();
             //no outstanding developments available
-          var value = mg.ApplyDevelopProperty(); 
-          Assert.AreEqual(-1, value);
-          
-          //not enough money
-          for (var i = 1; i <= 40; i++)
-          {
-              if (i == 30)
-              {
-                  mg.DiceRoll(2, 2, out _);
-              }
-              else
-              {
-                  mg.DiceRoll(1, 0, out _);
-              }
-                
-              try
-              {
-                  mg.BuyProperty();
-              }
-              catch
-              {
-                  // ignored
-              }
-          }
-          mg.DevelopProperty(3);
-          Assert.AreEqual(-2,mg.ApplyDevelopProperty());
-          
-          MonopolyGame newGame = new MonopolyGame(2);
-          newGame.NextPlayersTurn();
-          newGame.DiceRoll(1, 0, out _);
-          newGame.BuyProperty();
+            var value = mg.ApplyDevelopProperty();
+            Assert.AreEqual(-1, value);
 
-          newGame.DiceRoll(1, 1,out _);
-          newGame.BuyProperty();
-          
-          newGame.DevelopProperty(3);
-          newGame.DevelopProperty(3);
-          newGame.DevelopProperty(3);
-          
-          Assert.AreEqual(0,newGame.ApplyDevelopProperty());
-          
-          mg.DevelopProperty(3);
-          mg.DevelopProperty(3);
-          mg.DevelopProperty(3);
-          mg.DevelopProperty(3);
-          mg.ApplyDevelopProperty();
-          
-          mg.DevelopProperty(6);
-          mg.DevelopProperty(6);
-          mg.DevelopProperty(6);
-          mg.DevelopProperty(6);
-          mg.ApplyDevelopProperty();
-          
-          mg.DevelopProperty(11);
-          mg.DevelopProperty(11);
-          mg.DevelopProperty(11);
-          mg.DevelopProperty(11);
-          mg.ApplyDevelopProperty();
-          
-          mg.DevelopProperty(16);
-          mg.DevelopProperty(16);
-          mg.DevelopProperty(16);
-          mg.DevelopProperty(16);
-          
-          Assert.AreEqual(-3,mg.ApplyDevelopProperty());
+            //not enough money
+            for (var i = 1; i <= 40; i++)
+            {
+                if (i == 30)
+                {
+                    mg.DiceRoll(2, 2, out _);
+                }
+                else
+                {
+                    mg.DiceRoll(1, 0, out _);
+                }
+
+                try
+                {
+                    mg.BuyProperty();
+                }
+                catch
+                {
+                    // ignored
+                }
+            }
+            mg.DevelopProperty(3);
+            Assert.AreEqual(-2, mg.ApplyDevelopProperty());
+
+            MonopolyGame newGame = new MonopolyGame(2);
+            newGame.NextPlayersTurn();
+            newGame.DiceRoll(1, 0, out _);
+            newGame.BuyProperty();
+
+            newGame.DiceRoll(1, 1, out _);
+            newGame.BuyProperty();
+
+            newGame.DevelopProperty(3);
+            newGame.DevelopProperty(3);
+            newGame.DevelopProperty(3);
+
+            Assert.AreEqual(0, newGame.ApplyDevelopProperty());
+
+            mg.CompleteTrade(new List<int>(), new List<int>(), -5000, 0, 1);
+
+            mg.DevelopProperty(3);
+            mg.DevelopProperty(3);
+            mg.DevelopProperty(3);
+            mg.DevelopProperty(3);
+            mg.ApplyDevelopProperty();
+
+            mg.DevelopProperty(6);
+            mg.DevelopProperty(6);
+            mg.DevelopProperty(6);
+            mg.DevelopProperty(6);
+            mg.ApplyDevelopProperty();
+
+            mg.DevelopProperty(11);
+            mg.DevelopProperty(11);
+            mg.DevelopProperty(11);
+            mg.DevelopProperty(11);
+            mg.ApplyDevelopProperty();
+
+            mg.DevelopProperty(16);
+            mg.DevelopProperty(16);
+            mg.DevelopProperty(16);
+            mg.DevelopProperty(16);
+
+            Assert.AreEqual(-3, mg.ApplyDevelopProperty());
 
         }
 
         [TestMethod]
         public void CalculateMoneyAndHousesNeededTest()
         {
-            
+
         }
 
         [TestMethod]
         public void DevelopPropertyTest()
         {
-            
+
         }
 
         [TestMethod]
@@ -158,8 +160,8 @@ namespace PA3Tests.tests.Monopoly
             monoGame.NextPlayersTurn();
             monoGame.UnDevelopProperty(3);
             monoGame.ApplyDevelopProperty();
-            Assert.AreEqual(-1,monoGame.GetDevelopmentValue(3));
-            
+            Assert.AreEqual(-1, monoGame.GetDevelopmentValue(3));
+
             monoGame.NextPlayersTurn();
             //build 'uneven' forcing all properties in group to have 1 house
             monoGame.DevelopProperty(6);
@@ -170,17 +172,17 @@ namespace PA3Tests.tests.Monopoly
             monoGame.UnDevelopProperty(6);
             monoGame.UnDevelopProperty(6);
             monoGame.ApplyDevelopProperty();
-            
-            //test if both in group are even
-            Assert.AreEqual(0,monoGame.GetDevelopmentValue(8));
 
-            
+            //test if both in group are even
+            Assert.AreEqual(0, monoGame.GetDevelopmentValue(8));
+
+
             monoGame.UnDevelopProperty(8);
             monoGame.ApplyDevelopProperty();
             monoGame.UnDevelopProperty(8);
             monoGame.ApplyDevelopProperty();
-            
-            Assert.AreEqual(-1,monoGame.GetDevelopmentValue(8));
+
+            Assert.AreEqual(-1, monoGame.GetDevelopmentValue(8));
         }
 
         [TestMethod]
@@ -188,34 +190,34 @@ namespace PA3Tests.tests.Monopoly
         {
             MonopolyGame polyGame = new MonopolyGame(2);
             polyGame.NextPlayersTurn();
-            
+
             //test if player 0 wins with score 1500 (No change in anyones score)
             int playerId;
             int score;
-            polyGame.CalculateHighestPlayerScore(out playerId,out score);
-            Assert.AreEqual(0,playerId);
-            Assert.AreEqual(1500,score);
+            polyGame.CalculateHighestPlayerScore(out playerId, out score);
+            Assert.AreEqual(0, playerId);
+            Assert.AreEqual(1500, score);
 
             polyGame.DiceRoll(1, 0, out _);
             polyGame.BuyProperty();
             polyGame.DiceRoll(1, 1, out _);
             polyGame.BuyProperty();
-            
+
             polyGame.DevelopProperty(3);
             polyGame.DevelopProperty(3);
             polyGame.DevelopProperty(3);
             polyGame.DevelopProperty(3);
             polyGame.DevelopProperty(3);
             polyGame.ApplyDevelopProperty();
-            
+
             polyGame.NextPlayersTurn();
             polyGame.DiceRoll(1, 2, out _);
-            polyGame.PayRent(out _, out _, out _,out var a);
-            a.Invoke(null,null);
-            
-            polyGame.CalculateHighestPlayerScore(out playerId,out score);
+            polyGame.PayRent(out _, out _, out _, out var a);
+            a.Invoke(null, null);
+
+            polyGame.CalculateHighestPlayerScore(out playerId, out score);
             Assert.AreEqual(1890, score);
-            Assert.AreEqual(0,playerId);
+            Assert.AreEqual(0, playerId);
 
         }
 
@@ -227,30 +229,30 @@ namespace PA3Tests.tests.Monopoly
 
             mp.DiceRoll(1, 0, out _);
             mp.BuyProperty();
-            
+
             mp.NextPlayersTurn();
 
             mp.DiceRoll(1, 0, out _);
-            mp.PayRent(out _, out _, out _,out var a);
-            a.Invoke(null,null);
-            
-            Assert.AreEqual(1498,mp.GetBalanceOfPlayer(1));
-            
+            mp.PayRent(out _, out _, out _, out var a);
+            a.Invoke(null, null);
+
+            Assert.AreEqual(1498, mp.GetBalanceOfPlayer(1));
+
             //Check Utility Rent
             mp.NextPlayersTurn();
             mp.DiceRoll(0, 0, out _);
             mp.DiceRoll(6, 5, out _);
             mp.BuyProperty();
-            
+
             mp.NextPlayersTurn();
             mp.DiceRoll(6, 5, out _);
-            
-            mp.PayRent(out _, out _, out _,out var b);
-            b.Invoke(null,null);
-            
-            Assert.AreEqual((1498 - 44),mp.GetBalanceOfPlayer(1));
 
-           }
+            mp.PayRent(out _, out _, out _, out var b);
+            b.Invoke(null, null);
+
+            Assert.AreEqual((1498 - 44), mp.GetBalanceOfPlayer(1));
+
+        }
         [TestMethod]
         public void CanBuyTest()
         {
@@ -267,19 +269,19 @@ namespace PA3Tests.tests.Monopoly
                 {
                     mg.DiceRoll(1, 0, out _);
                 }
-                
+
                 try
                 {
                     mg.BuyProperty();
                 }
                 catch
                 {
-                    
+
                 }
             }
 
             int l = mg.currentsPlayerLocation;
-            
+
             Assert.AreEqual(false, mg.CanBuy(out _, out _));
         }
 
@@ -289,10 +291,10 @@ namespace PA3Tests.tests.Monopoly
         /// list of properties owned by the player
         /// </summary>
         [TestMethod]
-        public void BuyPropertyTest() 
+        public void BuyPropertyTest()
         {
             MonopolyGame mg = new MonopolyGame(2);
-            
+
             //Player may buy unowned property, 
             //cost is subtracted from player balance,
             //property added to players list of owned properties
@@ -317,7 +319,7 @@ namespace PA3Tests.tests.Monopoly
         /// list of properties owned by a player
         /// </summary>
         [TestMethod]
-        public void GetPropertiesOwnedByPlayerTest() 
+        public void GetPropertiesOwnedByPlayerTest()
         {
             MonopolyGame mg = new MonopolyGame(2);
 
@@ -353,10 +355,10 @@ namespace PA3Tests.tests.Monopoly
         /// should return an empty string if field is not property
         /// </summary>
         [TestMethod]
-        public void GetNamesForPropertyTest() 
+        public void GetNamesForPropertyTest()
         {
             MonopolyGame mg = new MonopolyGame(2);
-            
+
             //valid properties
             var medAve = mg.GetNameOfProperty(1);
             var boardwalk = mg.GetNameOfProperty(39);
@@ -409,7 +411,7 @@ namespace PA3Tests.tests.Monopoly
         /// Tests whether or not a piece of property has any buildings on it
         /// </summary>
         [TestMethod]
-        public void HasAnyBuildingsOnItTest() 
+        public void HasAnyBuildingsOnItTest()
         {
             MonopolyGame mg = new MonopolyGame(2);
 
@@ -437,7 +439,7 @@ namespace PA3Tests.tests.Monopoly
         /// and properties traded between two players
         /// </summary>
         [TestMethod]
-        public void CompleteTradeTest() 
+        public void CompleteTradeTest()
         {
             MonopolyGame mg = new MonopolyGame(2);
 
@@ -458,7 +460,7 @@ namespace PA3Tests.tests.Monopoly
 
             Assert.AreEqual(propList2.Count, mg.GetPropertiesOwnedByPlayer(0).Count);
             Assert.AreEqual(propList1.Count, mg.GetPropertiesOwnedByPlayer(1).Count);
-            foreach(var prop in mg.GetPropertiesOwnedByPlayer(0)) 
+            foreach (var prop in mg.GetPropertiesOwnedByPlayer(0))
             {
                 Assert.IsTrue(propList2.Contains(prop));
             }
