@@ -186,6 +186,37 @@ namespace PA3Tests.tests.Monopoly
             Assert.AreEqual((1498 - 44),mp.GetBalanceOfPlayer(1));
 
            }
+        [TestMethod]
+        public void CanBuyTest()
+        {
+            MonopolyGame mg = new MonopolyGame(2);
+            mg.NextPlayersTurn();
+
+            for (int i = 1; i <= 40; i++)
+            {
+                if (i == 30)
+                {
+                    mg.DiceRoll(2, 2, out _);
+                }
+                else
+                {
+                    mg.DiceRoll(1, 0, out _);
+                }
+                
+                try
+                {
+                    mg.BuyProperty();
+                }
+                catch
+                {
+                    
+                }
+            }
+
+            int l = mg.currentsPlayerLocation;
+            
+            Assert.AreEqual(false, mg.CanBuy(out _, out _));
+        }
     
         [TestMethod]
         public void BuyPropertyTest() 
@@ -209,7 +240,9 @@ namespace PA3Tests.tests.Monopoly
             mg.NextPlayersTurn();
             Assert.AreEqual(7, mg.DiceRoll(1, 2, out _));
         }
+
         
+
         [TestMethod]
         public void GetPropertiesOwnedByPlayerTest() 
         {
