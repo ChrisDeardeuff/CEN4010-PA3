@@ -7,6 +7,10 @@ namespace PA3Tests.tests.Monopoly
     [TestClass]
     public class StreetTest
     {
+        /// <summary>
+        /// Tests if CanBeMortaged Returns true when the property canbeMortaged (no houses on any property in the group, not mortaged) 
+        /// otherwise should return false
+        /// </summary>
         [TestMethod]
         public void CanBeMortgagedOneStreet()
         {
@@ -26,6 +30,10 @@ namespace PA3Tests.tests.Monopoly
             Assert.IsFalse(street.CanBeMortaged());
         }
 
+        /// <summary>
+        /// Tests if CanBeMortaged Returns true when the property canbeMortaged (no houses on any property in the group, not mortaged) 
+        /// otherwise should return false
+        /// </summary>
         [TestMethod]
         public void CanBeMortgagedMultipleStreets()
         {
@@ -49,6 +57,10 @@ namespace PA3Tests.tests.Monopoly
 
         }
 
+        /// <summary>
+        /// test if CanPlayerBuild returns true if all properties in the group are owned by the same player,
+        /// else false
+        /// </summary>
         [TestMethod]
         public void CanBuildTest()
         {
@@ -74,6 +86,10 @@ namespace PA3Tests.tests.Monopoly
 
         }
 
+        /// <summary>
+        /// test if CanPlayerBuild returns true if all properties in the group are owned by the same player,
+        /// else false
+        /// </summary>
         [TestMethod]
         public void CannotBuildTest()
         {
@@ -101,6 +117,10 @@ namespace PA3Tests.tests.Monopoly
             //Assert.IsFalse(street3.CanPlayerBuild(player1));
         }
 
+        /// <summary>
+        /// Tests if property returns the right value for getRent,
+        /// value is based on development value of the property
+        /// </summary>
         [TestMethod]
         public void GetStreetRent()
         {

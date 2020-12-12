@@ -6,6 +6,10 @@ namespace PA3Tests.tests.Monopoly
     [TestClass]
     public class RailroadsTest
     {
+        /// <summary>
+        /// Tests if property returns the right value for getRent, value is based on how many 
+        /// railroads are owned by the player who knows this railroad
+        /// </summary>
         [TestMethod]
         public void RailroadRentTest()
         {
@@ -32,9 +36,12 @@ namespace PA3Tests.tests.Monopoly
             rail4.BoughtByPlayer(0);
             Assert.AreEqual(200, rail1.GetRent());
         }
-
+        /// <summary>
+        /// tests if a property can be mortgaged,
+        /// this should be true for railroads as long as the property is not mortgaged.
+        /// </summary>
         [TestMethod]
-        public void RailMortgageTest()
+        public void CanBeMortagedTest()
         {
             //testing can be mortgaged
             var group = new Group(1);
@@ -43,9 +50,11 @@ namespace PA3Tests.tests.Monopoly
             Assert.AreEqual(true, rail1.CanBeMortaged()); //separate method for this
         }
 
+        /// <summary>
+        /// test if CanPlayerBuild returns false (should always return false)
+        /// </summary>
         [TestMethod]
-
-        public void CanBuildOnRailroadTest()
+        public void CanPlayerBuildTest()
         {
             //testing can player build
             var player = new Player();
