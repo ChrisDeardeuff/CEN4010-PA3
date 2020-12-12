@@ -216,6 +216,22 @@ namespace PA3Tests.tests.Monopoly
         public void CompleteTradeTest() 
         {
             MonopolyGame mg = new MonopolyGame(2);
+
+            mg.NextPlayersTurn();
+            var propList1 = mg.GetPropertiesOwnedByPlayer();
+
+            mg.NextPlayersTurn();
+            var propList2 = mg.GetPropertiesOwnedByPlayer();
+
+            //var balance1 = mg.GetBalanceOfPlayer(1);
+            //var balance2 = mg.GetBalanceOfPlayer(2);
+            mg.NextPlayersTurn();
+
+            //mg.CompleteTrade(propList1, propList2, 100, 1, 2);
+
+            //Assert.AreEqual(1400, balance1);
+            //Assert.AreEqual(1600, balance2);
+
         }
 
         [TestMethod]
