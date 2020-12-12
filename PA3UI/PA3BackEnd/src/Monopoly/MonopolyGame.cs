@@ -400,7 +400,7 @@ namespace PA3BackEnd.src.Monopoly
         ///     8 - Can Buy
         ///     9 - landed on go to prison
         /// </returns>
-        public int DiceRolle(int x, int y, out RoutedEventHandler action)
+        public int DiceRoll(int x, int y, out RoutedEventHandler action)
         {
             roles.Add(new int[] { x, y });
 
