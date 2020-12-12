@@ -112,7 +112,7 @@ namespace PA3Tests.tests.Monopoly
 
             Assert.AreEqual(0, newGame.ApplyDevelopProperty());
 
-            mg.CompleteTrade(new List<int>(), new List<int>(), -5000, 0, 1);
+            mg.CompleteTrade(new List<int>(), new List<int>(), -10000, 0, 1);
 
             mg.DevelopProperty(3);
             mg.DevelopProperty(3);
